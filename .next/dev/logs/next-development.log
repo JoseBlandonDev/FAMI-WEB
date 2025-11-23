@@ -1,0 +1,338 @@
+[00:00:07.919] Server  LOG      ✓ Ready in 5s
+[00:00:11.350] Server  LOG      ○ Compiling / ...
+[00:00:16.280] Server  ERROR    ⨯ ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+
+
+[00:00:20.942] Browser ERROR   uncaughtError: Error: ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+
+
+[00:00:22.242] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:22.244] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:33.523] Server  ERROR    ⨯ ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+
+
+[00:00:33.995] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:35.003] Browser ERROR   uncaughtError: Error: ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+
+
+[00:00:35.216] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:35.216] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:45.200] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:45.201] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:45.201] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:45.201] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:45.201] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:45.201] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:45.201] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:45.201] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:45.201] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:45.201] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:45.201] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:45.201] Browser ERROR   ./app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at at (C:\Users\bland\FAMI-WEB\node_modules\tailwindcss\dist\lib.js:38:1629)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+
+Import trace:
+  Client Component Browser:
+    ./app/globals.css [Client Component Browser]
+    ./app/layout.jsx [Server Component]
+[00:00:58.827] Server  LOG      ✓ Compiled in 3.1s
+[00:01:06.166] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:06.608] Browser WARN    Image with src "http://localhost:3000/logos/fami-logo.svg" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height.
+[00:01:06.608] Browser WARN    Image with src "http://localhost:3000/logos/fami-logo-white.svg" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height.
+[00:01:06.608] Browser WARN    Image with src "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:01:06.608] Browser WARN    Image with src "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" has "fill" and a height value of 0. This is likely because the parent element of the image has not been styled to have a set height.
+[00:01:09.848] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:13.319] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:21.387] Server  LOG      ✓ Compiled in 537ms
+[00:02:33.691] Server  LOG      ✓ Compiled in 1044ms
+[00:02:41.188] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:02:50.815] Server  LOG      ✓ Compiled in 247ms
+[00:05:33.821] Server  LOG      ✓ Compiled in 226ms
+[00:05:54.158] Server  LOG      ✓ Compiled in 871ms
+[00:05:58.542] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1544531696-214af74a6f02?q=80&w=1769&auto=format&fit=crop" 404
+[00:05:59.470] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1631217868269-df75c5240474?q=80&w=1740&auto=format&fit=crop" 404
+[00:06:15.859] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:16.238] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:06:28.539] Server  ERROR    ⨯ "upstream image response failed for" "https://images.unsplash.com/photo-1544531696-214af74a6f02?q=80&w=1769&auto=format&fit=crop" 404
+[00:06:29.458] Server  LOG      ○ Compiling /salud-ocupacional ...
+[00:07:16.720] Server  LOG      ✓ Compiled in 185ms
+[00:08:15.746] Server  LOG      ✓ Compiled in 246ms
+[00:08:18.393] Server  LOG      ✓ Compiled in 413ms
+[00:08:20.084] Server  LOG      ✓ Compiled in 205ms
+[00:08:21.469] Server  LOG      ✓ Compiled in 424ms
+[00:08:25.927] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./node_modules/next/dist/client/image-component.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:08:31.892] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:08:38.073] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:08:38.073] Browser WARN    Image with src "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1740&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:08:48.173] Server  LOG      ○ Compiling /apoyos-pedagogicos ...
+[00:09:30.079] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:30.299] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:09:30.299] Browser WARN    Image with src "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1740&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:09:36.088] Browser WARN    Image with src "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1740&auto=format&fit=crop" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes

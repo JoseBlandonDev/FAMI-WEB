@@ -1,3 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-fami-blue: #2E3A8C;
+  --color-fami-cyan: #6C8CD5;
+  --color-fami-orange: #FF7F32;
+  --color-fami-gray: #F8F9FA;
+  --color-fami-text: #1F2937;
+  
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+}

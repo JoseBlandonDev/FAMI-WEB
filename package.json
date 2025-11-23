@@ -1,0 +1,35 @@
+{
+  "name": "fami-web",
+  "version": "1.0.0",
+  "description": "A professional healthcare website for an IPS (Clinic) and Foundation in Colombia.",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoseBlandonDev/FAMI-WEB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoseBlandonDev/FAMI-WEB/issues"
+  },
+  "homepage": "https://github.com/JoseBlandonDev/FAMI-WEB#readme",
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.17",
+    "autoprefixer": "^10.4.22",
+    "embla-carousel-autoplay": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
+    "lucide-react": "^0.554.0",
+    "next": "^16.0.3",
+    "postcss": "^8.5.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.17"
+  }
+}

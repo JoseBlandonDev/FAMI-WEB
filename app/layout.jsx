@@ -1,4 +1,6 @@
 import { Montserrat } from 'next/font/google';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 import "./globals.css";
 
 const montserrat = Montserrat({ 
@@ -15,11 +17,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={`${montserrat.variable} font-sans bg-fami-gray text-fami-text antialiased`}>
-        {/* <Navbar /> will be injected here */}
+        <Navbar />
         <main className="min-h-screen">
           {children}
         </main>
-        {/* <Footer /> will be injected here */}
+        <Footer />
       </body>
     </html>
   );
