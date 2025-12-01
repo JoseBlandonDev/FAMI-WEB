@@ -1,52 +1,9 @@
 "use client";
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { Facebook, Twitter, Youtube, Instagram, ArrowRight } from 'lucide-react';
-
-const featuredNews = {
-  id: 1,
-  title: "Lorem Ipsum Dolor",
-  image: "/images/news/featured-news.jpg"
-};
-
-const newsHighlight = {
-  title: "Una vez más FAMI es es reconocida como una de las mejores empresas para trabajar en el país.",
-  date: "14 de julio de 2023",
-  content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
-  link: "/noticias/1"
-};
-
-const newsItems = [
-  {
-    id: 2,
-    title: "Lorem Ipsum Dolor",
-    excerpt: "Una vez más FAMI es es reconocida como una de las mejores empresas para trabajar en el país.",
-    date: "14 de julio de 2023",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
-    image: "/images/news/news-1.jpg",
-    link: "/noticias/2"
-  },
-  {
-    id: 3,
-    title: "Lorem Ipsum Dolor",
-    excerpt: "Una vez más FAMI es es reconocida como una de las mejores empresas para trabajar en el país.",
-    date: "14 de julio de 2023",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
-    image: "/images/news/news-2.jpg",
-    link: "/noticias/3"
-  },
-  {
-    id: 4,
-    title: "Lorem Ipsum Dolor",
-    excerpt: "Una vez más FAMI es es reconocida como una de las mejores empresas para trabajar en el país.",
-    date: "14 de julio de 2023",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
-    image: "/images/news/news-3.jpg",
-    link: "/noticias/4"
-  }
-];
+import Image from 'next/image';
+import { Facebook, Twitter, Youtube, Instagram, ArrowRight, Calendar } from 'lucide-react';
 
 const socialLinks = [
   { icon: Facebook, href: 'https://facebook.com/fami', label: 'Facebook' },
@@ -55,13 +12,20 @@ const socialLinks = [
   { icon: Instagram, href: 'https://instagram.com/fami', label: 'Instagram' },
 ];
 
-const NewsSection = () => {
+const NewsSection = ({ news = [] }) => {
+  if (!news || news.length === 0) return null;
+
+  // Get featured news or the first one
+  const featuredNews = news.find(item => item.featured) || news[0];
+  // Get the rest of the news (limit to 3)
+  const otherNews = news.filter(item => item.id !== featuredNews.id).slice(0, 3);
+
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-12">
-          <div className="mb-6 md:mb-0">
+          <div className="mb-6 md:mb-0 md:w-1/3">
             <h2 className="text-3xl md:text-4xl font-bold text-fami-blue mb-2">
               Noticias
             </h2>
@@ -69,8 +33,8 @@ const NewsSection = () => {
               FAMI
             </h3>
             <p className="text-gray-500 text-sm mt-2">
-              Lorem ipsum dolor sit amet consectetur<br />
-              adipiscing elit sed diam nonummy
+              Mantente informado con las últimas novedades<br />
+              y eventos de nuestra fundación.
             </p>
 
             {/* Social Icons */}
@@ -94,35 +58,40 @@ const NewsSection = () => {
           <div className="flex flex-col md:flex-row gap-6 md:w-2/3">
             {/* Featured Image */}
             <div className="relative w-full md:w-1/2 aspect-video md:aspect-square rounded-xl overflow-hidden bg-gray-100">
-              <Image
-                src={featuredNews.image}
-                alt={featuredNews.title}
-                fill
-                className="object-cover"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                }}
-              />
+              {featuredNews.image ? (
+                <Image
+                  src={featuredNews.image}
+                  alt={featuredNews.title}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              ) : (
+                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center text-gray-400">
+                  Sin imagen
+                </div>
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
-                <span className="text-white font-medium">{featuredNews.title}</span>
+                <span className="text-white font-medium line-clamp-2">{featuredNews.title}</span>
               </div>
             </div>
 
             {/* Highlight Card */}
-            <div className="bg-fami-blue rounded-xl p-6 md:w-1/2 text-white">
-              <h4 className="font-bold text-lg mb-2">
-                {newsHighlight.title}
+            <div className="bg-fami-blue rounded-xl p-6 md:w-1/2 text-white flex flex-col justify-center">
+              <h4 className="font-bold text-lg mb-2 line-clamp-3">
+                {featuredNews.title}
               </h4>
-              <p className="text-white/70 text-xs mb-4">
-                {newsHighlight.date}
+              <p className="text-white/70 text-xs mb-4 flex items-center gap-1">
+                <Calendar size={12} />
+                {featuredNews.date}
               </p>
-              <p className="text-white/90 text-sm mb-6">
-                {newsHighlight.content}
+              <p className="text-white/90 text-sm mb-6 line-clamp-4">
+                {featuredNews.excerpt || featuredNews.content}
               </p>
               <Link
-                href={newsHighlight.link}
-                className="inline-flex items-center gap-2 text-fami-orange hover:text-orange-400 transition-colors text-sm font-medium"
+                href={`/noticias/${featuredNews.id}`}
+                className="inline-flex items-center gap-2 text-fami-orange hover:text-orange-400 transition-colors text-sm font-medium mt-auto"
               >
                 Ver más...
                 <ArrowRight size={16} />
@@ -133,29 +102,33 @@ const NewsSection = () => {
 
         {/* News Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {newsItems.map((news) => (
-            <div key={news.id} className="bg-fami-gray rounded-xl overflow-hidden group hover:shadow-lg transition-shadow">
+          {otherNews.map((item) => (
+            <div key={item.id} className="bg-fami-gray rounded-xl overflow-hidden group hover:shadow-lg transition-shadow">
               {/* Image */}
               <div className="relative aspect-video bg-gray-200 overflow-hidden">
-                <Image
-                  src={news.image}
-                  alt={news.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
-                />
+                {item.image ? (
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    unoptimized
+                  />
+                ) : (
+                  <div className="flex items-center justify-center h-full text-gray-400 text-sm">Sin imagen</div>
+                )}
               </div>
 
               {/* Content */}
               <div className="p-5">
-                <h4 className="font-bold text-fami-blue mb-2">{news.title}</h4>
-                <p className="text-gray-600 text-sm mb-2">{news.excerpt}</p>
-                <p className="text-gray-400 text-xs mb-3">{news.date}</p>
-                <p className="text-gray-500 text-sm mb-4 line-clamp-2">{news.content}</p>
+                <h4 className="font-bold text-fami-blue mb-2 line-clamp-2">{item.title}</h4>
+                <p className="text-gray-400 text-xs mb-3 flex items-center gap-1">
+                  <Calendar size={12} />
+                  {item.date}
+                </p>
+                <p className="text-gray-500 text-sm mb-4 line-clamp-3">{item.excerpt}</p>
                 <Link
-                  href={news.link}
+                  href={`/noticias/${item.id}`}
                   className="inline-flex items-center gap-2 text-fami-blue hover:text-fami-orange transition-colors text-sm font-medium"
                 >
                   Ver más...

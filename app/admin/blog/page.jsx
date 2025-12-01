@@ -1,55 +1,20 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Plus, Search, Edit, Trash2, Eye, Calendar, Clock, Save, X, Upload } from 'lucide-react';
-
-const initialBlogs = [
-  {
-    id: 1,
-    title: 'Importancia de la salud ocupacional en empresas',
-    excerpt: 'La salud ocupacional es fundamental para el bienestar de los trabajadores y la productividad empresarial.',
-    content: 'Contenido completo del artículo...',
-    author: 'Dr. Juan Pérez',
-    category: 'Salud Ocupacional',
-    image: '/images/blog/blog-1.jpg',
-    date: '2025-11-28',
-    status: 'published',
-    views: 234
-  },
-  {
-    id: 2,
-    title: 'Beneficios de los apoyos pedagógicos',
-    excerpt: 'Los apoyos pedagógicos ayudan al desarrollo integral de los niños en sus primeras etapas.',
-    content: 'Contenido completo del artículo...',
-    author: 'Lic. María García',
-    category: 'Pedagogía',
-    image: '/images/blog/blog-2.jpg',
-    date: '2025-11-25',
-    status: 'published',
-    views: 189
-  },
-  {
-    id: 3,
-    title: 'Prevención de enfermedades laborales',
-    excerpt: 'Conoce las mejores prácticas para prevenir enfermedades en el ambiente laboral.',
-    content: 'Contenido completo del artículo...',
-    author: 'Dr. Carlos Rodríguez',
-    category: 'Prevención',
-    image: '/images/blog/blog-3.jpg',
-    date: '2025-11-20',
-    status: 'draft',
-    views: 0
-  },
-];
+import { Plus, Search, Edit, Trash2, Eye, Calendar, Save, X, Upload, Loader2 } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 const categories = ['Salud Ocupacional', 'Pedagogía', 'Prevención', 'Bienestar', 'Noticias'];
 
 export default function AdminBlog() {
-  const [blogs, setBlogs] = useState(initialBlogs);
+  const [blogs, setBlogs] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [editingBlog, setEditingBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+
   const [formData, setFormData] = useState({
     title: '',
     excerpt: '',
@@ -57,12 +22,33 @@ export default function AdminBlog() {
     author: '',
     category: '',
     image: '',
-    status: 'draft'
+    status: 'draft',
+    date: new Date().toISOString().split('T')[0]
   });
 
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  const fetchBlogs = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('blogs')
+        .select('*')
+        .order('date', { ascending: false });
+      
+      if (error) throw error;
+      setBlogs(data || []);
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const filteredBlogs = blogs.filter(blog =>
-    blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    blog.category.toLowerCase().includes(searchQuery.toLowerCase())
+    blog.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    blog.category?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleEdit = (blog) => {
@@ -74,7 +60,8 @@ export default function AdminBlog() {
       author: blog.author,
       category: blog.category,
       image: blog.image,
-      status: blog.status
+      status: blog.status,
+      date: blog.date
     });
     setShowModal(true);
   };
@@ -88,47 +75,77 @@ export default function AdminBlog() {
       author: '',
       category: '',
       image: '',
-      status: 'draft'
+      status: 'draft',
+      date: new Date().toISOString().split('T')[0]
     });
     setShowModal(true);
   };
 
-  const handleSave = () => {
-    if (editingBlog) {
-      setBlogs(blogs.map(blog =>
-        blog.id === editingBlog.id
-          ? { ...blog, ...formData, date: new Date().toISOString().split('T')[0] }
-          : blog
-      ));
-    } else {
-      const newBlog = {
-        id: Date.now(),
-        ...formData,
-        date: new Date().toISOString().split('T')[0],
-        views: 0
-      };
-      setBlogs([newBlog, ...blogs]);
-    }
-    setShowModal(false);
-    setEditingBlog(null);
-  };
-
-  const handleDelete = (id) => {
-    if (confirm('¿Estás seguro de eliminar este artículo?')) {
-      setBlogs(blogs.filter(blog => blog.id !== id));
-    }
-  };
-
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({ ...formData, image: reader.result });
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+
+    try {
+      const filename = `blog/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, '')}`;
+      const { data, error } = await supabase.storage
+        .from('hero-images')
+        .upload(filename, file);
+
+      if (error) throw error;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('hero-images')
+        .getPublicUrl(filename);
+
+      setFormData(prev => ({ ...prev, image: publicUrl }));
+    } catch (error) {
+      alert('Error al subir imagen: ' + error.message);
     }
   };
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      if (editingBlog) {
+        const { error } = await supabase
+          .from('blogs')
+          .update(formData)
+          .eq('id', editingBlog.id);
+        if (error) throw error;
+      } else {
+        const { error } = await supabase
+          .from('blogs')
+          .insert([formData]);
+        if (error) throw error;
+      }
+      
+      await fetchBlogs();
+      setShowModal(false);
+      setEditingBlog(null);
+    } catch (error) {
+      alert('Error al guardar: ' + error.message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!confirm('¿Estás seguro de eliminar este artículo?')) return;
+    
+    try {
+      const { error } = await supabase
+        .from('blogs')
+        .delete()
+        .eq('id', id);
+      if (error) throw error;
+      
+      setBlogs(blogs.filter(b => b.id !== id));
+    } catch (error) {
+      alert('Error al eliminar: ' + error.message);
+    }
+  };
+
+  if (loading) return <div className="p-8 text-center">Cargando blogs...</div>;
 
   return (
     <div className="space-y-6">
@@ -169,14 +186,16 @@ export default function AdminBlog() {
           <div key={blog.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group">
             {/* Image */}
             <div className="relative h-48 bg-gray-100">
-              {blog.image && (
+              {blog.image ? (
                 <Image
                   src={blog.image}
                   alt={blog.title}
                   fill
                   className="object-cover"
-                  onError={(e) => { e.target.style.display = 'none'; }}
+                  unoptimized
                 />
+              ) : (
+                <div className="flex items-center justify-center h-full text-gray-400">Sin imagen</div>
               )}
               <div className="absolute top-3 right-3">
                 <span className={`px-2 py-1 text-xs rounded-full ${
@@ -199,10 +218,6 @@ export default function AdminBlog() {
                 <span className="flex items-center gap-1">
                   <Calendar size={14} />
                   {blog.date}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Eye size={14} />
-                  {blog.views} vistas
                 </span>
               </div>
 
@@ -257,6 +272,7 @@ export default function AdminBlog() {
                       alt="Preview"
                       fill
                       className="object-cover"
+                      unoptimized
                     />
                   )}
                   <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer bg-black/50 opacity-0 hover:opacity-100 transition-opacity">
@@ -281,6 +297,17 @@ export default function AdminBlog() {
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
                   placeholder="Título del artículo"
+                />
+              </div>
+
+              {/* Date */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Fecha</label>
+                <input
+                  type="date"
+                  value={formData.date}
+                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
                 />
               </div>
 
@@ -360,9 +387,10 @@ export default function AdminBlog() {
               </button>
               <button
                 onClick={handleSave}
-                className="flex items-center gap-2 px-4 py-2 bg-fami-blue text-white rounded-lg hover:bg-fami-blue/90 transition-colors"
+                disabled={saving}
+                className="flex items-center gap-2 px-4 py-2 bg-fami-blue text-white rounded-lg hover:bg-fami-blue/90 transition-colors disabled:opacity-50"
               >
-                <Save size={18} />
+                {saving ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
                 {editingBlog ? 'Guardar Cambios' : 'Crear Artículo'}
               </button>
             </div>
