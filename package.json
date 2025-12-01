@@ -22,7 +22,10 @@
   "homepage": "https://github.com/JoseBlandonDev/FAMI-WEB#readme",
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.17",
+    "@vercel/blob": "^2.0.0",
+    "@vercel/postgres": "^0.10.0",
     "autoprefixer": "^10.4.22",
+    "bcryptjs": "^3.0.3",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "lucide-react": "^0.554.0",

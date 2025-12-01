@@ -4,12 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Eye, EyeOff, Lock, User, AlertCircle } from 'lucide-react';
-
-// Credenciales por defecto
-const ADMIN_CREDENTIALS = {
-  username: 'admin',
-  password: 'fami2024'
-};
+import { useAuth } from '@/context/AuthContext';
 
 export default function AdminLogin() {
   const [username, setUsername] = useState('');
@@ -18,9 +13,10 @@ export default function AdminLogin() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { login } = useAuth(); // We'll update AuthContext to wrap the API call or we do it here
 
   useEffect(() => {
-    // Verificar si ya está logueado
+    // Check if already logged in
     const user = localStorage.getItem('fami_admin_user');
     if (user) {
       router.push('/admin');
@@ -32,22 +28,36 @@ export default function AdminLogin() {
     setError('');
     setLoading(true);
 
-    // Simular delay de autenticación
-    await new Promise(resolve => setTimeout(resolve, 500));
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
 
-    if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
-      const userData = {
-        username: username,
-        name: 'Administrador FAMI',
-        role: 'admin',
-        loginTime: new Date().toISOString()
-      };
-      localStorage.setItem('fami_admin_user', JSON.stringify(userData));
-      router.push('/admin');
-    } else {
-      setError('Usuario o contraseña incorrectos');
+      const data = await res.json();
+
+      if (data.success) {
+        // Update context/localStorage via AuthContext helper if possible, 
+        // or just manual here as AuthContext reads from localStorage on mount.
+        // Let's manually set it here for simplicity and let AuthContext pick it up or reload.
+        // Ideally, useAuth should expose a login method that takes the user object.
+        
+        localStorage.setItem('fami_admin_user', JSON.stringify(data.user));
+        // Force a hard reload or router push might not trigger context update if context doesn't listen to storage event.
+        // Better to update via Context if we can.
+        
+        // For now:
+        router.push('/admin');
+        router.refresh(); // Refresh to update server components/layout state
+      } else {
+        setError(data.error || 'Credenciales inválidas');
+      }
+    } catch (err) {
+      setError('Error de conexión');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
@@ -149,11 +159,6 @@ export default function AdminLogin() {
             </button>
           </form>
 
-          <div className="mt-6 pt-6 border-t border-gray-100 text-center">
-            <p className="text-xs text-gray-400">
-              Credenciales de prueba: admin / fami2024
-            </p>
-          </div>
         </div>
 
         {/* Footer */}
