@@ -1,58 +1,56 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Upload, Trash2, Plus, Save, ArrowLeft, Play } from 'lucide-react';
+import { Upload, Trash2, Plus, Save, ArrowLeft, Play, Loader2 } from 'lucide-react';
 import Link from 'next/link';
-
-const initialVideos = [
-  {
-    id: 1,
-    title: "FAMI en Video",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    thumbnail: "/images/videos/featured-video.jpg",
-    videoUrl: "https://www.youtube.com/watch?v=example",
-    featured: true
-  },
-  {
-    id: 2,
-    title: "Lorem Ipsum Dolor",
-    description: "",
-    thumbnail: "/images/videos/video-1.jpg",
-    videoUrl: "https://www.youtube.com/watch?v=example",
-    featured: false
-  },
-  {
-    id: 3,
-    title: "Lorem Ipsum Dolor",
-    description: "",
-    thumbnail: "/images/videos/video-2.jpg",
-    videoUrl: "https://www.youtube.com/watch?v=example",
-    featured: false
-  },
-  {
-    id: 4,
-    title: "Lorem Ipsum Dolor",
-    description: "",
-    thumbnail: "/images/videos/video-3.jpg",
-    videoUrl: "https://www.youtube.com/watch?v=example",
-    featured: false
-  }
-];
+import { supabase } from '@/lib/supabase';
 
 export default function AdminVideos() {
-  const [videos, setVideos] = useState(initialVideos);
+  const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
-  const handleImageUpload = (videoId, event) => {
+  useEffect(() => {
+    fetchVideos();
+  }, []);
+
+  const fetchVideos = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('videos')
+        .select('*')
+        .order('id', { ascending: true });
+      if (error) throw error;
+      setVideos(data || []);
+    } catch (error) {
+      console.error('Error fetching videos:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleImageUpload = async (videoId, event) => {
     const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setVideos(videos.map(video =>
-          video.id === videoId ? { ...video, thumbnail: reader.result } : video
-        ));
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+
+    try {
+      const filename = `videos/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, '')}`;
+      const { data, error } = await supabase.storage
+        .from('hero-images')
+        .upload(filename, file);
+
+      if (error) throw error;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('hero-images')
+        .getPublicUrl(filename);
+
+      setVideos(videos.map(video =>
+        video.id === videoId ? { ...video, thumbnail: publicUrl } : video
+      ));
+    } catch (error) {
+      alert('Error al subir imagen: ' + error.message);
     }
   };
 
@@ -67,23 +65,60 @@ export default function AdminVideos() {
       id: Date.now(),
       title: "Nuevo video",
       description: "",
-      thumbnail: "/images/videos/placeholder.jpg",
-      videoUrl: "",
-      featured: false
+      thumbnail: "",
+      video_url: "",
+      featured: false,
+      isNew: true
     };
     setVideos([...videos, newVideo]);
   };
 
-  const deleteVideo = (videoId) => {
-    if (confirm('¿Estás seguro de eliminar este video?')) {
-      setVideos(videos.filter(video => video.id !== videoId));
+  const deleteVideo = async (videoId) => {
+    if (!confirm('¿Estás seguro de eliminar este video?')) return;
+    
+    const video = videos.find(v => v.id === videoId);
+    if (video.isNew) {
+      setVideos(videos.filter(v => v.id !== videoId));
+      return;
+    }
+
+    try {
+      const { error } = await supabase.from('videos').delete().eq('id', videoId);
+      if (error) throw error;
+      setVideos(videos.filter(v => v.id !== videoId));
+    } catch (error) {
+      alert('Error al eliminar: ' + error.message);
     }
   };
 
-  const saveChanges = () => {
-    alert('Cambios guardados correctamente');
-    console.log('Saving videos:', videos);
+  const saveChanges = async () => {
+    setSaving(true);
+    try {
+      const upsertData = videos.map(v => ({
+        id: v.isNew ? undefined : v.id,
+        title: v.title,
+        description: v.description,
+        thumbnail: v.thumbnail,
+        video_url: v.video_url || v.videoUrl, // handle mismatch
+        featured: v.featured
+      }));
+      
+      const { error } = await supabase
+        .from('videos')
+        .upsert(upsertData);
+        
+      if (error) throw error;
+
+      alert('Cambios guardados correctamente');
+      await fetchVideos();
+    } catch (error) {
+      alert('Error al guardar: ' + error.message);
+    } finally {
+      setSaving(false);
+    }
   };
+
+  if (loading) return <div className="p-8 text-center">Cargando videos...</div>;
 
   return (
     <div>
@@ -108,9 +143,10 @@ export default function AdminVideos() {
           </button>
           <button
             onClick={saveChanges}
-            className="flex items-center gap-2 px-4 py-2 bg-fami-blue text-white rounded-lg hover:bg-fami-blue/90 transition-colors"
+            disabled={saving}
+            className="flex items-center gap-2 px-4 py-2 bg-fami-blue text-white rounded-lg hover:bg-fami-blue/90 transition-colors disabled:opacity-50"
           >
-            <Save size={20} />
+            {saving ? <Loader2 className="animate-spin" size={20} /> : <Save size={20} />}
             Guardar Cambios
           </button>
         </div>
@@ -151,6 +187,7 @@ export default function AdminVideos() {
                         alt={video.title}
                         fill
                         className="object-cover"
+                        unoptimized
                       />
                     )}
                     {/* Play icon overlay */}
@@ -192,8 +229,8 @@ export default function AdminVideos() {
                     </label>
                     <input
                       type="url"
-                      value={video.videoUrl}
-                      onChange={(e) => handleInputChange(video.id, 'videoUrl', e.target.value)}
+                      value={video.video_url || video.videoUrl}
+                      onChange={(e) => handleInputChange(video.id, 'video_url', e.target.value)}
                       placeholder="https://www.youtube.com/watch?v=..."
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
                     />
@@ -220,7 +257,7 @@ export default function AdminVideos() {
                       className="w-4 h-4 text-fami-blue focus:ring-fami-blue border-gray-300 rounded"
                     />
                     <label htmlFor={`featured-${video.id}`} className="text-sm text-gray-700">
-                      Marcar como video destacado (aparece más grande)
+                      Marcar como video destacado
                     </label>
                   </div>
                 </div>

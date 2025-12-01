@@ -10,14 +10,12 @@ import {
   Newspaper,
   Video,
   Award,
-  Users,
   FileText,
   Settings,
   Menu,
   X,
   LogOut,
   Home,
-  ChevronDown,
   Bell,
   PanelLeftClose,
   PanelLeft
@@ -25,7 +23,6 @@ import {
 
 const sidebarItems = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-  { name: 'Clientes', href: '/admin/clientes', icon: Users },
   { name: 'Noticias', href: '/admin/noticias', icon: Newspaper },
   { name: 'Blog', href: '/admin/blog', icon: FileText },
   { name: 'Hero / Slider', href: '/admin/hero', icon: Image },
@@ -64,7 +61,7 @@ export default function AdminLayout({ children }) {
     );
   }
 
-  if (!user) return null; // Should redirect via effect, but prevent flash
+  if (!user) return null;
 
   return (
     <div className="min-h-screen bg-gray-50">

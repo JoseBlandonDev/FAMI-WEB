@@ -1,41 +1,56 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Upload, Trash2, Plus, Save, ArrowLeft } from 'lucide-react';
+import { Upload, Trash2, Plus, Save, ArrowLeft, Loader2 } from 'lucide-react';
 import Link from 'next/link';
-
-const initialCertifications = [
-  {
-    id: 1,
-    name: "Nombre del reconocimiento",
-    image: "/images/certifications/cert-1.png"
-  },
-  {
-    id: 2,
-    name: "Nombre del reconocimiento",
-    image: "/images/certifications/cert-2.png"
-  },
-  {
-    id: 3,
-    name: "Nombre del reconocimiento",
-    image: "/images/certifications/cert-3.png"
-  }
-];
+import { supabase } from '@/lib/supabase';
 
 export default function AdminCertifications() {
-  const [certifications, setCertifications] = useState(initialCertifications);
+  const [certifications, setCertifications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
-  const handleImageUpload = (certId, event) => {
+  useEffect(() => {
+    fetchCertifications();
+  }, []);
+
+  const fetchCertifications = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('certifications')
+        .select('*')
+        .order('id', { ascending: true });
+      if (error) throw error;
+      setCertifications(data || []);
+    } catch (error) {
+      console.error('Error fetching certifications:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleImageUpload = async (certId, event) => {
     const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setCertifications(certifications.map(cert =>
-          cert.id === certId ? { ...cert, image: reader.result } : cert
-        ));
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+
+    try {
+      const filename = `certifications/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, '')}`;
+      const { data, error } = await supabase.storage
+        .from('hero-images')
+        .upload(filename, file);
+
+      if (error) throw error;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('hero-images')
+        .getPublicUrl(filename);
+
+      setCertifications(certifications.map(cert =>
+        cert.id === certId ? { ...cert, image: publicUrl } : cert
+      ));
+    } catch (error) {
+      alert('Error al subir imagen: ' + error.message);
     }
   };
 
@@ -49,21 +64,55 @@ export default function AdminCertifications() {
     const newCert = {
       id: Date.now(),
       name: "Nueva certificación",
-      image: "/images/certifications/placeholder.png"
+      image: "",
+      isNew: true
     };
     setCertifications([...certifications, newCert]);
   };
 
-  const deleteCertification = (certId) => {
-    if (confirm('¿Estás seguro de eliminar esta certificación?')) {
-      setCertifications(certifications.filter(cert => cert.id !== certId));
+  const deleteCertification = async (certId) => {
+    if (!confirm('¿Estás seguro de eliminar esta certificación?')) return;
+    
+    const cert = certifications.find(c => c.id === certId);
+    if (cert.isNew) {
+      setCertifications(certifications.filter(c => c.id !== certId));
+      return;
+    }
+
+    try {
+      const { error } = await supabase.from('certifications').delete().eq('id', certId);
+      if (error) throw error;
+      setCertifications(certifications.filter(c => c.id !== certId));
+    } catch (error) {
+      alert('Error al eliminar: ' + error.message);
     }
   };
 
-  const saveChanges = () => {
-    alert('Cambios guardados correctamente');
-    console.log('Saving certifications:', certifications);
+  const saveChanges = async () => {
+    setSaving(true);
+    try {
+      const upsertData = certifications.map(c => ({
+        id: c.isNew ? undefined : c.id,
+        name: c.name,
+        image: c.image
+      }));
+      
+      const { error } = await supabase
+        .from('certifications')
+        .upsert(upsertData);
+        
+      if (error) throw error;
+
+      alert('Cambios guardados correctamente');
+      await fetchCertifications();
+    } catch (error) {
+      alert('Error al guardar: ' + error.message);
+    } finally {
+      setSaving(false);
+    }
   };
+
+  if (loading) return <div className="p-8 text-center">Cargando certificaciones...</div>;
 
   return (
     <div>
@@ -88,9 +137,10 @@ export default function AdminCertifications() {
           </button>
           <button
             onClick={saveChanges}
-            className="flex items-center gap-2 px-4 py-2 bg-fami-blue text-white rounded-lg hover:bg-fami-blue/90 transition-colors"
+            disabled={saving}
+            className="flex items-center gap-2 px-4 py-2 bg-fami-blue text-white rounded-lg hover:bg-fami-blue/90 transition-colors disabled:opacity-50"
           >
-            <Save size={20} />
+            {saving ? <Loader2 className="animate-spin" size={20} /> : <Save size={20} />}
             Guardar Cambios
           </button>
         </div>
@@ -119,6 +169,7 @@ export default function AdminCertifications() {
                     alt={cert.name}
                     fill
                     className="object-cover"
+                    unoptimized
                   />
                 )}
                 <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer bg-black/50 opacity-0 hover:opacity-100 transition-opacity">

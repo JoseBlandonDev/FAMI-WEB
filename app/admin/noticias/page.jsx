@@ -1,57 +1,49 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Plus, Search, Edit, Trash2, Eye, Calendar, Save, X, Upload, Star } from 'lucide-react';
-
-const initialNews = [
-  {
-    id: 1,
-    title: 'FAMI recibe reconocimiento como mejor empresa de salud',
-    excerpt: 'Una vez más FAMI es reconocida como una de las mejores empresas para trabajar en el país.',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    image: '/images/news/news-1.jpg',
-    date: '2025-11-28',
-    featured: true,
-    views: 567
-  },
-  {
-    id: 2,
-    title: 'Nueva campaña de vacunación en todas las sedes',
-    excerpt: 'FAMI lanza nueva campaña de vacunación gratuita para la comunidad.',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    image: '/images/news/news-2.jpg',
-    date: '2025-11-25',
-    featured: false,
-    views: 234
-  },
-  {
-    id: 3,
-    title: 'Apertura de nueva sede en Cali',
-    excerpt: 'FAMI expande su presencia con una nueva sede en el Valle del Cauca.',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    image: '/images/news/news-3.jpg',
-    date: '2025-11-20',
-    featured: false,
-    views: 891
-  },
-];
+import { Plus, Search, Edit, Trash2, Eye, Calendar, Save, X, Upload, Star, Loader2 } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 export default function AdminNoticias() {
-  const [news, setNews] = useState(initialNews);
+  const [news, setNews] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [editingNews, setEditingNews] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  
   const [formData, setFormData] = useState({
     title: '',
     excerpt: '',
     content: '',
     image: '',
-    featured: false
+    featured: false,
+    date: new Date().toISOString().split('T')[0]
   });
 
+  useEffect(() => {
+    fetchNews();
+  }, []);
+
+  const fetchNews = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('news')
+        .select('*')
+        .order('date', { ascending: false });
+      
+      if (error) throw error;
+      setNews(data || []);
+    } catch (error) {
+      console.error('Error fetching news:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const filteredNews = news.filter(item =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
+    item.title?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleEdit = (item) => {
@@ -61,7 +53,8 @@ export default function AdminNoticias() {
       excerpt: item.excerpt,
       content: item.content,
       image: item.image,
-      featured: item.featured
+      featured: item.featured,
+      date: item.date
     });
     setShowModal(true);
   };
@@ -73,53 +66,94 @@ export default function AdminNoticias() {
       excerpt: '',
       content: '',
       image: '',
-      featured: false
+      featured: false,
+      date: new Date().toISOString().split('T')[0]
     });
     setShowModal(true);
   };
 
-  const handleSave = () => {
-    if (editingNews) {
-      setNews(news.map(item =>
-        item.id === editingNews.id
-          ? { ...item, ...formData, date: new Date().toISOString().split('T')[0] }
-          : item
-      ));
-    } else {
-      const newItem = {
-        id: Date.now(),
-        ...formData,
-        date: new Date().toISOString().split('T')[0],
-        views: 0
-      };
-      setNews([newItem, ...news]);
-    }
-    setShowModal(false);
-    setEditingNews(null);
-  };
-
-  const handleDelete = (id) => {
-    if (confirm('¿Estás seguro de eliminar esta noticia?')) {
-      setNews(news.filter(item => item.id !== id));
-    }
-  };
-
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({ ...formData, image: reader.result });
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+
+    try {
+      const filename = `news/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, '')}`;
+      const { data, error } = await supabase.storage
+        .from('hero-images') // Using the same bucket for simplicity
+        .upload(filename, file);
+
+      if (error) throw error;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('hero-images')
+        .getPublicUrl(filename);
+
+      setFormData(prev => ({ ...prev, image: publicUrl }));
+    } catch (error) {
+      alert('Error al subir imagen: ' + error.message);
     }
   };
 
-  const toggleFeatured = (id) => {
-    setNews(news.map(item =>
-      item.id === id ? { ...item, featured: !item.featured } : item
-    ));
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      if (editingNews) {
+        const { error } = await supabase
+          .from('news')
+          .update(formData)
+          .eq('id', editingNews.id);
+        if (error) throw error;
+      } else {
+        const { error } = await supabase
+          .from('news')
+          .insert([formData]);
+        if (error) throw error;
+      }
+      
+      await fetchNews();
+      setShowModal(false);
+      setEditingNews(null);
+    } catch (error) {
+      alert('Error al guardar: ' + error.message);
+    } finally {
+      setSaving(false);
+    }
   };
+
+  const handleDelete = async (id) => {
+    if (!confirm('¿Estás seguro de eliminar esta noticia?')) return;
+    
+    try {
+      const { error } = await supabase
+        .from('news')
+        .delete()
+        .eq('id', id);
+      if (error) throw error;
+      
+      setNews(news.filter(item => item.id !== id));
+    } catch (error) {
+      alert('Error al eliminar: ' + error.message);
+    }
+  };
+
+  const toggleFeatured = async (item) => {
+    try {
+      const { error } = await supabase
+        .from('news')
+        .update({ featured: !item.featured })
+        .eq('id', item.id);
+      
+      if (error) throw error;
+      
+      setNews(news.map(n => 
+        n.id === item.id ? { ...n, featured: !n.featured } : n
+      ));
+    } catch (error) {
+      console.error('Error toggling featured:', error);
+    }
+  };
+
+  if (loading) return <div className="p-8 text-center">Cargando noticias...</div>;
 
   return (
     <div className="space-y-6">
@@ -159,14 +193,16 @@ export default function AdminNoticias() {
             <div className="flex flex-col md:flex-row">
               {/* Image */}
               <div className="relative w-full md:w-64 h-48 md:h-auto bg-gray-100 flex-shrink-0">
-                {item.image && (
+                {item.image ? (
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
                     className="object-cover"
-                    onError={(e) => { e.target.style.display = 'none'; }}
+                    unoptimized
                   />
+                ) : (
+                  <div className="flex items-center justify-center h-full text-gray-400">Sin imagen</div>
                 )}
                 {item.featured && (
                   <div className="absolute top-3 left-3">
@@ -183,22 +219,18 @@ export default function AdminNoticias() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
-                    <p className="text-gray-500 mt-2">{item.excerpt}</p>
+                    <p className="text-gray-500 mt-2 line-clamp-2">{item.excerpt}</p>
                     <div className="flex items-center gap-4 mt-4 text-sm text-gray-400">
                       <span className="flex items-center gap-1">
                         <Calendar size={14} />
                         {item.date}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Eye size={14} />
-                        {item.views} vistas
                       </span>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={() => toggleFeatured(item.id)}
+                      onClick={() => toggleFeatured(item)}
                       className={`p-2 rounded-lg transition-colors ${
                         item.featured
                           ? 'text-yellow-500 bg-yellow-50 hover:bg-yellow-100'
@@ -270,6 +302,7 @@ export default function AdminNoticias() {
                       alt="Preview"
                       fill
                       className="object-cover"
+                      unoptimized
                     />
                   )}
                   <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer bg-black/50 opacity-0 hover:opacity-100 transition-opacity">
@@ -294,6 +327,17 @@ export default function AdminNoticias() {
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
                   placeholder="Título de la noticia"
+                />
+              </div>
+
+              {/* Date */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Fecha</label>
+                <input
+                  type="date"
+                  value={formData.date}
+                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
                 />
               </div>
 
@@ -345,9 +389,10 @@ export default function AdminNoticias() {
               </button>
               <button
                 onClick={handleSave}
-                className="flex items-center gap-2 px-4 py-2 bg-fami-blue text-white rounded-lg hover:bg-fami-blue/90 transition-colors"
+                disabled={saving}
+                className="flex items-center gap-2 px-4 py-2 bg-fami-blue text-white rounded-lg hover:bg-fami-blue/90 transition-colors disabled:opacity-50"
               >
-                <Save size={18} />
+                {saving ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
                 {editingNews ? 'Guardar Cambios' : 'Crear Noticia'}
               </button>
             </div>
