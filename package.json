@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/JoseBlandonDev/FAMI-WEB#readme",
   "dependencies": {
+    "@supabase/supabase-js": "^2.86.0",
     "@tailwindcss/postcss": "^4.1.17",
     "autoprefixer": "^10.4.22",
     "embla-carousel-autoplay": "^8.6.0",

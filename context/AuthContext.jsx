@@ -2,16 +2,9 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabase';
 
 const AuthContext = createContext();
-
-// Usuario y contraseña por defecto
-const ADMIN_USER = {
-  username: 'admin',
-  password: 'fami2024',
-  name: 'Administrador FAMI',
-  role: 'admin'
-};
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -19,50 +12,48 @@ export function AuthProvider({ children }) {
   const router = useRouter();
 
   useEffect(() => {
-    // Verificar si hay sesión guardada
-    const savedUser = localStorage.getItem('fami_admin_user');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-    setLoading(false);
+    // Check active session
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user ?? null);
+      setLoading(false);
+    };
+
+    checkSession();
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  const login = (username, password) => {
-    if (username === ADMIN_USER.username && password === ADMIN_USER.password) {
-      const userData = {
-        username: ADMIN_USER.username,
-        name: ADMIN_USER.name,
-        role: ADMIN_USER.role,
-        loginTime: new Date().toISOString()
-      };
-      setUser(userData);
-      localStorage.setItem('fami_admin_user', JSON.stringify(userData));
-      return { success: true };
+  const login = async (email, password) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      return { success: false, error: error.message };
     }
-    return { success: false, error: 'Usuario o contraseña incorrectos' };
+    
+    return { success: true };
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('fami_admin_user');
+  const logout = async () => {
+    await supabase.auth.signOut();
     router.push('/admin/login');
   };
 
-  const isAuthenticated = () => {
-    return user !== null;
-  };
-
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
 export function useAuth() {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth debe usarse dentro de AuthProvider');
-  }
-  return context;
+  return useContext(AuthContext);
 }

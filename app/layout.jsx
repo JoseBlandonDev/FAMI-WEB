@@ -2,6 +2,7 @@ import { Montserrat } from 'next/font/google';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import SocialSidebar from '@/components/layout/SocialSidebar';
+import AppShell from '@/components/layout/AppShell';
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -18,12 +19,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={`${montserrat.variable} font-sans bg-white text-fami-text antialiased`}>
-        <Navbar />
-        <SocialSidebar />
-        <main className="min-h-screen">
+        <AppShell
+          navbar={<Navbar />}
+          sidebar={<SocialSidebar />}
+          footer={<Footer />}
+        >
           {children}
-        </main>
-        <Footer />
+        </AppShell>
       </body>
     </html>
   );
