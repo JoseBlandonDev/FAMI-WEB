@@ -3,6 +3,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import SocialSidebar from '@/components/layout/SocialSidebar';
 import AppShell from '@/components/layout/AppShell';
+import { AuthProvider } from '@/context/AuthContext';
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -19,13 +20,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={`${montserrat.variable} font-sans bg-white text-fami-text antialiased`}>
-        <AppShell
-          navbar={<Navbar />}
-          sidebar={<SocialSidebar />}
-          footer={<Footer />}
-        >
-          {children}
-        </AppShell>
+        <AuthProvider>
+          <AppShell
+            navbar={<Navbar />}
+            sidebar={<SocialSidebar />}
+            footer={<Footer />}
+          >
+            {children}
+          </AppShell>
+        </AuthProvider>
       </body>
     </html>
   );
