@@ -6,18 +6,21 @@ import Certifications from '@/components/sections/Certifications';
 import NewsSection from '@/components/sections/NewsSection';
 import VideoSection from '@/components/sections/VideoSection';
 import ContactCTA from '@/components/sections/ContactCTA';
-import { sql } from '@vercel/postgres';
+import { supabase } from '@/lib/supabase';
 
 // Force dynamic rendering since we are fetching from DB
 export const dynamic = 'force-dynamic';
 
 async function getHeroSlides() {
   try {
-    const { rows } = await sql`SELECT * FROM slides ORDER BY id ASC`;
+    const { data } = await supabase
+      .from('slides')
+      .select('*')
+      .order('order_index', { ascending: true });
     
-    if (rows.length === 0) return null;
+    if (!data || data.length === 0) return null;
 
-    return rows.map(row => ({
+    return data.map(row => ({
       id: row.id,
       title: row.title,
       subtitle: row.subtitle,
@@ -27,7 +30,6 @@ async function getHeroSlides() {
     }));
   } catch (error) {
     console.error('Database error:', error);
-    // Return null or default slides if DB fails/is empty
     return null; 
   }
 }
