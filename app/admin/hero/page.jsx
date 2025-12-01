@@ -1,35 +1,56 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Upload, Trash2, Plus, Save, ArrowLeft } from 'lucide-react';
+import { Upload, Trash2, Plus, Save, ArrowLeft, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
-const initialSlides = [
-  {
-    id: 1,
-    title: "MEJORA TU PRODUCTIVIDAD.",
-    subtitle: "Salud ocupacional",
-    image: "/images/hero/doctor-hero.png",
-    ctaText: "Ver más",
-    ctaLink: "/salud-ocupacional"
-  }
-];
-
 export default function AdminHero() {
-  const [slides, setSlides] = useState(initialSlides);
-  const [editingSlide, setEditingSlide] = useState(null);
+  const [slides, setSlides] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
-  const handleImageUpload = (slideId, event) => {
+  useEffect(() => {
+    fetchSlides();
+  }, []);
+
+  const fetchSlides = async () => {
+    try {
+      const response = await fetch('/api/hero');
+      const data = await response.json();
+      setSlides(data);
+    } catch (error) {
+      console.error('Error fetching slides:', error);
+      alert('Error al cargar los slides');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleImageUpload = async (slideId, event) => {
     const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await res.json();
+
+      if (data.success) {
         setSlides(slides.map(slide =>
-          slide.id === slideId ? { ...slide, image: reader.result } : slide
+          slide.id === slideId ? { ...slide, image: data.url } : slide
         ));
-      };
-      reader.readAsDataURL(file);
+      } else {
+        alert('Error al subir imagen');
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      alert('Error al subir imagen');
     }
   };
 
@@ -44,7 +65,7 @@ export default function AdminHero() {
       id: Date.now(),
       title: "Nuevo Slide",
       subtitle: "Subtítulo",
-      image: "/images/hero/placeholder.png",
+      image: "/images/hero/placeholder.png", // Ensure this exists or handle missing
       ctaText: "Ver más",
       ctaLink: "#"
     };
@@ -57,11 +78,35 @@ export default function AdminHero() {
     }
   };
 
-  const saveChanges = () => {
-    // In a real app, this would save to a database or API
-    alert('Cambios guardados correctamente');
-    console.log('Saving slides:', slides);
+  const saveChanges = async () => {
+    setSaving(true);
+    try {
+      const response = await fetch('/api/hero', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(slides),
+      });
+      
+      if (response.ok) {
+        alert('Cambios guardados correctamente');
+      } else {
+        alert('Error al guardar cambios');
+      }
+    } catch (error) {
+      console.error('Error saving slides:', error);
+      alert('Error al guardar cambios');
+    } finally {
+      setSaving(false);
+    }
   };
+
+  if (loading) {
+    return (
+      <div className="flex h-[50vh] items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-fami-blue" />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -86,10 +131,11 @@ export default function AdminHero() {
           </button>
           <button
             onClick={saveChanges}
-            className="flex items-center gap-2 px-4 py-2 bg-fami-blue text-white rounded-lg hover:bg-fami-blue/90 transition-colors"
+            disabled={saving}
+            className="flex items-center gap-2 px-4 py-2 bg-fami-blue text-white rounded-lg hover:bg-fami-blue/90 transition-colors disabled:opacity-50"
           >
-            <Save size={20} />
-            Guardar Cambios
+            {saving ? <Loader2 size={20} className="animate-spin" /> : <Save size={20} />}
+            {saving ? 'Guardando...' : 'Guardar Cambios'}
           </button>
         </div>
       </div>
@@ -122,6 +168,7 @@ export default function AdminHero() {
                         alt={slide.title}
                         fill
                         className="object-cover"
+                        unoptimized // To allow arbitrary uploads without config
                       />
                     )}
                     <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer bg-black/50 opacity-0 hover:opacity-100 transition-opacity">

@@ -5,31 +5,10 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const heroSlides = [
-  {
-    id: 1,
-    category: "Salud ocupacional",
-    title: "MEJORA TU PRODUCTIVIDAD.",
-    description: "Más allá de la prevención, fomentamos el equilibrio físico y emocional de los colaboradores de nuestro país creamos.",
-    benefits: [
-      "Exámenes de salud ocupacional",
-      "Inteligencia emocional",
-      "Descargas emocionales",
-      "Prevención de riesgos laborales",
-      "Pausas Activas"
-    ],
-    extraText: "Y lo mejor: beneficios extensibles para su familia.",
-    image: "/images/hero/doctor-hero.png",
-    bgImage: "/images/hero/hero-bg.jpg",
-    ctaText: "Ver más",
-    ctaLink: "/salud-ocupacional"
-  }
-];
-
-const HeroSection = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 8000 })]);
+const HeroSection = ({ slides }) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 6000 })]);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -39,82 +18,43 @@ const HeroSection = () => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
+  if (!slides || slides.length === 0) return null;
+
   return (
-    <section className="relative w-full">
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex">
-          {heroSlides.map((slide) => (
-            <div
-              key={slide.id}
-              className="flex-[0_0_100%] min-w-0 relative"
-            >
-              {/* Background with gradient */}
-              <div className="relative min-h-[600px] md:min-h-[650px] bg-gradient-to-r from-fami-blue via-fami-blue to-fami-cyan overflow-hidden">
-                {/* Decorative curve */}
-                <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block">
-                  <svg
-                    className="absolute left-0 top-0 h-full"
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="none"
-                    style={{ width: '150px' }}
-                  >
-                    <path
-                      d="M100,0 C50,0 0,50 0,100 L100,100 Z"
-                      fill="white"
-                      opacity="0.1"
-                    />
-                  </svg>
-                </div>
-
-                <div className="container mx-auto px-4 h-full">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center min-h-[600px] md:min-h-[650px] py-12">
-                    {/* Content */}
-                    <div className="text-white z-10 pl-0 md:pl-8">
-                      <span className="inline-block text-fami-orange text-sm md:text-base font-medium mb-2">
-                        {slide.category}
-                      </span>
-                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                        {slide.title}
-                      </h1>
-                      <p className="text-white/90 text-base md:text-lg mb-6 max-w-lg">
-                        {slide.description}
-                      </p>
-
-                      {/* Benefits List */}
-                      <ul className="space-y-2 mb-6">
-                        {slide.benefits.map((benefit, index) => (
-                          <li key={index} className="flex items-center gap-3 text-white/90">
-                            <Check size={18} className="text-fami-orange flex-shrink-0" />
-                            <span className="text-sm md:text-base">{benefit}</span>
-                          </li>
-                        ))}
-                      </ul>
-
-                      <p className="text-fami-orange font-medium mb-8 text-sm md:text-base">
-                        {slide.extraText}
-                      </p>
-
-                      <Link
-                        href={slide.ctaLink}
-                        className="inline-block px-8 py-3 bg-fami-orange text-white font-medium rounded-md hover:bg-orange-600 transition-colors"
-                      >
-                        {slide.ctaText}
-                      </Link>
-                    </div>
-
-                    {/* Image */}
-                    <div className="relative h-[400px] md:h-[550px] hidden lg:flex items-end justify-center">
-                      <div className="relative w-full h-full">
-                        <Image
-                          src={slide.image}
-                          alt="Doctor FAMI"
-                          fill
-                          className="object-contain object-bottom"
-                          priority
-                        />
-                      </div>
-                    </div>
-                  </div>
+    <section className="relative w-full h-[600px] md:h-[700px] bg-gray-900 group">
+      <div className="overflow-hidden h-full" ref={emblaRef}>
+        <div className="flex h-full">
+          {slides.map((slide) => (
+            <div className="flex-[0_0_100%] min-w-0 relative h-full" key={slide.id}>
+              {slide.image && (
+                <Image
+                  src={slide.image}
+                  alt={slide.title}
+                  fill
+                  className="object-cover"
+                  priority
+                  unoptimized
+                />
+              )}
+              <div className="absolute inset-0 bg-black/40" />
+              <div className="absolute inset-0 flex items-center justify-center text-center px-4">
+                <div className="max-w-4xl animate-fadeIn">
+                  {slide.subtitle && (
+                    <span className="text-fami-orange font-bold uppercase tracking-wider mb-4 block text-sm md:text-base">
+                      {slide.subtitle}
+                    </span>
+                  )}
+                  <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight drop-shadow-lg">
+                    {slide.title}
+                  </h1>
+                  {slide.ctaText && (
+                    <Link
+                      href={slide.ctaLink || "#"}
+                      className="inline-block px-8 py-4 bg-fami-orange text-white font-bold rounded-lg hover:bg-orange-600 transition-transform hover:scale-105 shadow-lg"
+                    >
+                      {slide.ctaText}
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -125,17 +65,15 @@ const HeroSection = () => {
       {/* Navigation Arrows */}
       <button
         onClick={scrollPrev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white transition-all"
-        aria-label="Anterior"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white transition-all opacity-0 group-hover:opacity-100"
       >
-        <ChevronLeft size={28} />
+        <ChevronLeft size={32} />
       </button>
       <button
         onClick={scrollNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white transition-all"
-        aria-label="Siguiente"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white transition-all opacity-0 group-hover:opacity-100"
       >
-        <ChevronRight size={28} />
+        <ChevronRight size={32} />
       </button>
     </section>
   );
