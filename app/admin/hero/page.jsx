@@ -4,11 +4,16 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Upload, Trash2, Plus, Save, ArrowLeft, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { supabase } from '@/lib/supabase';
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 export default function AdminHero() {
   const [slides, setSlides] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const { user } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     fetchSlides();
@@ -16,9 +21,24 @@ export default function AdminHero() {
 
   const fetchSlides = async () => {
     try {
-      const response = await fetch('/api/hero');
-      const data = await response.json();
-      setSlides(data);
+      const { data, error } = await supabase
+        .from('slides')
+        .select('*')
+        .order('order_index', { ascending: true });
+
+      if (error) throw error;
+
+      // Map snake_case to camelCase
+      const formattedSlides = data.map(row => ({
+        id: row.id,
+        title: row.title,
+        subtitle: row.subtitle,
+        image: row.image_url,
+        ctaText: row.cta_text,
+        ctaLink: row.cta_link
+      }));
+
+      setSlides(formattedSlides);
     } catch (error) {
       console.error('Error fetching slides:', error);
       alert('Error al cargar los slides');
@@ -31,26 +51,33 @@ export default function AdminHero() {
     const file = event.target.files[0];
     if (!file) return;
 
-    const formData = new FormData();
-    formData.append('file', file);
-
     try {
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      const data = await res.json();
+      // 1. Upload to Supabase Storage
+      const filename = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, '')}`;
+      
+      const { data, error } = await supabase
+        .storage
+        .from('hero-images')
+        .upload(filename, file, {
+          upsert: false
+        });
 
-      if (data.success) {
-        setSlides(slides.map(slide =>
-          slide.id === slideId ? { ...slide, image: data.url } : slide
-        ));
-      } else {
-        alert('Error al subir imagen');
-      }
+      if (error) throw error;
+
+      // 2. Get Public URL
+      const { data: { publicUrl } } = supabase
+        .storage
+        .from('hero-images')
+        .getPublicUrl(filename);
+
+      // 3. Update State
+      setSlides(slides.map(slide =>
+        slide.id === slideId ? { ...slide, image: publicUrl } : slide
+      ));
+
     } catch (error) {
       console.error('Error uploading image:', error);
-      alert('Error al subir imagen');
+      alert('Error al subir imagen: ' + error.message);
     }
   };
 
@@ -62,12 +89,13 @@ export default function AdminHero() {
 
   const addNewSlide = () => {
     const newSlide = {
-      id: Date.now(),
+      id: Date.now(), // Temporary ID for UI
       title: "Nuevo Slide",
       subtitle: "Subtítulo",
-      image: "/images/hero/placeholder.png", // Ensure this exists or handle missing
+      image: "", 
       ctaText: "Ver más",
-      ctaLink: "#"
+      ctaLink: "#",
+      isNew: true
     };
     setSlides([...slides, newSlide]);
   };
@@ -79,22 +107,50 @@ export default function AdminHero() {
   };
 
   const saveChanges = async () => {
+    if (!user) {
+      alert('Debes iniciar sesión para guardar.');
+      return;
+    }
+
     setSaving(true);
     try {
-      const response = await fetch('/api/hero', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(slides),
-      });
+      // Strategy: Delete all and re-insert to maintain order and clean state
+      // This is simple and effective for this use case.
       
-      if (response.ok) {
-        alert('Cambios guardados correctamente');
-      } else {
-        alert('Error al guardar cambios');
+      const dbSlides = slides.map((slide, index) => ({
+        title: slide.title,
+        subtitle: slide.subtitle,
+        image_url: slide.image,
+        cta_text: slide.ctaText,
+        cta_link: slide.ctaLink,
+        order_index: index
+      }));
+
+      // 1. Delete all existing slides
+      // (Supabase doesn't support TRUNCATE via client easily, so we delete where ID > 0)
+      const { error: deleteError } = await supabase
+        .from('slides')
+        .delete()
+        .neq('id', 0); 
+      
+      if (deleteError) throw deleteError;
+
+      // 2. Insert new slides
+      if (dbSlides.length > 0) {
+        const { error: insertError } = await supabase
+          .from('slides')
+          .insert(dbSlides);
+        
+        if (insertError) throw insertError;
       }
+
+      alert('Cambios guardados correctamente');
+      // Reload to get real IDs from DB
+      fetchSlides(); 
+
     } catch (error) {
       console.error('Error saving slides:', error);
-      alert('Error al guardar cambios');
+      alert('Error al guardar cambios: ' + error.message);
     } finally {
       setSaving(false);
     }
@@ -162,14 +218,18 @@ export default function AdminHero() {
                     Imagen del Slide
                   </label>
                   <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden border-2 border-dashed border-gray-300">
-                    {slide.image && (
+                    {slide.image ? (
                       <Image
                         src={slide.image}
                         alt={slide.title}
                         fill
                         className="object-cover"
-                        unoptimized // To allow arbitrary uploads without config
+                        unoptimized
                       />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gray-50">
+                        <Upload className="text-gray-300" size={48} />
+                      </div>
                     )}
                     <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer bg-black/50 opacity-0 hover:opacity-100 transition-opacity">
                       <Upload size={32} className="text-white mb-2" />
@@ -195,7 +255,7 @@ export default function AdminHero() {
                     </label>
                     <input
                       type="text"
-                      value={slide.subtitle}
+                      value={slide.subtitle || ''}
                       onChange={(e) => handleInputChange(slide.id, 'subtitle', e.target.value)}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
                     />
@@ -207,7 +267,7 @@ export default function AdminHero() {
                     </label>
                     <input
                       type="text"
-                      value={slide.title}
+                      value={slide.title || ''}
                       onChange={(e) => handleInputChange(slide.id, 'title', e.target.value)}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
                     />
@@ -219,7 +279,7 @@ export default function AdminHero() {
                     </label>
                     <input
                       type="text"
-                      value={slide.ctaText}
+                      value={slide.ctaText || ''}
                       onChange={(e) => handleInputChange(slide.id, 'ctaText', e.target.value)}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
                     />
@@ -231,7 +291,7 @@ export default function AdminHero() {
                     </label>
                     <input
                       type="text"
-                      value={slide.ctaLink}
+                      value={slide.ctaLink || ''}
                       onChange={(e) => handleInputChange(slide.id, 'ctaLink', e.target.value)}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
                     />
