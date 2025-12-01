@@ -21,7 +21,7 @@ const HeroSection = ({ slides }) => {
   if (!slides || slides.length === 0) return null;
 
   return (
-    <section className="relative w-full h-[600px] md:h-[700px] bg-gray-900 group">
+    <section className="relative w-full h-[350px] md:h-[450px] bg-gray-900 group">
       <div className="overflow-hidden h-full" ref={emblaRef}>
         <div className="flex h-full">
           {slides.map((slide) => (
@@ -40,17 +40,17 @@ const HeroSection = ({ slides }) => {
               <div className="absolute inset-0 flex items-center justify-center text-center px-4">
                 <div className="max-w-4xl animate-fadeIn">
                   {slide.subtitle && (
-                    <span className="text-fami-orange font-bold uppercase tracking-wider mb-4 block text-sm md:text-base">
+                    <span className="text-fami-orange font-bold uppercase tracking-wider mb-2 block text-xs md:text-sm">
                       {slide.subtitle}
                     </span>
                   )}
-                  <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight drop-shadow-lg">
+                  <h1 className="text-2xl md:text-4xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
                     {slide.title}
                   </h1>
                   {slide.ctaText && (
                     <Link
                       href={slide.ctaLink || "#"}
-                      className="inline-block px-8 py-4 bg-fami-orange text-white font-bold rounded-lg hover:bg-orange-600 transition-transform hover:scale-105 shadow-lg"
+                      className="inline-block px-6 py-3 bg-fami-orange text-white font-bold rounded-lg hover:bg-orange-600 transition-transform hover:scale-105 shadow-lg text-sm md:text-base"
                     >
                       {slide.ctaText}
                     </Link>
@@ -65,15 +65,15 @@ const HeroSection = ({ slides }) => {
       {/* Navigation Arrows */}
       <button
         onClick={scrollPrev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white transition-all opacity-0 group-hover:opacity-100"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white transition-all opacity-0 group-hover:opacity-100"
       >
-        <ChevronLeft size={32} />
+        <ChevronLeft size={24} />
       </button>
       <button
         onClick={scrollNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white transition-all opacity-0 group-hover:opacity-100"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white transition-all opacity-0 group-hover:opacity-100"
       >
-        <ChevronRight size={32} />
+        <ChevronRight size={24} />
       </button>
     </section>
   );
