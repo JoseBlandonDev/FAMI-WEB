@@ -1,0 +1,175 @@
+{
+  "hero": {
+    "slides": [
+      {
+        "id": 1,
+        "title": "MEJORA TU PRODUCTIVIDAD.",
+        "subtitle": "Salud ocupacional",
+        "description": "Más allá de la prevención, fomentamos el equilibrio físico y emocional de los colaboradores de nuestro país creamos.",
+        "benefits": [
+          "Exámenes de salud ocupacional",
+          "Inteligencia emocional",
+          "Descargas emocionales",
+          "Prevención de riesgos laborales",
+          "Pausas Activas"
+        ],
+        "extraText": "Y lo mejor: beneficios extensibles para su familia.",
+        "image": "/images/hero/doctor-hero.png",
+        "ctaText": "Ver más",
+        "ctaLink": "/salud-ocupacional"
+      }
+    ]
+  },
+  "services": [
+    {
+      "id": 1,
+      "title": "Salud Ocupacional",
+      "icon": "stethoscope",
+      "image": "/images/services/salud-ocupacional.png",
+      "link": "/salud-ocupacional"
+    },
+    {
+      "id": 2,
+      "title": "Apoyos pedagógicos",
+      "icon": "book",
+      "image": "/images/services/apoyos-pedagogicos.png",
+      "link": "/apoyos-pedagogicos"
+    },
+    {
+      "id": 3,
+      "title": "Servicios de la IPS",
+      "icon": "heart",
+      "image": "/images/services/servicios-ips.png",
+      "link": "/servicios-ips"
+    }
+  ],
+  "certifications": [
+    {
+      "id": 1,
+      "name": "Nombre del reconocimiento",
+      "image": "/images/certifications/cert-1.png"
+    },
+    {
+      "id": 2,
+      "name": "Nombre del reconocimiento",
+      "image": "/images/certifications/cert-2.png"
+    },
+    {
+      "id": 3,
+      "name": "Nombre del reconocimiento",
+      "image": "/images/certifications/cert-3.png"
+    }
+  ],
+  "news": {
+    "featured": {
+      "id": 1,
+      "title": "Lorem Ipsum Dolor",
+      "excerpt": "Una vez más FAMI es es reconocida como una de las mejores empresas para trabajar en el país.",
+      "date": "14 de julio de 2023",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+      "image": "/images/news/featured-news.jpg",
+      "link": "/noticias/1"
+    },
+    "items": [
+      {
+        "id": 2,
+        "title": "Lorem Ipsum Dolor",
+        "excerpt": "Una vez más FAMI es es reconocida como una de las mejores empresas para trabajar en el país.",
+        "date": "14 de julio de 2023",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+        "image": "/images/news/news-1.jpg",
+        "link": "/noticias/2"
+      },
+      {
+        "id": 3,
+        "title": "Lorem Ipsum Dolor",
+        "excerpt": "Una vez más FAMI es es reconocida como una de las mejores empresas para trabajar en el país.",
+        "date": "14 de julio de 2023",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+        "image": "/images/news/news-2.jpg",
+        "link": "/noticias/3"
+      },
+      {
+        "id": 4,
+        "title": "Lorem Ipsum Dolor",
+        "excerpt": "Una vez más FAMI es es reconocida como una de las mejores empresas para trabajar en el país.",
+        "date": "14 de julio de 2023",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+        "image": "/images/news/news-3.jpg",
+        "link": "/noticias/4"
+      }
+    ]
+  },
+  "videos": {
+    "featured": {
+      "id": 1,
+      "title": "FAMI en Video",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod.",
+      "thumbnail": "/images/videos/featured-video.jpg",
+      "videoUrl": "https://www.youtube.com/watch?v=example"
+    },
+    "items": [
+      {
+        "id": 2,
+        "title": "Lorem Ipsum Dolor",
+        "thumbnail": "/images/videos/video-1.jpg",
+        "videoUrl": "https://www.youtube.com/watch?v=example"
+      },
+      {
+        "id": 3,
+        "title": "Lorem Ipsum Dolor",
+        "thumbnail": "/images/videos/video-2.jpg",
+        "videoUrl": "https://www.youtube.com/watch?v=example"
+      },
+      {
+        "id": 4,
+        "title": "Lorem Ipsum Dolor",
+        "thumbnail": "/images/videos/video-3.jpg",
+        "videoUrl": "https://www.youtube.com/watch?v=example"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Escucharte nos ayuda a crecer",
+    "subtitle": "Haz clic en el link y completa el formulario",
+    "ctaText": "Contáctanos",
+    "ctaLink": "/contacto"
+  },
+  "footer": {
+    "legalLinks": [
+      { "name": "Términos legales y derechos de uso", "href": "#" },
+      { "name": "Aviso de Privacidad", "href": "#" },
+      { "name": "Política de Cookies", "href": "#" },
+      { "name": "Mapa Web", "href": "#" }
+    ],
+    "institutionalLinks": [
+      { "name": "Transparencia", "href": "#" },
+      { "name": "Reporte a Joint Commission International", "href": "#" },
+      { "name": "Correo electrónico corporativo", "href": "#" },
+      { "name": "Campus Virtual", "href": "#" },
+      { "name": "Atención al usuario", "href": "#" },
+      { "name": "Canal de denuncias", "href": "#" }
+    ],
+    "socialLinks": {
+      "instagram": "https://instagram.com/fami",
+      "facebook": "https://facebook.com/fami",
+      "linkedin": "https://linkedin.com/company/fami",
+      "whatsapp": "https://wa.me/573218227123"
+    }
+  },
+  "navbar": {
+    "topBar": {
+      "location": "Localización",
+      "contact": "Contáctanos"
+    },
+    "menuItems": [
+      { "name": "Especialidades", "href": "/especialidades" },
+      { "name": "Servicios / Programas", "href": "/servicios" },
+      { "name": "Paquetes / Visitantes", "href": "/paquetes" },
+      { "name": "Noticias", "href": "/noticias" },
+      { "name": "Eventos", "href": "/eventos" },
+      { "name": "Nosotros", "href": "/nosotros" },
+      { "name": "Aliados / Cooperantes", "href": "/aliados" }
+    ]
+  }
+}
