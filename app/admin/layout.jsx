@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 import {
   LayoutDashboard,
   Image,
@@ -36,7 +37,7 @@ const sidebarItems = [
 export default function AdminLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [user, setUser] = useState(null);
+  const { user, logout, loading } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -44,20 +45,10 @@ export default function AdminLayout({ children }) {
   const isLoginPage = pathname === '/admin/login';
 
   useEffect(() => {
-    if (!isLoginPage) {
-      const savedUser = localStorage.getItem('fami_admin_user');
-      if (savedUser) {
-        setUser(JSON.parse(savedUser));
-      } else {
-        router.push('/admin/login');
-      }
+    if (!loading && !user && !isLoginPage) {
+      router.push('/admin/login');
     }
-  }, [isLoginPage, router]);
-
-  const handleLogout = () => {
-    localStorage.removeItem('fami_admin_user');
-    router.push('/admin/login');
-  };
+  }, [user, loading, isLoginPage, router]);
 
   // Si es la página de login, mostrar solo el contenido
   if (isLoginPage) {
@@ -65,13 +56,15 @@ export default function AdminLayout({ children }) {
   }
 
   // Si no hay usuario y no es login, mostrar loading
-  if (!user && !isLoginPage) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
         <div className="w-8 h-8 border-4 border-fami-blue/30 border-t-fami-blue rounded-full animate-spin" />
       </div>
     );
   }
+
+  if (!user) return null; // Should redirect via effect, but prevent flash
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -153,7 +146,7 @@ export default function AdminLayout({ children }) {
               {sidebarOpen && <span>Ver Sitio</span>}
             </Link>
             <button
-              onClick={handleLogout}
+              onClick={logout}
               className="flex items-center gap-3 px-3 py-2.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors w-full"
               title={!sidebarOpen ? 'Salir' : ''}
             >
@@ -186,16 +179,16 @@ export default function AdminLayout({ children }) {
 
               <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
                 <div className="text-right hidden sm:block">
-                  <p className="text-sm font-medium text-gray-900">{user?.name || 'Admin'}</p>
-                  <p className="text-xs text-gray-500">{user?.role || 'Administrador'}</p>
+                  <p className="text-sm font-medium text-gray-900">{user?.email || 'Admin'}</p>
+                  <p className="text-xs text-gray-500">Administrador</p>
                 </div>
                 <div className="w-10 h-10 rounded-full bg-fami-blue text-white flex items-center justify-center font-bold">
-                  {user?.name?.charAt(0) || 'A'}
+                  {user?.email?.charAt(0).toUpperCase() || 'A'}
                 </div>
               </div>
 
               <button
-                onClick={handleLogout}
+                onClick={logout}
                 className="hidden sm:flex items-center gap-2 px-3 py-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
               >
                 <LogOut size={18} />
