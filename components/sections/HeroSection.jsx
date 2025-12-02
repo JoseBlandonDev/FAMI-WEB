@@ -67,7 +67,7 @@ const HeroSection = ({ slides }) => {
                       src={slide.image || defaultSlide.image}
                       alt={slide.title || 'FAMI Salud'}
                       fill
-                      className="object-contain object-center"
+                      className="object-contain object-center rounded-2xl"
                       priority
                       unoptimized
                     />
