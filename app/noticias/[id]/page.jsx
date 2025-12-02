@@ -5,11 +5,18 @@ import { ArrowLeft, Calendar, Share2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 
-export const revalidate = 0; // Dynamic data
+// Force dynamic rendering to ensure we fetch fresh data
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 async function getNewsItem(id) {
-  // Validate ID is a number to prevent DB errors
-  if (isNaN(id)) return null;
+  console.log(`[NewsPage] Fetching news with ID: ${id}`); // Debug log
+
+  // Validate ID is a number
+  if (!id || isNaN(Number(id))) {
+    console.error(`[NewsPage] Invalid ID: ${id}`);
+    return null;
+  }
 
   try {
     const { data, error } = await supabase
@@ -19,21 +26,35 @@ async function getNewsItem(id) {
       .single();
 
     if (error) {
-      console.error('Error fetching news item:', error);
+      console.error(`[NewsPage] Supabase error for ID ${id}:`, error.message);
+      return null;
+    }
+
+    if (!data) {
+      console.warn(`[NewsPage] No data found for ID ${id}`);
       return null;
     }
 
     return data;
   } catch (err) {
-    console.error('Unexpected error:', err);
+    console.error(`[NewsPage] Unexpected error:`, err);
     return null;
   }
 }
 
 export default async function NewsDetailPage({ params }) {
-  const newsItem = await getNewsItem(params.id);
+  // Await params in case future Next.js versions require it, though normally direct access works in 14
+  // But let's be safe with the ID extraction
+  const { id } = params; 
+  
+  if (!id) {
+    notFound();
+  }
+
+  const newsItem = await getNewsItem(id);
 
   if (!newsItem) {
+    console.warn(`[NewsPage] Rendering 404 because newsItem is null for ID ${id}`);
     notFound();
   }
 
@@ -94,13 +115,17 @@ export default async function NewsDetailPage({ params }) {
           {/* Body Text */}
           <div className="prose prose-lg max-w-none text-gray-700">
             {/* Render newlines as paragraphs */}
-            {newsItem.content.split('\n').map((paragraph, index) => (
-              paragraph.trim() && (
-                <p key={index} className="mb-4 leading-relaxed">
-                  {paragraph}
-                </p>
-              )
-            ))}
+            {newsItem.content ? (
+              newsItem.content.split('\n').map((paragraph, index) => (
+                paragraph.trim() && (
+                  <p key={index} className="mb-4 leading-relaxed">
+                    {paragraph}
+                  </p>
+                )
+              ))
+            ) : (
+              <p>{newsItem.excerpt}</p>
+            )}
           </div>
 
         </div>
@@ -108,4 +133,3 @@ export default async function NewsDetailPage({ params }) {
     </div>
   );
 }
-
