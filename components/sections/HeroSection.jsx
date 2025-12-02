@@ -60,7 +60,7 @@ const HeroSection = ({ slides }) => {
             <div className="flex-[0_0_100%] min-w-0" key={slide.id || index}>
               {/* Hero with background image */}
               <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 md:py-12">
-                <div className="relative min-h-[250px] sm:min-h-[350px] md:min-h-[450px] lg:min-h-[480px] rounded-xl sm:rounded-2xl overflow-hidden">
+                <div className="relative min-h-[280px] sm:min-h-[350px] md:min-h-[450px] lg:min-h-[480px] rounded-xl sm:rounded-2xl overflow-hidden">
                   {/* Background Image */}
                   <div className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden">
                     <Image
@@ -118,15 +118,15 @@ const HeroSection = ({ slides }) => {
         <>
           <button
             onClick={scrollPrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-fami-blue/10 hover:bg-fami-blue/20 text-fami-blue transition-all"
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-fami-blue/10 hover:bg-fami-blue/20 text-fami-blue transition-all"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={20} className="sm:w-6 sm:h-6" />
           </button>
           <button
             onClick={scrollNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-fami-blue/10 hover:bg-fami-blue/20 text-fami-blue transition-all"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-fami-blue/10 hover:bg-fami-blue/20 text-fami-blue transition-all"
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={20} className="sm:w-6 sm:h-6" />
           </button>
         </>
       )}
@@ -138,7 +138,7 @@ const HeroSection = ({ slides }) => {
           <div className="relative">
             <input
               type="text"
-              placeholder="Buscar servicios..."
+              placeholder="Escriba aquí el nombre de los servicios"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full px-4 sm:px-5 py-3 sm:py-4 pr-12 sm:pr-14 border border-gray-300 rounded-lg text-sm sm:text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fami-blue focus:border-transparent shadow-sm"
@@ -150,16 +150,16 @@ const HeroSection = ({ slides }) => {
         </div>
 
         {/* Service Category Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 md:gap-6">
           {serviceCategories.map((category) => {
             const Icon = category.icon;
             return (
               <Link
                 key={category.id}
                 href={category.href}
-                className="flex items-center gap-3 px-4 sm:px-6 py-3 sm:py-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md hover:border-fami-blue transition-all group"
+                className="flex items-center gap-3 px-4 sm:px-6 py-3 sm:py-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md hover:border-fami-blue transition-all group sm:min-w-[200px] md:min-w-[250px]"
               >
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-fami-blue/10 flex items-center justify-center group-hover:bg-fami-blue/20 transition-colors flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-fami-blue/10 flex items-center justify-center group-hover:bg-fami-blue/20 transition-colors">
                   <Icon size={20} className={`sm:w-6 sm:h-6 ${category.color}`} />
                 </div>
                 <span className="font-semibold text-sm sm:text-base text-gray-800 group-hover:text-fami-blue transition-colors">
