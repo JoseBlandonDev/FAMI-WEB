@@ -62,9 +62,8 @@ export default function AdminServices() {
 
   const addNewService = () => {
     // For new services, we use a temporary ID (negative to distinguish)
-    // In a real save, we'd remove temp ID
     const newService = {
-      id: Date.now(), // Use date as temp ID
+      id: -Date.now(), 
       title: "Nuevo Servicio",
       image: "",
       link: "#",
@@ -96,28 +95,44 @@ export default function AdminServices() {
   const saveChanges = async () => {
     setSaving(true);
     try {
-      // Upsert all services
-      // We map to match DB columns
-      const upsertData = services.map(s => ({
-        // Only include ID if it's not a temp one (or if upsert logic handles it)
-        id: s.isNew ? undefined : s.id,
-        title: s.title,
-        image: s.image,
-        link: s.link
-      }));
+      const newItems = services.filter(s => s.isNew);
+      const existingItems = services.filter(s => !s.isNew);
 
-      // NOTE: supabase.upsert might fail if ID is undefined for new items?
-      // It handles it if we don't pass ID, it inserts.
-      
-      const { error } = await supabase
-        .from('services')
-        .upsert(upsertData, { onConflict: 'id' });
+      // 1. Handle NEW items (Insert)
+      if (newItems.length > 0) {
+        const itemsToInsert = newItems.map(s => ({
+          title: s.title,
+          image: s.image,
+          link: s.link
+        }));
         
-      if (error) throw error;
+        const { error: insertError } = await supabase
+          .from('services')
+          .insert(itemsToInsert);
+          
+        if (insertError) throw insertError;
+      }
+
+      // 2. Handle EXISTING items (Update)
+      if (existingItems.length > 0) {
+        const itemsToUpdate = existingItems.map(s => ({
+          id: s.id,
+          title: s.title,
+          image: s.image,
+          link: s.link
+        }));
+        
+        const { error: updateError } = await supabase
+          .from('services')
+          .upsert(itemsToUpdate);
+          
+        if (updateError) throw updateError;
+      }
 
       alert('Cambios guardados correctamente');
       await fetchServices(); // Refresh to get real IDs
     } catch (error) {
+      console.error('Error saving services:', error);
       alert('Error al guardar: ' + error.message);
     } finally {
       setSaving(false);

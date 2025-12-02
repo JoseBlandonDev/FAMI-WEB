@@ -62,7 +62,7 @@ export default function AdminVideos() {
 
   const addNewVideo = () => {
     const newVideo = {
-      id: Date.now(),
+      id: -Date.now(), // Negative ID for temporary local state
       title: "Nuevo video",
       description: "",
       thumbnail: "",
@@ -94,29 +94,52 @@ export default function AdminVideos() {
   const saveChanges = async () => {
     setSaving(true);
     try {
-      const upsertData = videos.map(v => ({
-        // Important: if it's new (isNew flag), send undefined ID so DB generates it
-        id: v.isNew ? undefined : v.id,
-        title: v.title,
-        description: v.description,
-        thumbnail: v.thumbnail,
-        video_url: v.video_url || v.videoUrl, 
-        featured: v.featured
-      }));
-      
-      // Upsert requires specifying columns to check for conflict if we want to update.
-      // But if ID is undefined, it's an insert.
-      // supabase.upsert works best when we provide the Primary Key for updates.
-      
-      const { error } = await supabase
-        .from('videos')
-        .upsert(upsertData, { onConflict: 'id' });
+      // Split into new and existing items
+      const newItems = videos.filter(v => v.isNew);
+      const existingItems = videos.filter(v => !v.isNew);
+
+      // 1. Handle NEW items (Insert)
+      if (newItems.length > 0) {
+        const itemsToInsert = newItems.map(v => ({
+          title: v.title,
+          description: v.description,
+          thumbnail: v.thumbnail,
+          video_url: v.video_url || v.videoUrl,
+          featured: v.featured
+        }));
         
-      if (error) throw error;
+        const { error: insertError } = await supabase
+          .from('videos')
+          .insert(itemsToInsert);
+          
+        if (insertError) throw insertError;
+      }
+
+      // 2. Handle EXISTING items (Update)
+      // Since upsert can be tricky with partial updates without ID conflicts, 
+      // we can use upsert if we are sure IDs exist, OR loop update.
+      // Upsert is better for batching.
+      if (existingItems.length > 0) {
+        const itemsToUpdate = existingItems.map(v => ({
+          id: v.id,
+          title: v.title,
+          description: v.description,
+          thumbnail: v.thumbnail,
+          video_url: v.video_url || v.videoUrl,
+          featured: v.featured
+        }));
+
+        const { error: updateError } = await supabase
+          .from('videos')
+          .upsert(itemsToUpdate);
+          
+        if (updateError) throw updateError;
+      }
 
       alert('Cambios guardados correctamente');
       await fetchVideos();
     } catch (error) {
+      console.error('Error saving videos:', error);
       alert('Error al guardar: ' + error.message);
     } finally {
       setSaving(false);

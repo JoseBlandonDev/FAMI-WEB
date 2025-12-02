@@ -62,7 +62,7 @@ export default function AdminCertifications() {
 
   const addNewCertification = () => {
     const newCert = {
-      id: Date.now(),
+      id: -Date.now(), // Negative ID for temporary local state
       name: "Nueva certificación",
       image: "",
       isNew: true
@@ -91,21 +91,43 @@ export default function AdminCertifications() {
   const saveChanges = async () => {
     setSaving(true);
     try {
-      const upsertData = certifications.map(c => ({
-        id: c.isNew ? undefined : c.id,
-        name: c.name,
-        image: c.image
-      }));
-      
-      const { error } = await supabase
-        .from('certifications')
-        .upsert(upsertData, { onConflict: 'id' });
+      // Split into new and existing items
+      const newItems = certifications.filter(c => c.isNew);
+      const existingItems = certifications.filter(c => !c.isNew);
+
+      // 1. Handle NEW items (Insert)
+      if (newItems.length > 0) {
+        const itemsToInsert = newItems.map(c => ({
+          name: c.name,
+          image: c.image
+        }));
         
-      if (error) throw error;
+        const { error: insertError } = await supabase
+          .from('certifications')
+          .insert(itemsToInsert);
+          
+        if (insertError) throw insertError;
+      }
+
+      // 2. Handle EXISTING items (Update)
+      if (existingItems.length > 0) {
+        const itemsToUpdate = existingItems.map(c => ({
+          id: c.id,
+          name: c.name,
+          image: c.image
+        }));
+        
+        const { error: updateError } = await supabase
+          .from('certifications')
+          .upsert(itemsToUpdate);
+          
+        if (updateError) throw updateError;
+      }
 
       alert('Cambios guardados correctamente');
       await fetchCertifications();
     } catch (error) {
+      console.error('Error saving certifications:', error);
       alert('Error al guardar: ' + error.message);
     } finally {
       setSaving(false);
