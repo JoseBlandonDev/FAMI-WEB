@@ -19,13 +19,15 @@ import {
   Bell,
   PanelLeftClose,
   PanelLeft,
-  Share2
+  Share2,
+  Stethoscope
 } from 'lucide-react';
 
 const sidebarItems = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
   { name: 'Noticias', href: '/admin/noticias', icon: Newspaper },
   { name: 'Blog', href: '/admin/blog', icon: FileText },
+  { name: 'Especialidades', href: '/admin/especialidades', icon: Stethoscope },
   { name: 'Hero / Slider', href: '/admin/hero', icon: Image },
   { name: 'Servicios', href: '/admin/servicios', icon: Settings },
   { name: 'Certificaciones', href: '/admin/certificaciones', icon: Award },

@@ -1,4 +1,5 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/apoyos-pedagogicos/page": "app/apoyos-pedagogicos/page.js",
   "/contacto/page": "app/contacto/page.js",
   "/nosotros/page": "app/nosotros/page.js",

@@ -1,45 +1,43 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import { Search, ChevronRight } from 'lucide-react';
-
-const especialidades = [
-  { id: 1, nombre: 'Medicina General', descripcion: 'Atención primaria y diagnóstico general' },
-  { id: 2, nombre: 'Medicina Interna', descripcion: 'Diagnóstico y tratamiento de enfermedades en adultos' },
-  { id: 3, nombre: 'Pediatría', descripcion: 'Atención médica especializada para niños' },
-  { id: 4, nombre: 'Ginecología y Obstetricia', descripcion: 'Salud de la mujer y atención prenatal' },
-  { id: 5, nombre: 'Cardiología', descripcion: 'Diagnóstico y tratamiento de enfermedades del corazón' },
-  { id: 6, nombre: 'Dermatología', descripcion: 'Tratamiento de enfermedades de la piel' },
-  { id: 7, nombre: 'Oftalmología', descripcion: 'Cuidado y tratamiento de los ojos' },
-  { id: 8, nombre: 'Otorrinolaringología', descripcion: 'Oído, nariz y garganta' },
-  { id: 9, nombre: 'Traumatología y Ortopedia', descripcion: 'Lesiones y enfermedades del sistema musculoesquelético' },
-  { id: 10, nombre: 'Neurología', descripcion: 'Trastornos del sistema nervioso' },
-  { id: 11, nombre: 'Psiquiatría', descripcion: 'Salud mental y trastornos psiquiátricos' },
-  { id: 12, nombre: 'Psicología', descripcion: 'Evaluación y terapia psicológica' },
-  { id: 13, nombre: 'Nutrición y Dietética', descripcion: 'Planes alimenticios y nutrición clínica' },
-  { id: 14, nombre: 'Fisioterapia', descripcion: 'Rehabilitación física y terapia' },
-  { id: 15, nombre: 'Odontología', descripcion: 'Salud bucal y tratamientos dentales' },
-  { id: 16, nombre: 'Urología', descripcion: 'Sistema urinario y salud masculina' },
-  { id: 17, nombre: 'Gastroenterología', descripcion: 'Sistema digestivo y enfermedades gastrointestinales' },
-  { id: 18, nombre: 'Neumología', descripcion: 'Enfermedades respiratorias y pulmonares' },
-  { id: 19, nombre: 'Endocrinología', descripcion: 'Trastornos hormonales y metabólicos' },
-  { id: 20, nombre: 'Reumatología', descripcion: 'Enfermedades articulares y autoinmunes' },
-  { id: 21, nombre: 'Nefrología', descripcion: 'Enfermedades renales' },
-  { id: 22, nombre: 'Cirugía General', descripcion: 'Procedimientos quirúrgicos generales' },
-  { id: 23, nombre: 'Medicina del Trabajo', descripcion: 'Salud ocupacional y prevención laboral' },
-  { id: 24, nombre: 'Medicina Familiar', descripcion: 'Atención integral para toda la familia' },
-];
+import Image from 'next/image';
+import { Search, ChevronRight, Loader2 } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 export default function EspecialidadesPage() {
+  const [especialidades, setEspecialidades] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchEspecialidades();
+  }, []);
+
+  const fetchEspecialidades = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('especialidades')
+        .select('*')
+        .eq('activo', true)
+        .order('nombre', { ascending: true });
+
+      if (error) throw error;
+      setEspecialidades(data || []);
+    } catch (error) {
+      console.error('Error fetching especialidades:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const filteredEspecialidades = useMemo(() => {
     if (!searchTerm.trim()) return especialidades;
     return especialidades.filter(esp =>
-      esp.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+      esp.nombre?.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  }, [searchTerm]);
+  }, [searchTerm, especialidades]);
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -91,17 +89,25 @@ export default function EspecialidadesPage() {
 
       {/* Specialties Grid */}
       <div className="container mx-auto px-4 py-12">
-        {filteredEspecialidades.length === 0 ? (
+        {loading ? (
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="animate-spin text-fami-blue" size={40} />
+          </div>
+        ) : filteredEspecialidades.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-500 text-lg">
-              No se encontraron especialidades con "{searchTerm}"
+              {searchTerm
+                ? `No se encontraron especialidades con "${searchTerm}"`
+                : 'No hay especialidades disponibles'}
             </p>
-            <button
-              onClick={() => setSearchTerm('')}
-              className="mt-4 text-fami-blue hover:text-fami-orange transition-colors font-medium"
-            >
-              Ver todas las especialidades
-            </button>
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm('')}
+                className="mt-4 text-fami-blue hover:text-fami-orange transition-colors font-medium"
+              >
+                Ver todas las especialidades
+              </button>
+            )}
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
@@ -109,11 +115,24 @@ export default function EspecialidadesPage() {
               <Link
                 key={especialidad.id}
                 href={`/especialidades/${especialidad.id}`}
-                className="group bg-white border border-gray-200 rounded-lg p-6 hover:border-fami-blue hover:shadow-md transition-all text-center min-h-[120px] flex items-center justify-center"
+                className="group bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-fami-blue hover:shadow-md transition-all"
               >
-                <span className="text-gray-700 group-hover:text-fami-blue font-medium transition-colors">
-                  {especialidad.nombre}
-                </span>
+                {especialidad.imagen && (
+                  <div className="relative h-32 bg-gray-100">
+                    <Image
+                      src={especialidad.imagen}
+                      alt={especialidad.nombre}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      unoptimized
+                    />
+                  </div>
+                )}
+                <div className="p-4 text-center">
+                  <span className="text-gray-700 group-hover:text-fami-blue font-medium transition-colors">
+                    {especialidad.nombre}
+                  </span>
+                </div>
               </Link>
             ))}
           </div>
