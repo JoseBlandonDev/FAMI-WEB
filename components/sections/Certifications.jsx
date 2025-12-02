@@ -22,15 +22,16 @@ const Certifications = ({ certifications = [] }) => {
   const Card = ({ cert }) => (
     <div className="flex flex-col items-center h-full">
       {/* Certificate Card */}
-      <div className="relative w-full aspect-[3/4] max-w-[250px] bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all hover:-translate-y-1">
+      {/* Changed aspect-ratio to allow wider images and improved container sizing */}
+      <div className="relative w-full aspect-[4/3] bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all hover:-translate-y-1">
         {/* Certificate Image */}
-        <div className="relative w-full h-full">
+        <div className="relative w-full h-full p-4">
           {cert.image ? (
             <Image
               src={cert.image}
               alt={cert.name}
               fill
-              className="object-cover"
+              className="object-contain" // Changed from object-cover to contain to show full wide images
               unoptimized
             />
           ) : (
@@ -43,18 +44,18 @@ const Certifications = ({ certifications = [] }) => {
           )}
         </div>
         
-        {/* Overlay with details */}
-        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
-           <p className="text-white text-center text-sm">{cert.description}</p>
-        </div>
+        {/* Overlay with details - Optional now since description is below */}
+        <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
       </div>
       
       {/* Name */}
       <h3 className="mt-6 text-center text-gray-800 font-bold text-lg px-2">
         {cert.name}
       </h3>
-      {cert.description && !isCarousel && (
-         <p className="mt-2 text-center text-gray-500 text-sm max-w-[250px]">
+      
+      {/* Description - Always visible now */}
+      {cert.description && (
+         <p className="mt-2 text-center text-gray-500 text-sm max-w-[280px] line-clamp-3">
            {cert.description}
          </p>
       )}
@@ -70,7 +71,7 @@ const Certifications = ({ certifications = [] }) => {
         <div className="w-24 h-1 bg-fami-orange mx-auto mb-16 rounded-full"></div>
 
         {isCarousel ? (
-          <div className="relative max-w-6xl mx-auto px-12">
+          <div className="relative max-w-7xl mx-auto px-12">
             <div className="overflow-hidden" ref={emblaRef}>
               <div className="flex -ml-8 py-4">
                 {certifications.map((cert) => (
@@ -95,7 +96,7 @@ const Certifications = ({ certifications = [] }) => {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
             {certifications.map((cert) => (
               <Card key={cert.id} cert={cert} />
             ))}
