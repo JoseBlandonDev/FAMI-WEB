@@ -12,13 +12,43 @@
   --color-fami-gray: #F8F9FA; /* Mantener como un gris muy claro neutro si se necesita */
 
   /* Font Stack */
-  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Gobold Extra 1", ui-sans-serif, system-ui, sans-serif; /* H1, H2 */
   --font-subtitle: "Bebas Neue", ui-sans-serif, system-ui, sans-serif; /* H3, Subtítulos, Botones */
 }
 
-/* Custom Fonts Import (Google Fonts for now, local font should be added for Gobold) */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap');
+/* Local Fonts Configuration */
+@font-face {
+  font-family: 'Gobold Extra 1';
+  src: url('/fonts/Gobold Extra1.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('/fonts/BebasNeue Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* Global Styles */
 @layer base {
@@ -27,7 +57,6 @@
   }
   
   h1, h2 {
-    /* TODO: Ensure Gobold font is loaded. Using sans-serif fallback if not available yet */
     @apply font-display font-bold uppercase tracking-wide text-fami-blue;
   }
 
