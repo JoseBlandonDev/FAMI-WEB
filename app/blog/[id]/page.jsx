@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Share2, User, Tag } from 'lucide-react';
+import { Calendar, ChevronRight, Facebook, Twitter, Linkedin, Share2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 
@@ -39,7 +39,7 @@ async function getRelatedBlogs(currentId, category) {
       .select('*')
       .eq('status', 'published')
       .neq('id', currentId)
-      .limit(3);
+      .limit(4);
 
     if (category) {
       query = query.eq('category', category);
@@ -53,7 +53,6 @@ async function getRelatedBlogs(currentId, category) {
 }
 
 export default async function BlogDetailPage({ params }) {
-  // In Next.js 15+, params is a Promise
   const resolvedParams = await params;
   const id = resolvedParams.id;
 
@@ -71,148 +70,194 @@ export default async function BlogDetailPage({ params }) {
 
   return (
     <div className="bg-white min-h-screen">
-      {/* Header Image */}
-      <div className="relative w-full h-[400px] md:h-[500px] bg-gray-900">
-        {blogItem.image ? (
-          <Image
-            src={blogItem.image}
-            alt={blogItem.title}
-            fill
-            className="object-cover opacity-60"
-            unoptimized
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-white/20">
-            Sin imagen de portada
-          </div>
-        )}
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-
-        <div className="absolute bottom-0 left-0 right-0 container mx-auto px-4 pb-12 md:pb-20">
-          <div className="max-w-4xl mx-auto">
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 text-white/80 hover:text-fami-orange mb-6 transition-colors"
-            >
-              <ArrowLeft size={20} />
-              Volver al blog
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 border-b border-gray-200">
+        <div className="container mx-auto px-4 py-3">
+          <nav className="flex items-center gap-2 text-sm text-gray-500">
+            <Link href="/" className="hover:text-fami-blue transition-colors">
+              FAMI
             </Link>
-
-            {blogItem.category && (
-              <div className="inline-flex items-center gap-2 bg-fami-orange/90 text-white px-3 py-1 rounded-full text-sm font-medium mb-4">
-                <Tag size={14} />
-                {blogItem.category}
-              </div>
-            )}
-
-            <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight drop-shadow-lg mb-4">
-              {blogItem.title}
-            </h1>
-
-            <div className="flex flex-wrap items-center gap-6 text-white/80">
-              <div className="flex items-center gap-2">
-                <Calendar size={18} className="text-fami-orange" />
-                <span>{blogItem.date}</span>
-              </div>
-              {blogItem.author && (
-                <div className="flex items-center gap-2">
-                  <User size={18} className="text-fami-orange" />
-                  <span>{blogItem.author}</span>
-                </div>
-              )}
-            </div>
-          </div>
+            <ChevronRight size={14} />
+            <Link href="/blog" className="hover:text-fami-blue transition-colors">
+              Blog
+            </Link>
+            <ChevronRight size={14} />
+            <span className="text-gray-700 truncate max-w-xs">{blogItem.title}</span>
+          </nav>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="container mx-auto px-4 -mt-10 relative z-10">
-        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col lg:flex-row gap-10">
 
-          {/* Share */}
-          <div className="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
+          {/* Article Content - Left Side */}
+          <article className="flex-1 lg:max-w-3xl">
+            {/* Header */}
+            <header className="mb-8">
+              {/* Date and Category Row */}
+              <div className="flex items-center justify-between mb-6">
+                <time className="text-gray-500 text-sm">
+                  {blogItem.date}
+                </time>
+                <div className="flex items-center gap-4">
+                  {blogItem.category && (
+                    <span className="text-fami-orange font-semibold text-sm uppercase tracking-wide">
+                      {blogItem.category}
+                    </span>
+                  )}
+                  {/* Social Share Buttons */}
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(blogItem.title)}&url=${encodeURIComponent(`https://famii-mu.vercel.app/blog/${blogItem.id}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full bg-gray-200 hover:bg-gray-800 hover:text-white flex items-center justify-center transition-all"
+                    >
+                      <Twitter size={16} />
+                    </a>
+                    <a
+                      href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://famii-mu.vercel.app/blog/${blogItem.id}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full bg-gray-200 hover:bg-blue-600 hover:text-white flex items-center justify-center transition-all"
+                    >
+                      <Facebook size={16} />
+                    </a>
+                    <a
+                      href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(`https://famii-mu.vercel.app/blog/${blogItem.id}`)}&title=${encodeURIComponent(blogItem.title)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full bg-gray-200 hover:bg-blue-700 hover:text-white flex items-center justify-center transition-all"
+                    >
+                      <Linkedin size={16} />
+                    </a>
+                    <a
+                      href={`https://wa.me/?text=${encodeURIComponent(blogItem.title + ' - https://famii-mu.vercel.app/blog/' + blogItem.id)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full bg-gray-200 hover:bg-green-500 hover:text-white flex items-center justify-center transition-all"
+                    >
+                      <Share2 size={16} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Title */}
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
+                {blogItem.title}
+              </h1>
+
+              {/* Divider */}
+              <div className="w-20 h-1 bg-fami-orange mb-8"></div>
+            </header>
+
+            {/* Featured Image */}
+            {blogItem.image && (
+              <div className="relative aspect-video mb-8 rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src={blogItem.image}
+                  alt={blogItem.title}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              </div>
+            )}
+
+            {/* Excerpt/Lead */}
             {blogItem.excerpt && (
-              <p className="text-gray-500 italic text-lg flex-1 pr-4">
+              <p className="text-lg text-gray-700 leading-relaxed mb-6 font-medium">
                 {blogItem.excerpt}
               </p>
             )}
-            <button className="flex items-center gap-2 text-gray-500 hover:text-fami-blue transition-colors text-sm whitespace-nowrap">
-              <Share2 size={16} />
-              Compartir
-            </button>
-          </div>
 
-          {/* Body */}
-          <div className="prose prose-lg max-w-none text-gray-700">
-            {blogItem.content ? (
-              blogItem.content.split('\n').map((paragraph, index) => (
-                paragraph.trim() && (
-                  <p key={index} className="mb-4 leading-relaxed">
-                    {paragraph}
-                  </p>
-                )
-              ))
-            ) : (
-              <p className="text-gray-500">Este artículo no tiene contenido adicional.</p>
+            {/* Content */}
+            <div className="prose prose-lg max-w-none text-gray-700">
+              {blogItem.content ? (
+                blogItem.content.split('\n').map((paragraph, index) => (
+                  paragraph.trim() && (
+                    <p key={index} className="mb-5 leading-relaxed text-gray-600">
+                      {paragraph}
+                    </p>
+                  )
+                ))
+              ) : (
+                <p className="text-gray-500">Este artículo no tiene contenido adicional.</p>
+              )}
+            </div>
+
+            {/* Author */}
+            {blogItem.author && (
+              <div className="mt-10 pt-6 border-t border-gray-200">
+                <p className="text-sm text-gray-500">
+                  <span className="font-semibold text-gray-700">{blogItem.author}</span>
+                </p>
+              </div>
             )}
-          </div>
+          </article>
 
-          {/* Author Card */}
-          {blogItem.author && (
-            <div className="mt-12 pt-8 border-t border-gray-100">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-fami-blue/10 flex items-center justify-center">
-                  <User size={28} className="text-fami-blue" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Escrito por</p>
-                  <p className="text-lg font-bold text-gray-900">{blogItem.author}</p>
+          {/* Sidebar - Right Side */}
+          <aside className="lg:w-80 flex-shrink-0">
+            <div className="sticky top-24">
+              <h3 className="text-xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-fami-orange">
+                Artículos relacionados
+              </h3>
+
+              {/* Current Article Card */}
+              <div className="mb-6">
+                <div className="text-gray-600 text-sm leading-relaxed mb-4">
+                  {blogItem.title}
                 </div>
               </div>
-            </div>
-          )}
-        </div>
 
-        {/* Related Posts */}
-        {relatedBlogs.length > 0 && (
-          <div className="max-w-4xl mx-auto mt-16 mb-20">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8">
-              Artículos relacionados
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedBlogs.map((blog) => (
-                <Link
-                  key={blog.id}
-                  href={`/blog/${blog.id}`}
-                  className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-gray-100"
-                >
-                  <div className="relative aspect-video bg-gray-200 overflow-hidden">
-                    {blog.image ? (
-                      <Image
-                        src={blog.image}
-                        alt={blog.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        unoptimized
-                      />
-                    ) : (
-                      <div className="flex items-center justify-center h-full text-gray-400 text-sm">
-                        Sin imagen
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-4">
-                    <h4 className="font-semibold text-gray-900 line-clamp-2 group-hover:text-fami-blue transition-colors">
+              {/* Related Articles */}
+              <div className="space-y-6">
+                {relatedBlogs.map((blog) => (
+                  <Link
+                    key={blog.id}
+                    href={`/blog/${blog.id}`}
+                    className="group block"
+                  >
+                    <div className="relative aspect-[4/3] rounded-lg overflow-hidden mb-3 bg-gray-100">
+                      {blog.image ? (
+                        <Image
+                          src={blog.image}
+                          alt={blog.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          unoptimized
+                        />
+                      ) : (
+                        <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                          Sin imagen
+                        </div>
+                      )}
+                    </div>
+                    <h4 className="text-sm font-medium text-gray-700 group-hover:text-fami-blue transition-colors line-clamp-2">
                       {blog.title}
                     </h4>
-                    <p className="text-xs text-gray-400 mt-2">{blog.date}</p>
-                  </div>
+                    {blog.author && (
+                      <p className="text-xs text-gray-400 mt-1">{blog.author}</p>
+                    )}
+                  </Link>
+                ))}
+              </div>
+
+              {/* View All Link */}
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <Link
+                  href="/blog"
+                  className="text-fami-blue hover:text-fami-orange font-medium text-sm transition-colors"
+                >
+                  Ver todos los artículos →
                 </Link>
-              ))}
+              </div>
             </div>
-          </div>
-        )}
+          </aside>
+
+        </div>
       </div>
     </div>
   );

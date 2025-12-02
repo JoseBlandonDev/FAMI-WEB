@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, MapPin, Phone } from 'lucide-react';
+import { Menu, X, MapPin, Phone, User } from 'lucide-react';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -72,10 +72,25 @@ const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
+              {/* User Login Icon */}
+              <Link
+                href="/admin/login"
+                className="ml-4 p-2 text-gray-600 hover:text-fami-blue hover:bg-fami-blue/10 rounded-full transition-all"
+                title="Iniciar sesión"
+              >
+                <User size={22} />
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="lg:hidden flex items-center">
+            <div className="lg:hidden flex items-center gap-2">
+              <Link
+                href="/admin/login"
+                className="p-2 text-gray-600 hover:text-fami-blue hover:bg-fami-blue/10 rounded-full transition-all"
+                title="Iniciar sesión"
+              >
+                <User size={22} />
+              </Link>
               <button
                 onClick={toggleMobileMenu}
                 className="text-gray-700 hover:text-fami-blue focus:outline-none p-2"

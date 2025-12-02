@@ -1,20 +1,15 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Share2 } from 'lucide-react';
+import { ChevronRight, Facebook, Twitter, Linkedin, Share2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 
-// Force dynamic rendering to ensure we fetch fresh data
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 async function getNewsItem(id) {
-  console.log(`[NewsPage] Fetching news with ID: ${id}`); // Debug log
-
-  // Validate ID is a number
   if (!id || isNaN(Number(id))) {
-    console.error(`[NewsPage] Invalid ID: ${id}`);
     return null;
   }
 
@@ -26,24 +21,33 @@ async function getNewsItem(id) {
       .single();
 
     if (error) {
-      console.error(`[NewsPage] Supabase error for ID ${id}:`, error.message);
-      return null;
-    }
-
-    if (!data) {
-      console.warn(`[NewsPage] No data found for ID ${id}`);
+      console.error(`Error fetching news ${id}:`, error.message);
       return null;
     }
 
     return data;
   } catch (err) {
-    console.error(`[NewsPage] Unexpected error:`, err);
+    console.error('Unexpected error:', err);
     return null;
   }
 }
 
+async function getRelatedNews(currentId) {
+  try {
+    const { data } = await supabase
+      .from('news')
+      .select('*')
+      .neq('id', currentId)
+      .order('date', { ascending: false })
+      .limit(4);
+
+    return data || [];
+  } catch (err) {
+    return [];
+  }
+}
+
 export default async function NewsDetailPage({ params }) {
-  // In Next.js 15+, params is a Promise
   const resolvedParams = await params;
   const id = resolvedParams.id;
 
@@ -54,79 +58,186 @@ export default async function NewsDetailPage({ params }) {
   const newsItem = await getNewsItem(id);
 
   if (!newsItem) {
-    console.warn(`[NewsPage] Rendering 404 because newsItem is null for ID ${id}`);
     notFound();
   }
 
+  const relatedNews = await getRelatedNews(newsItem.id);
+
   return (
-    <div className="bg-white min-h-screen pb-20">
-      {/* Header Image */}
-      <div className="relative w-full h-[400px] md:h-[500px] bg-gray-900">
-        {newsItem.image ? (
-          <Image
-            src={newsItem.image}
-            alt={newsItem.title}
-            fill
-            className="object-cover opacity-60"
-            unoptimized
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-white/20">
-            Sin imagen de portada
-          </div>
-        )}
-        
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-        
-        <div className="absolute bottom-0 left-0 right-0 container mx-auto px-4 pb-12 md:pb-20">
-           <div className="max-w-4xl mx-auto">
-             <Link 
-               href="/#noticias" 
-               className="inline-flex items-center gap-2 text-white/80 hover:text-fami-orange mb-6 transition-colors"
-             >
-               <ArrowLeft size={20} />
-               Volver a noticias
-             </Link>
-             
-             <div className="flex items-center gap-3 text-fami-orange font-medium mb-4">
-               <Calendar size={18} />
-               <span>{newsItem.date}</span>
-             </div>
-             
-             <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight drop-shadow-lg">
-               {newsItem.title}
-             </h1>
-           </div>
+    <div className="bg-white min-h-screen">
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 border-b border-gray-200">
+        <div className="container mx-auto px-4 py-3">
+          <nav className="flex items-center gap-2 text-sm text-gray-500">
+            <Link href="/" className="hover:text-fami-blue transition-colors">
+              FAMI
+            </Link>
+            <ChevronRight size={14} />
+            <Link href="/noticias" className="hover:text-fami-blue transition-colors">
+              Noticias
+            </Link>
+            <ChevronRight size={14} />
+            <span className="text-gray-700 truncate max-w-xs">{newsItem.title}</span>
+          </nav>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="container mx-auto px-4 -mt-10 relative z-10">
-        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
-          
-          {/* Share / Actions (Optional placeholder) */}
-          <div className="flex justify-end mb-8 border-b border-gray-100 pb-4">
-            <button className="flex items-center gap-2 text-gray-500 hover:text-fami-blue transition-colors text-sm">
-              <Share2 size={16} />
-              Compartir
-            </button>
-          </div>
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col lg:flex-row gap-10">
 
-          {/* Body Text */}
-          <div className="prose prose-lg max-w-none text-gray-700">
-            {/* Render newlines as paragraphs */}
-            {newsItem.content ? (
-              newsItem.content.split('\n').map((paragraph, index) => (
-                paragraph.trim() && (
-                  <p key={index} className="mb-4 leading-relaxed">
-                    {paragraph}
-                  </p>
-                )
-              ))
-            ) : (
-              <p>{newsItem.excerpt}</p>
+          {/* Article Content - Left Side */}
+          <article className="flex-1 lg:max-w-3xl">
+            {/* Header */}
+            <header className="mb-8">
+              {/* Date and Category Row */}
+              <div className="flex items-center justify-between mb-6">
+                <time className="text-gray-500 text-sm">
+                  {newsItem.date}
+                </time>
+                <div className="flex items-center gap-4">
+                  <span className="text-fami-orange font-semibold text-sm uppercase tracking-wide">
+                    Noticias FAMI
+                  </span>
+                  {/* Social Share Buttons */}
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(newsItem.title)}&url=${encodeURIComponent(`https://famii-mu.vercel.app/noticias/${newsItem.id}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full bg-gray-200 hover:bg-gray-800 hover:text-white flex items-center justify-center transition-all"
+                    >
+                      <Twitter size={16} />
+                    </a>
+                    <a
+                      href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://famii-mu.vercel.app/noticias/${newsItem.id}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full bg-gray-200 hover:bg-blue-600 hover:text-white flex items-center justify-center transition-all"
+                    >
+                      <Facebook size={16} />
+                    </a>
+                    <a
+                      href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(`https://famii-mu.vercel.app/noticias/${newsItem.id}`)}&title=${encodeURIComponent(newsItem.title)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full bg-gray-200 hover:bg-blue-700 hover:text-white flex items-center justify-center transition-all"
+                    >
+                      <Linkedin size={16} />
+                    </a>
+                    <a
+                      href={`https://wa.me/?text=${encodeURIComponent(newsItem.title + ' - https://famii-mu.vercel.app/noticias/' + newsItem.id)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-full bg-gray-200 hover:bg-green-500 hover:text-white flex items-center justify-center transition-all"
+                    >
+                      <Share2 size={16} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Title */}
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
+                {newsItem.title}
+              </h1>
+
+              {/* Divider */}
+              <div className="w-20 h-1 bg-fami-orange mb-8"></div>
+            </header>
+
+            {/* Featured Image */}
+            {newsItem.image && (
+              <div className="relative aspect-video mb-8 rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src={newsItem.image}
+                  alt={newsItem.title}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              </div>
             )}
-          </div>
+
+            {/* Excerpt/Lead */}
+            {newsItem.excerpt && (
+              <p className="text-lg text-gray-700 leading-relaxed mb-6 font-medium">
+                {newsItem.excerpt}
+              </p>
+            )}
+
+            {/* Content */}
+            <div className="prose prose-lg max-w-none text-gray-700">
+              {newsItem.content ? (
+                newsItem.content.split('\n').map((paragraph, index) => (
+                  paragraph.trim() && (
+                    <p key={index} className="mb-5 leading-relaxed text-gray-600">
+                      {paragraph}
+                    </p>
+                  )
+                ))
+              ) : (
+                <p className="text-gray-500">Esta noticia no tiene contenido adicional.</p>
+              )}
+            </div>
+          </article>
+
+          {/* Sidebar - Right Side */}
+          <aside className="lg:w-80 flex-shrink-0">
+            <div className="sticky top-24">
+              <h3 className="text-xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-fami-orange">
+                Noticias relacionadas
+              </h3>
+
+              {/* Current Article Reference */}
+              <div className="mb-6">
+                <div className="text-gray-600 text-sm leading-relaxed mb-4">
+                  {newsItem.title}
+                </div>
+              </div>
+
+              {/* Related News */}
+              <div className="space-y-6">
+                {relatedNews.map((news) => (
+                  <Link
+                    key={news.id}
+                    href={`/noticias/${news.id}`}
+                    className="group block"
+                  >
+                    <div className="relative aspect-[4/3] rounded-lg overflow-hidden mb-3 bg-gray-100">
+                      {news.image ? (
+                        <Image
+                          src={news.image}
+                          alt={news.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          unoptimized
+                        />
+                      ) : (
+                        <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                          Sin imagen
+                        </div>
+                      )}
+                    </div>
+                    <h4 className="text-sm font-medium text-gray-700 group-hover:text-fami-blue transition-colors line-clamp-2">
+                      {news.title}
+                    </h4>
+                    <p className="text-xs text-gray-400 mt-1">{news.date}</p>
+                  </Link>
+                ))}
+              </div>
+
+              {/* View All Link */}
+              <div className="mt-8 pt-6 border-t border-gray-200">
+                <Link
+                  href="/noticias"
+                  className="text-fami-blue hover:text-fami-orange font-medium text-sm transition-colors"
+                >
+                  Ver todas las noticias →
+                </Link>
+              </div>
+            </div>
+          </aside>
 
         </div>
       </div>
