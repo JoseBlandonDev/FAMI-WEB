@@ -3,11 +3,10 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, MapPin, Phone, Search, User } from 'lucide-react';
+import { Menu, X, MapPin, Phone } from 'lucide-react';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
 
   const menuItems = [
     { name: 'Especialidades', href: '/especialidades' },
@@ -75,32 +74,6 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Search and Login */}
-            <div className="hidden lg:flex items-center gap-4">
-              {/* Search Bar */}
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Buscar..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-40 pl-3 pr-10 py-2 text-sm border border-gray-300 rounded-full focus:outline-none focus:border-fami-blue"
-                />
-                <button className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-fami-blue">
-                  <Search size={18} />
-                </button>
-              </div>
-
-              {/* Login Button */}
-              <Link
-                href="/login"
-                className="flex items-center gap-2 px-4 py-2 bg-fami-blue text-white rounded-full text-sm font-medium hover:bg-fami-blue/90 transition-colors"
-              >
-                <User size={18} />
-                <span>Iniciar sesión</span>
-              </Link>
-            </div>
-
             {/* Mobile Menu Button */}
             <div className="lg:hidden flex items-center">
               <button
@@ -117,20 +90,6 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <div className="lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
             <div className="px-4 py-4 space-y-2">
-              {/* Mobile Search */}
-              <div className="relative mb-4">
-                <input
-                  type="text"
-                  placeholder="Buscar..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-4 pr-10 py-3 text-sm border border-gray-300 rounded-full focus:outline-none focus:border-fami-blue"
-                />
-                <button className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-fami-blue">
-                  <Search size={20} />
-                </button>
-              </div>
-
               {menuItems.map((item) => (
                 <Link
                   key={item.name}
@@ -141,17 +100,6 @@ const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
-
-              <div className="pt-4 border-t border-gray-100">
-                <Link
-                  href="/login"
-                  className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-fami-blue text-white rounded-full text-base font-medium hover:bg-fami-blue/90 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  <User size={20} />
-                  <span>Iniciar sesión</span>
-                </Link>
-              </div>
             </div>
           </div>
         )}
