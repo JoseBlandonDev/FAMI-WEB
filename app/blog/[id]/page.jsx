@@ -53,7 +53,9 @@ async function getRelatedBlogs(currentId, category) {
 }
 
 export default async function BlogDetailPage({ params }) {
-  const { id } = params;
+  // In Next.js 15+, params is a Promise
+  const resolvedParams = await params;
+  const id = resolvedParams.id;
 
   if (!id) {
     notFound();

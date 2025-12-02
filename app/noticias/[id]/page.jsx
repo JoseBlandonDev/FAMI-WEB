@@ -43,10 +43,10 @@ async function getNewsItem(id) {
 }
 
 export default async function NewsDetailPage({ params }) {
-  // Await params in case future Next.js versions require it, though normally direct access works in 14
-  // But let's be safe with the ID extraction
-  const { id } = params; 
-  
+  // In Next.js 15+, params is a Promise
+  const resolvedParams = await params;
+  const id = resolvedParams.id;
+
   if (!id) {
     notFound();
   }
