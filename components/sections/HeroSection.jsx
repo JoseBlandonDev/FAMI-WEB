@@ -43,21 +43,10 @@ const HeroSection = ({ slides }) => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
-  // Default slide content if no slides from DB
+  // Default slide only if no slides from DB (placeholder)
   const defaultSlide = {
     id: 1,
-    label: 'Salud ocupacional',
-    title: 'MEJORA TU PRODUCTIVIDAD.',
-    description: 'Más allá de la prevención, fomentamos el equilibrio físico y emocional de tus colaboradores. Nuestro plan incluye:',
-    features: [
-      'Exámenes de salud ocupacional',
-      'Inteligencia emocional',
-      'Descargas emocionales',
-      'Prevención de riesgos mecánicos',
-      'Pausas Activas'
-    ],
-    extraText: 'Y lo mejor: beneficios extendidos para su familia.',
-    image: '/images/hero-nurse.png'
+    image: '/images/hero-placeholder.jpg'
   };
 
   const displaySlides = slides && slides.length > 0 ? slides : [defaultSlide];
@@ -84,34 +73,39 @@ const HeroSection = ({ slides }) => {
                     />
                   </div>
 
-                  {/* Content Overlay */}
-                  <div className="relative h-full flex items-center p-8 md:p-12">
-                    <div className="max-w-xl bg-white/85 backdrop-blur-sm p-6 md:p-8 rounded-xl shadow-lg">
-                      <span className="text-gray-500 text-sm md:text-base mb-2 block">
-                        {slide.label || slide.subtitle || 'Salud ocupacional'}
-                      </span>
-                      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-fami-blue leading-tight mb-4">
-                        {slide.title || 'MEJORA TU PRODUCTIVIDAD.'}
-                      </h1>
-                      <div className="w-16 h-1 bg-fami-orange mb-6"></div>
+                  {/* Content Overlay - Only show if there's any text content */}
+                  {(slide.subtitle || slide.title || slide.ctaText) && (
+                    <div className="relative h-full flex items-center p-8 md:p-12">
+                      <div className="max-w-lg bg-white/90 backdrop-blur-sm p-6 md:p-8 rounded-xl shadow-lg">
+                        {/* Subtitle - only if provided */}
+                        {slide.subtitle && (
+                          <span className="text-gray-500 text-sm md:text-base mb-2 block">
+                            {slide.subtitle}
+                          </span>
+                        )}
 
-                      <p className="text-gray-600 text-sm md:text-base mb-4">
-                        {slide.description || defaultSlide.description}
-                      </p>
+                        {/* Title - only if provided */}
+                        {slide.title && (
+                          <>
+                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-fami-blue leading-tight mb-4">
+                              {slide.title}
+                            </h1>
+                            <div className="w-16 h-1 bg-fami-orange mb-6"></div>
+                          </>
+                        )}
 
-                      {(slide.features || defaultSlide.features) && (
-                        <ul className="text-gray-700 text-sm md:text-base space-y-1 mb-4">
-                          {(slide.features || defaultSlide.features).map((feature, i) => (
-                            <li key={i}>{feature}</li>
-                          ))}
-                        </ul>
-                      )}
-
-                      <p className="text-gray-600 text-sm md:text-base font-medium">
-                        {slide.extraText || defaultSlide.extraText}
-                      </p>
+                        {/* CTA Button - only if provided */}
+                        {slide.ctaText && slide.ctaLink && (
+                          <Link
+                            href={slide.ctaLink}
+                            className="inline-block bg-fami-orange text-white px-6 py-3 rounded-lg font-semibold hover:bg-fami-orange/90 transition-colors"
+                          >
+                            {slide.ctaText}
+                          </Link>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
