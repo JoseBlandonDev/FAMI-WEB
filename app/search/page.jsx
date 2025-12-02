@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, Loader2, FileText, Newspaper, Stethoscope, ArrowLeft } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
-export default function SearchPage() {
+function SearchContent() {
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
 
@@ -298,5 +298,34 @@ export default function SearchPage() {
         )}
       </div>
     </div>
+  );
+}
+
+// Loading fallback component
+function SearchLoading() {
+  return (
+    <div className="bg-gray-50 min-h-screen">
+      <div className="bg-fami-blue py-8 md:py-12">
+        <div className="container mx-auto px-4">
+          <div className="h-6 w-32 bg-white/20 rounded mb-4"></div>
+          <div className="h-10 w-64 bg-white/20 rounded mb-6"></div>
+          <div className="max-w-2xl h-14 bg-white/20 rounded-xl"></div>
+        </div>
+      </div>
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="animate-spin text-fami-blue" size={40} />
+          <span className="ml-3 text-gray-600">Cargando...</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<SearchLoading />}>
+      <SearchContent />
+    </Suspense>
   );
 }
