@@ -73,7 +73,8 @@ const SocialSidebar = () => {
             href={socialLinks[social.key]}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-12 h-12 flex items-center justify-center bg-fami-blue text-white rounded-r-lg shadow-md hover:w-14 hover:bg-fami-blue/90 transition-all duration-200"
+            className="w-12 h-12 flex items-center justify-center text-white rounded-r-lg shadow-md hover:w-14 transition-all duration-200"
+            style={{ backgroundColor: '#354093' }}
             aria-label={social.label}
           >
             <Icon size={22} />
