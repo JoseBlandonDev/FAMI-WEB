@@ -18,7 +18,8 @@ import {
   Home,
   Bell,
   PanelLeftClose,
-  PanelLeft
+  PanelLeft,
+  Share2
 } from 'lucide-react';
 
 const sidebarItems = [
@@ -29,6 +30,7 @@ const sidebarItems = [
   { name: 'Servicios', href: '/admin/servicios', icon: Settings },
   { name: 'Certificaciones', href: '/admin/certificaciones', icon: Award },
   { name: 'Videos', href: '/admin/videos', icon: Video },
+  { name: 'Redes Sociales', href: '/admin/redes-sociales', icon: Share2 },
 ];
 
 export default function AdminLayout({ children }) {
