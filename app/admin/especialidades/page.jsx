@@ -6,10 +6,10 @@ import Image from 'next/image';
 import { Plus, Search, Edit, Trash2, Save, X, Loader2, ImagePlus } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import imageCompression from 'browser-image-compression';
-import 'react-quill/dist/quill.snow.css';
+import 'react-quill-new/dist/quill.snow.css';
 
 // Dynamic import of React Quill (client-side only)
-const ReactQuill = dynamic(() => import('react-quill'), {
+const ReactQuill = dynamic(() => import('react-quill-new'), {
   ssr: false,
   loading: () => <div className="h-64 bg-gray-100 animate-pulse rounded-lg" />,
 });
