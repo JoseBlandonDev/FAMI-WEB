@@ -8,17 +8,26 @@ import { notFound } from 'next/navigation';
 export const revalidate = 0; // Dynamic data
 
 async function getNewsItem(id) {
-  const { data, error } = await supabase
-    .from('news')
-    .select('*')
-    .eq('id', id)
-    .single();
+  // Validate ID is a number to prevent DB errors
+  if (isNaN(id)) return null;
 
-  if (error || !data) {
+  try {
+    const { data, error } = await supabase
+      .from('news')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error fetching news item:', error);
+      return null;
+    }
+
+    return data;
+  } catch (err) {
+    console.error('Unexpected error:', err);
     return null;
   }
-
-  return data;
 }
 
 export default async function NewsDetailPage({ params }) {
