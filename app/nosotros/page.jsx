@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Heart, Users, Target } from 'lucide-react';
+import { Heart, Target } from 'lucide-react';
 
 export default function Page() {
   return (
@@ -41,15 +41,14 @@ export default function Page() {
             <Heart className="w-16 h-16 text-fami-cyan mb-6" />
             <h2 className="text-2xl font-bold text-fami-blue mb-4">Nuestra Visión</h2>
             <p className="text-gray-700 leading-relaxed">
-              Nuestra visión nos impulsa a construir un futuro donde la salud sea un derecho vivido con calidad, cercanía y respeto. 
-              Trabajamos cada día para acercar servicios clínicos y programas de promoción y prevención.
+              Nuestra visión nos impulsa a construir un futuro donde la salud sea un derecho vivido con calidad, cercanía y respeto.
             </p>
           </div>
         </div>
 
         {/* Valor Agregado */}
         <div className="mb-20 flex flex-col md:flex-row items-center gap-12">
-          <div className="w-full md:w-1/2 relative h-80 rounded-2xl overflow-hidden shadow-lg">
+          <div className="w-full md:w-1/2 relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
             <Image 
               src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1740&auto=format&fit=crop"
               alt="Equipo FAMI"
