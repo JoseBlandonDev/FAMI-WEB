@@ -69,10 +69,25 @@ const HeroSection = ({ slides }) => {
         <div className="flex">
           {displaySlides.map((slide, index) => (
             <div className="flex-[0_0_100%] min-w-0" key={slide.id || index}>
-              <div className="container mx-auto px-4 py-8 md:py-12">
-                <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-                  {/* Left Content */}
-                  <div className="flex-1 max-w-xl">
+              {/* Hero with background image */}
+              <div className="relative min-h-[450px] md:min-h-[500px] lg:min-h-[550px]">
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <Image
+                    src={slide.image || defaultSlide.image}
+                    alt={slide.title || 'FAMI Salud'}
+                    fill
+                    className="object-cover object-center"
+                    priority
+                    unoptimized
+                  />
+                  {/* Gradient Overlay for text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"></div>
+                </div>
+
+                {/* Content Overlay */}
+                <div className="relative container mx-auto px-4 py-12 md:py-16 h-full flex items-center">
+                  <div className="max-w-xl">
                     <span className="text-gray-500 text-sm md:text-base mb-2 block">
                       {slide.label || slide.subtitle || 'Salud ocupacional'}
                     </span>
@@ -96,24 +111,6 @@ const HeroSection = ({ slides }) => {
                     <p className="text-gray-600 text-sm md:text-base font-medium">
                       {slide.extraText || defaultSlide.extraText}
                     </p>
-                  </div>
-
-                  {/* Right Image */}
-                  <div className="flex-1 relative flex justify-center">
-                    {/* Background Shape */}
-                    <div className="absolute top-0 right-0 w-4/5 h-full bg-fami-purple/30 rounded-tl-[100px] rounded-bl-[100px]"></div>
-
-                    {/* Image */}
-                    <div className="relative h-[350px] md:h-[420px] lg:h-[480px] w-full max-w-md z-10">
-                      <Image
-                        src={slide.image || defaultSlide.image}
-                        alt={slide.title || 'FAMI Salud'}
-                        fill
-                        className="object-contain object-bottom"
-                        priority
-                        unoptimized
-                      />
-                    </div>
                   </div>
                 </div>
               </div>
