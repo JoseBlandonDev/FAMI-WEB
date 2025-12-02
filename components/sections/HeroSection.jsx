@@ -70,47 +70,47 @@ const HeroSection = ({ slides }) => {
           {displaySlides.map((slide, index) => (
             <div className="flex-[0_0_100%] min-w-0" key={slide.id || index}>
               {/* Hero with background image */}
-              <div className="relative min-h-[450px] md:min-h-[500px] lg:min-h-[550px]">
-                {/* Background Image */}
-                <div className="absolute inset-0">
-                  <Image
-                    src={slide.image || defaultSlide.image}
-                    alt={slide.title || 'FAMI Salud'}
-                    fill
-                    className="object-cover object-center"
-                    priority
-                    unoptimized
-                  />
-                  {/* Gradient Overlay for text readability */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"></div>
-                </div>
+              <div className="container mx-auto px-4 py-8 md:py-12">
+                <div className="relative min-h-[400px] md:min-h-[450px] lg:min-h-[480px] rounded-2xl overflow-hidden">
+                  {/* Background Image */}
+                  <div className="absolute inset-0">
+                    <Image
+                      src={slide.image || defaultSlide.image}
+                      alt={slide.title || 'FAMI Salud'}
+                      fill
+                      className="object-cover object-center"
+                      priority
+                      unoptimized
+                    />
+                  </div>
 
-                {/* Content Overlay */}
-                <div className="relative container mx-auto px-4 py-12 md:py-16 h-full flex items-center">
-                  <div className="max-w-xl">
-                    <span className="text-gray-500 text-sm md:text-base mb-2 block">
-                      {slide.label || slide.subtitle || 'Salud ocupacional'}
-                    </span>
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-fami-blue leading-tight mb-4">
-                      {slide.title || 'MEJORA TU PRODUCTIVIDAD.'}
-                    </h1>
-                    <div className="w-16 h-1 bg-fami-orange mb-6"></div>
+                  {/* Content Overlay */}
+                  <div className="relative h-full flex items-center p-8 md:p-12">
+                    <div className="max-w-xl bg-white/85 backdrop-blur-sm p-6 md:p-8 rounded-xl shadow-lg">
+                      <span className="text-gray-500 text-sm md:text-base mb-2 block">
+                        {slide.label || slide.subtitle || 'Salud ocupacional'}
+                      </span>
+                      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-fami-blue leading-tight mb-4">
+                        {slide.title || 'MEJORA TU PRODUCTIVIDAD.'}
+                      </h1>
+                      <div className="w-16 h-1 bg-fami-orange mb-6"></div>
 
-                    <p className="text-gray-600 text-sm md:text-base mb-4">
-                      {slide.description || defaultSlide.description}
-                    </p>
+                      <p className="text-gray-600 text-sm md:text-base mb-4">
+                        {slide.description || defaultSlide.description}
+                      </p>
 
-                    {(slide.features || defaultSlide.features) && (
-                      <ul className="text-gray-700 text-sm md:text-base space-y-1 mb-4">
-                        {(slide.features || defaultSlide.features).map((feature, i) => (
-                          <li key={i}>{feature}</li>
-                        ))}
-                      </ul>
-                    )}
+                      {(slide.features || defaultSlide.features) && (
+                        <ul className="text-gray-700 text-sm md:text-base space-y-1 mb-4">
+                          {(slide.features || defaultSlide.features).map((feature, i) => (
+                            <li key={i}>{feature}</li>
+                          ))}
+                        </ul>
+                      )}
 
-                    <p className="text-gray-600 text-sm md:text-base font-medium">
-                      {slide.extraText || defaultSlide.extraText}
-                    </p>
+                      <p className="text-gray-600 text-sm md:text-base font-medium">
+                        {slide.extraText || defaultSlide.extraText}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
