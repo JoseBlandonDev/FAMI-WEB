@@ -70,9 +70,9 @@ const HeroSection = ({ slides }) => {
           {displaySlides.map((slide, index) => (
             <div className="flex-[0_0_100%] min-w-0" key={slide.id || index}>
               <div className="container mx-auto px-4 py-8 md:py-12">
-                <div className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-12 min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
+                <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
                   {/* Left Content */}
-                  <div className="flex-1 flex flex-col justify-center max-w-xl">
+                  <div className="flex-1 max-w-xl">
                     <span className="text-gray-500 text-sm md:text-base mb-2 block">
                       {slide.label || slide.subtitle || 'Salud ocupacional'}
                     </span>
@@ -99,22 +99,20 @@ const HeroSection = ({ slides }) => {
                   </div>
 
                   {/* Right Image */}
-                  <div className="flex-1 relative min-h-[300px] lg:min-h-full">
+                  <div className="flex-1 relative flex justify-center">
                     {/* Background Shape */}
-                    <div className="absolute top-0 right-0 w-full h-full bg-fami-purple/30 rounded-tl-[100px] rounded-bl-[100px]"></div>
+                    <div className="absolute top-0 right-0 w-4/5 h-full bg-fami-purple/30 rounded-tl-[100px] rounded-bl-[100px]"></div>
 
                     {/* Image */}
-                    <div className="absolute inset-0 z-10 p-4">
-                      <div className="relative w-full h-full">
-                        <Image
-                          src={slide.image || defaultSlide.image}
-                          alt={slide.title || 'FAMI Salud'}
-                          fill
-                          className="object-cover object-center rounded-2xl"
-                          priority
-                          unoptimized
-                        />
-                      </div>
+                    <div className="relative h-[350px] md:h-[420px] lg:h-[480px] w-full max-w-md z-10">
+                      <Image
+                        src={slide.image || defaultSlide.image}
+                        alt={slide.title || 'FAMI Salud'}
+                        fill
+                        className="object-contain object-bottom"
+                        priority
+                        unoptimized
+                      />
                     </div>
                   </div>
                 </div>
