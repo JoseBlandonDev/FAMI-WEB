@@ -100,13 +100,6 @@ export default function AdminServices() {
       // We map to match DB columns
       const upsertData = services.map(s => ({
         // Only include ID if it's not a temp one (or if upsert logic handles it)
-        // If 'isNew' is true, we don't send 'id' so Postgres generates it?
-        // Actually, Supabase upsert needs ID to match.
-        // For new items, we should separate them or use Insert.
-        // Easier strategy:
-        // 1. Filter out items to update vs insert.
-        // BUT to keep it simple with reordering or bulk saving:
-        
         id: s.isNew ? undefined : s.id,
         title: s.title,
         image: s.image,
@@ -118,7 +111,7 @@ export default function AdminServices() {
       
       const { error } = await supabase
         .from('services')
-        .upsert(upsertData);
+        .upsert(upsertData, { onConflict: 'id' });
         
       if (error) throw error;
 
