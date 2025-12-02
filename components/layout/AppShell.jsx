@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
-export default function AppShell({ navbar, sidebar, footer, children }) {
+export default function AppShell({ navbar, sidebar, whatsapp, footer, children }) {
   const pathname = usePathname();
   const isAdmin = pathname?.startsWith('/admin');
 
@@ -14,6 +14,7 @@ export default function AppShell({ navbar, sidebar, footer, children }) {
     <>
       {navbar}
       {sidebar}
+      {whatsapp}
       <main className="min-h-screen">
         {children}
       </main>

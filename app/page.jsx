@@ -1,7 +1,5 @@
 import React from 'react';
 import HeroSection from '@/components/sections/HeroSection';
-import ServicesCards from '@/components/sections/ServicesCards';
-import ServiceSearch from '@/components/sections/ServiceSearch';
 import Certifications from '@/components/sections/Certifications';
 import NewsSection from '@/components/sections/NewsSection';
 import BlogSection from '@/components/sections/BlogSection';
@@ -18,14 +16,12 @@ async function getHomePageData() {
     // Parallel fetching for performance
     const [
       { data: slides },
-      { data: services },
       { data: news },
       { data: blogs },
       { data: certifications },
       { data: videos }
     ] = await Promise.all([
       supabase.from('slides').select('*').order('order_index', { ascending: true }),
-      supabase.from('services').select('*').order('id', { ascending: true }),
       supabase.from('news').select('*').order('date', { ascending: false }).limit(4),
       supabase.from('blogs').select('*').eq('status', 'published').order('date', { ascending: false }).limit(3),
       supabase.from('certifications').select('*').order('id', { ascending: true }),
@@ -34,7 +30,6 @@ async function getHomePageData() {
 
     return {
       slides: slides || [],
-      services: services || [],
       news: news || [],
       blogs: blogs || [],
       certifications: certifications || [],
@@ -43,7 +38,7 @@ async function getHomePageData() {
   } catch (error) {
     console.error('Error fetching home data:', error);
     return {
-      slides: [], services: [], news: [], blogs: [], certifications: [], videos: []
+      slides: [], news: [], blogs: [], certifications: [], videos: []
     };
   }
 }
@@ -72,8 +67,6 @@ export default async function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <HeroSection slides={heroSlides} />
-      <ServicesCards services={data.services} />
-      <ServiceSearch />
       <Certifications certifications={data.certifications} />
       <NewsSection news={data.news} />
       <BlogSection blogs={data.blogs} />
