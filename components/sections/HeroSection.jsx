@@ -100,17 +100,17 @@ const HeroSection = ({ slides }) => {
 
                   {/* Right Image */}
                   <div className="flex-1 relative">
-                    <div className="relative w-full max-w-md mx-auto">
+                    <div className="relative w-full max-w-lg mx-auto">
                       {/* Background Shape */}
-                      <div className="absolute top-0 right-0 w-4/5 h-full bg-fami-purple/30 rounded-tl-[100px] rounded-bl-[100px] -z-10"></div>
+                      <div className="absolute top-0 right-0 w-4/5 h-full bg-fami-purple/30 rounded-tl-[100px] rounded-bl-[100px]"></div>
 
                       {/* Image */}
-                      <div className="relative h-[300px] md:h-[400px] lg:h-[450px]">
+                      <div className="relative h-[300px] md:h-[400px] lg:h-[450px] z-10">
                         <Image
                           src={slide.image || defaultSlide.image}
                           alt={slide.title || 'FAMI Salud'}
                           fill
-                          className="object-contain object-bottom"
+                          className="object-cover object-center rounded-2xl"
                           priority
                           unoptimized
                         />
