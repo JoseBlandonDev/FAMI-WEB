@@ -227,7 +227,7 @@ export default async function NewsDetailPage({ params }) {
                         href={`/noticias/${news.id}`}
                         className="group flex gap-3"
                       >
-                        <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-gray-200">
+                        <div className="relative w-12 h-12 rounded overflow-hidden flex-shrink-0 bg-gray-200">
                           {news.image ? (
                             <Image
                               src={news.image}
@@ -237,7 +237,7 @@ export default async function NewsDetailPage({ params }) {
                               unoptimized
                             />
                           ) : (
-                            <div className="flex items-center justify-center h-full text-gray-400 text-xs">
+                            <div className="flex items-center justify-center h-full text-gray-400 text-[10px]">
                               IMG
                             </div>
                           )}
