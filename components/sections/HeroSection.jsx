@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import Image from 'next/image';
@@ -32,6 +33,7 @@ const serviceCategories = [
 ];
 
 const HeroSection = ({ slides }) => {
+  const router = useRouter();
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 8000 })]);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -42,6 +44,13 @@ const HeroSection = ({ slides }) => {
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
 
   // Default slide only if no slides from DB (placeholder)
   const defaultSlide = {
@@ -135,18 +144,21 @@ const HeroSection = ({ slides }) => {
       <div className="container mx-auto px-2 sm:px-4 pb-6 sm:pb-8">
         {/* Search Input */}
         <div className="max-w-4xl mx-auto mb-4 sm:mb-8">
-          <div className="relative">
+          <form onSubmit={handleSearch} className="relative">
             <input
               type="text"
-              placeholder="Escriba aquí el nombre de los servicios"
+              placeholder="Buscar especialidades, noticias, blogs..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full px-4 sm:px-5 py-3 sm:py-4 pr-12 sm:pr-14 border border-gray-300 rounded-lg text-sm sm:text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fami-blue focus:border-transparent shadow-sm"
             />
-            <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 bg-fami-blue text-white rounded-lg hover:bg-fami-blue/90 transition-colors">
+            <button
+              type="submit"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 bg-fami-blue text-white rounded-lg hover:bg-fami-blue/90 transition-colors"
+            >
               <Search size={18} className="sm:w-5 sm:h-5" />
             </button>
-          </div>
+          </form>
         </div>
 
         {/* Service Category Cards */}
