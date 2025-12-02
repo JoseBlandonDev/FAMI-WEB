@@ -99,7 +99,7 @@ export default function AdminCertifications() {
       
       const { error } = await supabase
         .from('certifications')
-        .upsert(upsertData);
+        .upsert(upsertData, { onConflict: 'id' });
         
       if (error) throw error;
 
