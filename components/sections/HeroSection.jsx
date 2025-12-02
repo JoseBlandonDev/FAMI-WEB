@@ -62,12 +62,12 @@ const HeroSection = ({ slides }) => {
               <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 md:py-12">
                 <div className="relative min-h-[250px] sm:min-h-[350px] md:min-h-[450px] lg:min-h-[480px] rounded-xl sm:rounded-2xl overflow-hidden">
                   {/* Background Image */}
-                  <div className="absolute inset-0">
+                  <div className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden">
                     <Image
                       src={slide.image || defaultSlide.image}
                       alt={slide.title || 'FAMI Salud'}
                       fill
-                      className="object-contain object-center rounded-xl sm:rounded-2xl"
+                      className="object-contain object-center"
                       priority
                       unoptimized
                     />
