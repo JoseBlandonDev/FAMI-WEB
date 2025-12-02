@@ -95,17 +95,22 @@ export default function AdminVideos() {
     setSaving(true);
     try {
       const upsertData = videos.map(v => ({
+        // Important: if it's new (isNew flag), send undefined ID so DB generates it
         id: v.isNew ? undefined : v.id,
         title: v.title,
         description: v.description,
         thumbnail: v.thumbnail,
-        video_url: v.video_url || v.videoUrl, // handle mismatch
+        video_url: v.video_url || v.videoUrl, 
         featured: v.featured
       }));
       
+      // Upsert requires specifying columns to check for conflict if we want to update.
+      // But if ID is undefined, it's an insert.
+      // supabase.upsert works best when we provide the Primary Key for updates.
+      
       const { error } = await supabase
         .from('videos')
-        .upsert(upsertData);
+        .upsert(upsertData, { onConflict: 'id' });
         
       if (error) throw error;
 
@@ -181,7 +186,7 @@ export default function AdminVideos() {
                     Miniatura
                   </label>
                   <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden border-2 border-dashed border-gray-300">
-                    {video.thumbnail && (
+                    {video.thumbnail ? (
                       <Image
                         src={video.thumbnail}
                         alt={video.title}
@@ -189,6 +194,8 @@ export default function AdminVideos() {
                         className="object-cover"
                         unoptimized
                       />
+                    ) : (
+                      <div className="flex items-center justify-center h-full text-gray-400">Sin imagen</div>
                     )}
                     {/* Play icon overlay */}
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -229,7 +236,7 @@ export default function AdminVideos() {
                     </label>
                     <input
                       type="url"
-                      value={video.video_url || video.videoUrl}
+                      value={video.video_url || video.videoUrl || ''}
                       onChange={(e) => handleInputChange(video.id, 'video_url', e.target.value)}
                       placeholder="https://www.youtube.com/watch?v=..."
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
