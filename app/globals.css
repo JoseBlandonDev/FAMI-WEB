@@ -55,7 +55,7 @@
   body {
     @apply font-sans text-fami-text bg-white antialiased;
   }
-  
+
   h1, h2 {
     @apply font-display font-bold uppercase tracking-wide text-fami-blue;
   }
@@ -67,4 +67,44 @@
   p, input, a {
     @apply font-sans;
   }
+}
+
+/* Rich Text Content Styles */
+.prose-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.prose-content h1,
+.prose-content h2,
+.prose-content h3 {
+  color: #1f2937;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose-content p {
+  margin-bottom: 1em;
+  line-height: 1.7;
+}
+
+.prose-content ul,
+.prose-content ol {
+  margin: 1em 0;
+  padding-left: 1.5em;
+}
+
+.prose-content li {
+  margin-bottom: 0.5em;
+}
+
+.prose-content a {
+  color: #354093;
+  text-decoration: underline;
+}
+
+.prose-content a:hover {
+  color: #FF7F32;
 }

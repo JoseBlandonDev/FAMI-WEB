@@ -134,7 +134,7 @@ export default async function EspecialidadDetailPage({ params }) {
               </h2>
               {especialidad.descripcion ? (
                 <div
-                  className="prose prose-lg max-w-none text-gray-600"
+                  className="prose-content text-gray-600"
                   dangerouslySetInnerHTML={{ __html: especialidad.descripcion }}
                 />
               ) : (
@@ -243,31 +243,6 @@ export default async function EspecialidadDetailPage({ params }) {
         </div>
       </div>
 
-      {/* Styles for rich text content */}
-      <style jsx global>{`
-        .prose img {
-          max-width: 100%;
-          height: auto;
-          border-radius: 8px;
-          margin: 16px 0;
-        }
-        .prose h1, .prose h2, .prose h3 {
-          color: #1f2937;
-          margin-top: 1.5em;
-          margin-bottom: 0.5em;
-        }
-        .prose p {
-          margin-bottom: 1em;
-          line-height: 1.7;
-        }
-        .prose ul, .prose ol {
-          margin: 1em 0;
-          padding-left: 1.5em;
-        }
-        .prose li {
-          margin-bottom: 0.5em;
-        }
-      `}</style>
     </div>
   );
 }
