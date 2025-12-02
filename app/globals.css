@@ -1,11 +1,41 @@
 @import "tailwindcss";
 
 @theme {
-  --color-fami-blue: #2E3A8C;
-  --color-fami-cyan: #6C8CD5;
-  --color-fami-orange: #FF7F32;
-  --color-fami-gray: #F8F9FA;
-  --color-fami-text: #1F2937;
-  
+  /* Official Brand Colors */
+  --color-fami-blue: #354093; /* primary-blue: Principal - Brand Base */
+  --color-fami-blue-light: #545ea8; /* secondary-blue: Secundario */
+  --color-fami-cyan: #829eb3; /* accent-blue: Acento cian agrisado */
+  --color-fami-purple: #9fa4d3; /* soft-purple: Lavanda suave */
+  --color-fami-orange: #FF7F32; /* Mantener naranja CTA si no está prohibido, o ajustar */
+  --color-fami-bg: #ccd1eb; /* light-bg: Fondo muy claro */
+  --color-fami-text: #2e2d2c; /* text-dark: Texto principal / Negro suave */
+  --color-fami-gray: #F8F9FA; /* Mantener como un gris muy claro neutro si se necesita */
+
+  /* Font Stack */
   --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Gobold Extra 1", ui-sans-serif, system-ui, sans-serif; /* H1, H2 */
+  --font-subtitle: "Bebas Neue", ui-sans-serif, system-ui, sans-serif; /* H3, Subtítulos, Botones */
+}
+
+/* Custom Fonts Import (Google Fonts for now, local font should be added for Gobold) */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/* Global Styles */
+@layer base {
+  body {
+    @apply font-sans text-fami-text bg-white antialiased;
+  }
+  
+  h1, h2 {
+    /* TODO: Ensure Gobold font is loaded. Using sans-serif fallback if not available yet */
+    @apply font-display font-bold uppercase tracking-wide text-fami-blue;
+  }
+
+  h3, .subtitle, button, .btn {
+    @apply font-subtitle tracking-wide;
+  }
+
+  p, input, a {
+    @apply font-sans;
+  }
 }
