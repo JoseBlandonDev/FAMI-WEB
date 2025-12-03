@@ -106,14 +106,11 @@ export default function AdminHero() {
     setSaving(true);
     try {
       // Prepare data for DB
+      // FIX: Only send columns that actually exist in the DB
       const dbSlides = slides.map((slide, index) => ({
         image_url: slide.image,
         cta_link: slide.ctaLink || null, // Send null if empty
-        order_index: index,
-        // Clean unused columns if they still exist in DB structure to avoid errors
-        title: '',
-        subtitle: '',
-        cta_text: ''
+        order_index: index
       }));
 
       // 1. Delete all existing slides
