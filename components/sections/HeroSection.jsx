@@ -74,8 +74,9 @@ const HeroSection = ({ slides }) => {
                    1. Using aspect ratio close to 1200/470 (~2.55) so it fits perfectly without fixed height cropping.
                    2. Using object-contain to ensure NOTHING is cut off.
                    3. Added max-w-5xl and mx-auto to limit width on large screens, making it effectively smaller/compact.
+                   4. Removed rounded borders to match design requirement.
                 */}
-                <div className="relative w-full max-w-5xl mx-auto aspect-[2.55/1] rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="relative w-full max-w-5xl mx-auto aspect-[2.55/1] overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                   
                   {/* Conditional Link Wrapping */}
                   {slide.ctaLink ? (
