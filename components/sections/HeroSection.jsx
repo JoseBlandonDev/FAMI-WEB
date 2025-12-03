@@ -63,18 +63,20 @@ const HeroSection = ({ slides }) => {
   return (
     <section className="relative bg-white">
       
-      {/* Search Bar - Moved ABOVE Hero */}
-      <div className="bg-gray-50 py-6 border-b border-gray-100">
+      {/* Search Bar - Above Hero */}
+      {/* Removed bottom border and reduced bottom padding to merge with hero */}
+      <div className="bg-gray-50 pt-6 pb-4">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <form onSubmit={handleSearch} className="relative flex items-center">
               <div className="relative w-full group">
+                {/* Orange border added */}
                 <input
                   type="text"
                   placeholder="¿Qué estás buscando hoy? (Especialidades, noticias...)"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-6 pr-14 py-3.5 bg-white border-2 border-transparent focus:border-fami-blue/20 rounded-full shadow-sm text-gray-700 placeholder-gray-400 outline-none transition-all duration-300 hover:shadow-md"
+                  className="w-full pl-6 pr-14 py-3.5 bg-white border-2 border-fami-orange/80 focus:border-fami-orange rounded-full shadow-sm text-gray-700 placeholder-gray-400 outline-none transition-all duration-300 hover:shadow-md"
                 />
                 <button
                   type="submit"
@@ -90,20 +92,14 @@ const HeroSection = ({ slides }) => {
       </div>
 
       {/* Hero Carousel */}
-      <div className="overflow-hidden relative" ref={emblaRef}>
+      {/* Removed top padding to stick to search bar area */}
+      <div className="overflow-hidden relative bg-gray-50 pb-8" ref={emblaRef}>
         <div className="flex">
           {displaySlides.map((slide, index) => (
             <div className="flex-[0_0_100%] min-w-0" key={slide.id || index}>
-              {/* Hero container */}
-              <div className="container mx-auto px-2 sm:px-4 py-6 sm:py-8">
-                {/* 
-                   Restored to show full image:
-                   1. Using aspect ratio close to 1200/470 (~2.55)
-                   2. Using object-contain to ensure NOTHING is cut off.
-                   3. Added max-w-5xl and mx-auto to limit width on large screens.
-                   4. Removed rounded borders.
-                */}
-                <div className="relative w-full max-w-5xl mx-auto aspect-[2.55/1] overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              {/* Hero container - Reduced padding */}
+              <div className="container mx-auto px-2 sm:px-4">
+                <div className="relative w-full max-w-5xl mx-auto aspect-[2.55/1] overflow-hidden shadow-md hover:shadow-lg transition-shadow bg-white">
                   
                   {/* Conditional Link Wrapping */}
                   {slide.ctaLink ? (
@@ -112,7 +108,7 @@ const HeroSection = ({ slides }) => {
                         src={slide.image || defaultSlide.image}
                         alt="FAMI Banner"
                         fill
-                        className="object-contain" // Ensures full image visibility
+                        className="object-contain"
                         priority
                         unoptimized
                       />
@@ -123,7 +119,7 @@ const HeroSection = ({ slides }) => {
                         src={slide.image || defaultSlide.image}
                         alt="FAMI Banner"
                         fill
-                        className="object-contain" // Ensures full image visibility
+                        className="object-contain"
                         priority
                         unoptimized
                       />
@@ -136,27 +132,27 @@ const HeroSection = ({ slides }) => {
           ))}
         </div>
 
-        {/* Navigation Arrows (only if multiple slides) */}
+        {/* Navigation Arrows - Larger and more prominent */}
         {displaySlides.length > 1 && (
           <>
             <button
               onClick={scrollPrev}
-              className="absolute left-2 sm:left-[10%] top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/80 hover:bg-white text-fami-blue shadow-md transition-all"
+              className="absolute left-2 sm:left-[5%] md:left-[10%] top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-lg border border-gray-100 text-fami-blue hover:bg-fami-orange hover:text-white hover:border-fami-orange transition-all duration-300 group"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={32} className="group-hover:scale-110 transition-transform" />
             </button>
             <button
               onClick={scrollNext}
-              className="absolute right-2 sm:right-[10%] top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/80 hover:bg-white text-fami-blue shadow-md transition-all"
+              className="absolute right-2 sm:right-[5%] md:right-[10%] top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-lg border border-gray-100 text-fami-blue hover:bg-fami-orange hover:text-white hover:border-fami-orange transition-all duration-300 group"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={32} className="group-hover:scale-110 transition-transform" />
             </button>
           </>
         )}
       </div>
 
       {/* Service Category Cards - Below Banner */}
-      <div className="container mx-auto px-2 sm:px-4 pb-12">
+      <div className="container mx-auto px-2 sm:px-4 py-12">
         <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 md:gap-8">
           {serviceCategories.map((category) => {
             const Icon = category.icon;
