@@ -20,11 +20,13 @@ import {
   PanelLeftClose,
   PanelLeft,
   Share2,
-  Stethoscope
+  Stethoscope,
+  MessageSquare
 } from 'lucide-react';
 
 const sidebarItems = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+  { name: 'Encuestas', href: '/admin/encuestas', icon: MessageSquare },
   { name: 'Noticias', href: '/admin/noticias', icon: Newspaper },
   { name: 'Blog', href: '/admin/blog', icon: FileText },
   { name: 'Especialidades', href: '/admin/especialidades', icon: Stethoscope },

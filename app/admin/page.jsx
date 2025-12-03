@@ -9,12 +9,14 @@ import {
   Award,
   FileText,
   Settings,
-  Calendar
+  Calendar,
+  MessageSquare
 } from 'lucide-react';
 
 const quickLinks = [
   { name: 'Gestionar Noticias', href: '/admin/noticias', icon: Newspaper, color: 'bg-green-500' },
   { name: 'Gestionar Blog', href: '/admin/blog', icon: FileText, color: 'bg-purple-500' },
+  { name: 'Encuestas', href: '/admin/encuestas', icon: MessageSquare, color: 'bg-pink-500' },
   { name: 'Editar Hero', href: '/admin/hero', icon: Image, color: 'bg-orange-500' },
   { name: 'Gestionar Servicios', href: '/admin/servicios', icon: Settings, color: 'bg-blue-500' },
   { name: 'Videos', href: '/admin/videos', icon: Video, color: 'bg-red-500' },
