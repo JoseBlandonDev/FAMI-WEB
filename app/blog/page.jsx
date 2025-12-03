@@ -33,7 +33,7 @@ export default async function BlogPage() {
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Header */}
-      <div className="bg-fami-blue py-16 md:py-24">
+      <div className="bg-fami-blue py-8 md:py-12">
         <div className="container mx-auto px-4">
           <Link
             href="/"
