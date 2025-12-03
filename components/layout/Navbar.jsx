@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, MapPin, Phone, User, Instagram, Facebook, Youtube, Linkedin, Twitter } from 'lucide-react';
+import { Menu, X, MapPin, Phone, Instagram, Facebook, Youtube, Linkedin, Twitter } from 'lucide-react';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -11,11 +11,8 @@ const Navbar = () => {
   const menuItems = [
     { name: 'Especialidades', href: '/especialidades' },
     { name: 'Servicios / Programas', href: '/servicios' },
-    { name: 'Paquetes / Visitantes', href: '/paquetes' },
     { name: 'Noticias', href: '/noticias' },
-    { name: 'Eventos', href: '/eventos' },
     { name: 'Nosotros', href: '/nosotros' },
-    { name: 'Aliados / Cooperantes', href: '/aliados' },
   ];
 
   const toggleMobileMenu = () => {
@@ -93,14 +90,6 @@ const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
-              {/* User Login Icon - REMOVED AS REQUESTED IN PREVIOUS PROMPTS, ADDING IT BACK ONLY FOR ADMIN ACCESS IF NEEDED, BUT USER ASKED TO REMOVE IT FROM HEADER BEFORE */}
-              {/* <Link
-                href="/admin/login"
-                className="ml-4 p-2 text-gray-600 hover:text-fami-blue hover:bg-fami-blue/10 rounded-full transition-all"
-                title="Iniciar sesión"
-              >
-                <User size={24} />
-              </Link> */}
             </div>
 
             {/* Mobile Menu Button */}

@@ -13,7 +13,7 @@ const EspecialidadesPage = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 -mt-10">
+      <div className="container mx-auto px-4 mt-8">
         <div className="space-y-12">
 
           {/* Servicios IPS */}
