@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Upload, Trash2, Plus, Save, ArrowLeft, Loader2 } from 'lucide-react';
+import { Upload, Trash2, Plus, Save, ArrowLeft, Loader2, Link as LinkIcon } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/context/AuthContext';
@@ -31,10 +31,7 @@ export default function AdminHero() {
       // Map snake_case to camelCase
       const formattedSlides = data.map(row => ({
         id: row.id,
-        title: row.title,
-        subtitle: row.subtitle,
         image: row.image_url,
-        ctaText: row.cta_text,
         ctaLink: row.cta_link
       }));
 
@@ -52,7 +49,6 @@ export default function AdminHero() {
     if (!file) return;
 
     try {
-      // 1. Upload to Supabase Storage
       const filename = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, '')}`;
       
       const { data, error } = await supabase
@@ -64,13 +60,11 @@ export default function AdminHero() {
 
       if (error) throw error;
 
-      // 2. Get Public URL
       const { data: { publicUrl } } = supabase
         .storage
         .from('hero-images')
         .getPublicUrl(filename);
 
-      // 3. Update State
       setSlides(slides.map(slide =>
         slide.id === slideId ? { ...slide, image: publicUrl } : slide
       ));
@@ -89,12 +83,9 @@ export default function AdminHero() {
 
   const addNewSlide = () => {
     const newSlide = {
-      id: Date.now(), // Temporary ID for UI
-      title: "Nuevo Slide",
-      subtitle: "Subtítulo",
+      id: Date.now(), 
       image: "", 
-      ctaText: "Ver más",
-      ctaLink: "#",
+      ctaLink: "",
       isNew: true
     };
     setSlides([...slides, newSlide]);
@@ -114,20 +105,18 @@ export default function AdminHero() {
 
     setSaving(true);
     try {
-      // Strategy: Delete all and re-insert to maintain order and clean state
-      // This is simple and effective for this use case.
-      
+      // Prepare data for DB
       const dbSlides = slides.map((slide, index) => ({
-        title: slide.title,
-        subtitle: slide.subtitle,
         image_url: slide.image,
-        cta_text: slide.ctaText,
-        cta_link: slide.ctaLink,
-        order_index: index
+        cta_link: slide.ctaLink || null, // Send null if empty
+        order_index: index,
+        // Clean unused columns if they still exist in DB structure to avoid errors
+        title: '',
+        subtitle: '',
+        cta_text: ''
       }));
 
       // 1. Delete all existing slides
-      // (Supabase doesn't support TRUNCATE via client easily, so we delete where ID > 0)
       const { error: deleteError } = await supabase
         .from('slides')
         .delete()
@@ -145,7 +134,6 @@ export default function AdminHero() {
       }
 
       alert('Cambios guardados correctamente');
-      // Reload to get real IDs from DB
       fetchSlides(); 
 
     } catch (error) {
@@ -174,7 +162,7 @@ export default function AdminHero() {
           </Link>
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Hero / Slider</h1>
-            <p className="text-gray-600 text-sm">Administra las imágenes del slider principal</p>
+            <p className="text-gray-600 text-sm">Gestiona las imágenes del carrusel principal</p>
           </div>
         </div>
         <div className="flex gap-3">
@@ -211,17 +199,17 @@ export default function AdminHero() {
             </div>
 
             <div className="p-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="flex flex-col md:flex-row gap-6">
                 {/* Image Preview */}
-                <div>
+                <div className="w-full md:w-2/3">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Imagen del Slide
+                    Imagen del Banner (1200 x 470 px)
                   </label>
-                  <div className="relative aspect-video bg-gray-100 rounded-lg overflow-hidden border-2 border-dashed border-gray-300">
+                  <div className="relative aspect-[2.55/1] bg-gray-100 rounded-lg overflow-hidden border-2 border-dashed border-gray-300">
                     {slide.image ? (
                       <Image
                         src={slide.image}
-                        alt={slide.title}
+                        alt="Slide"
                         fill
                         className="object-cover"
                         unoptimized
@@ -242,60 +230,26 @@ export default function AdminHero() {
                       />
                     </label>
                   </div>
-                  <p className="text-xs text-gray-500 mt-2">
-                    Recomendado: 1920x800px, formato PNG o JPG
-                  </p>
                 </div>
 
-                {/* Form Fields */}
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Subtítulo
-                    </label>
-                    <input
-                      type="text"
-                      value={slide.subtitle || ''}
-                      onChange={(e) => handleInputChange(slide.id, 'subtitle', e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Título Principal
-                    </label>
-                    <input
-                      type="text"
-                      value={slide.title || ''}
-                      onChange={(e) => handleInputChange(slide.id, 'title', e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Texto del Botón
-                    </label>
-                    <input
-                      type="text"
-                      value={slide.ctaText || ''}
-                      onChange={(e) => handleInputChange(slide.id, 'ctaText', e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Link del Botón
-                    </label>
+                {/* Link Input */}
+                <div className="w-full md:w-1/3">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Enlace de redirección (Opcional)
+                  </label>
+                  <div className="relative">
+                    <LinkIcon size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                     <input
                       type="text"
                       value={slide.ctaLink || ''}
                       onChange={(e) => handleInputChange(slide.id, 'ctaLink', e.target.value)}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
+                      placeholder="https://..."
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
                     />
                   </div>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Si se deja vacío, el banner no será clickeable.
+                  </p>
                 </div>
               </div>
             </div>
