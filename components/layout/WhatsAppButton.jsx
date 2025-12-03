@@ -1,42 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import { MessageCircle } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import React from 'react';
+import { FaWhatsapp } from 'react-icons/fa'; // Using FontAwesome icon from react-icons
 
 const WhatsAppButton = () => {
-  const [whatsappLink, setWhatsappLink] = useState('');
-
-  useEffect(() => {
-    fetchWhatsappLink();
-  }, []);
-
-  const fetchWhatsappLink = async () => {
-    try {
-      const { data } = await supabase
-        .from('social_media')
-        .select('whatsapp')
-        .single();
-
-      if (data?.whatsapp) {
-        setWhatsappLink(data.whatsapp);
-      }
-    } catch (error) {
-      console.error('Error fetching WhatsApp link:', error);
-    }
-  };
-
-  if (!whatsappLink) return null;
+  const whatsappNumber = "573218227123";
+  const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
   return (
     <a
       href={whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-green-500 shadow-lg flex items-center justify-center text-white hover:bg-green-600 hover:scale-110 transition-all"
-      aria-label="Contactar por WhatsApp"
+      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:scale-110 transition-transform duration-300 hover:shadow-xl animate-bounce-in"
+      aria-label="Chat on WhatsApp"
     >
-      <MessageCircle size={28} fill="white" />
+      <FaWhatsapp size={32} />
     </a>
   );
 };

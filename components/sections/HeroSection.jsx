@@ -62,21 +62,44 @@ const HeroSection = ({ slides }) => {
 
   return (
     <section className="relative bg-white">
+      
+      {/* Search Bar - Above Hero */}
+      {/* Removed bottom border and reduced bottom padding to merge with hero */}
+      <div className="bg-gray-50 pt-6 pb-4">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <form onSubmit={handleSearch} className="relative flex items-center">
+              <div className="relative w-full group">
+                {/* Orange border added */}
+                <input
+                  type="text"
+                  placeholder="¿Qué estás buscando hoy? (Especialidades, noticias...)"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-6 pr-14 py-3.5 bg-white border-2 border-fami-orange/80 focus:border-fami-orange rounded-full shadow-sm text-gray-700 placeholder-gray-400 outline-none transition-all duration-300 hover:shadow-md"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-fami-blue text-white rounded-full hover:bg-fami-orange transition-colors shadow-sm group-hover:scale-105 duration-200"
+                  aria-label="Buscar"
+                >
+                  <Search size={20} />
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
       {/* Hero Carousel */}
-      <div className="overflow-hidden" ref={emblaRef}>
+      {/* Removed top padding to stick to search bar area */}
+      <div className="overflow-hidden relative bg-gray-50 pb-8" ref={emblaRef}>
         <div className="flex">
           {displaySlides.map((slide, index) => (
             <div className="flex-[0_0_100%] min-w-0" key={slide.id || index}>
-              {/* Hero with background image */}
-              <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-6">
-                {/* 
-                   Restored to show full image:
-                   1. Using aspect ratio close to 1200/470 (~2.55) so it fits perfectly without fixed height cropping.
-                   2. Using object-contain to ensure NOTHING is cut off.
-                   3. Added max-w-5xl and mx-auto to limit width on large screens, making it effectively smaller/compact.
-                   4. Removed rounded borders to match design requirement.
-                */}
-                <div className="relative w-full max-w-5xl mx-auto aspect-[2.55/1] overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              {/* Hero container - Reduced padding */}
+              <div className="container mx-auto px-2 sm:px-4">
+                <div className="relative w-full max-w-5xl mx-auto aspect-[2.55/1] overflow-hidden shadow-md hover:shadow-lg transition-shadow bg-white">
                   
                   {/* Conditional Link Wrapping */}
                   {slide.ctaLink ? (
@@ -85,7 +108,7 @@ const HeroSection = ({ slides }) => {
                         src={slide.image || defaultSlide.image}
                         alt="FAMI Banner"
                         fill
-                        className="object-contain" // Ensures full image visibility
+                        className="object-contain"
                         priority
                         unoptimized
                       />
@@ -96,7 +119,7 @@ const HeroSection = ({ slides }) => {
                         src={slide.image || defaultSlide.image}
                         alt="FAMI Banner"
                         fill
-                        className="object-contain" // Ensures full image visibility
+                        className="object-contain"
                         priority
                         unoptimized
                       />
@@ -108,61 +131,41 @@ const HeroSection = ({ slides }) => {
             </div>
           ))}
         </div>
+
+        {/* Navigation Arrows - Larger and more prominent */}
+        {displaySlides.length > 1 && (
+          <>
+            <button
+              onClick={scrollPrev}
+              className="absolute left-2 sm:left-[5%] md:left-[10%] top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-lg border border-gray-100 text-fami-blue hover:bg-fami-orange hover:text-white hover:border-fami-orange transition-all duration-300 group"
+            >
+              <ChevronLeft size={32} className="group-hover:scale-110 transition-transform" />
+            </button>
+            <button
+              onClick={scrollNext}
+              className="absolute right-2 sm:right-[5%] md:right-[10%] top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-lg border border-gray-100 text-fami-blue hover:bg-fami-orange hover:text-white hover:border-fami-orange transition-all duration-300 group"
+            >
+              <ChevronRight size={32} className="group-hover:scale-110 transition-transform" />
+            </button>
+          </>
+        )}
       </div>
 
-      {/* Navigation Arrows (only if multiple slides) */}
-      {displaySlides.length > 1 && (
-        <>
-          <button
-            onClick={scrollPrev}
-            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-white/80 hover:bg-white text-fami-blue shadow-md transition-all"
-          >
-            <ChevronLeft size={20} className="sm:w-6 sm:h-6" />
-          </button>
-          <button
-            onClick={scrollNext}
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-white/80 hover:bg-white text-fami-blue shadow-md transition-all"
-          >
-            <ChevronRight size={20} className="sm:w-6 sm:h-6" />
-          </button>
-        </>
-      )}
-
-      {/* Search Bar & Service Categories */}
-      <div className="container mx-auto px-2 sm:px-4 pb-6 sm:pb-8">
-        {/* Search Input */}
-        <div className="max-w-4xl mx-auto mb-4 sm:mb-8">
-          <form onSubmit={handleSearch} className="relative">
-            <input
-              type="text"
-              placeholder="Buscar especialidades, noticias, blogs..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 sm:px-5 py-3 sm:py-4 pr-12 sm:pr-14 border border-gray-300 rounded-lg text-sm sm:text-base text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fami-blue focus:border-transparent shadow-sm"
-            />
-            <button
-              type="submit"
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 bg-fami-blue text-white rounded-lg hover:bg-fami-blue/90 transition-colors"
-            >
-              <Search size={18} className="sm:w-5 sm:h-5" />
-            </button>
-          </form>
-        </div>
-
-        {/* Service Category Cards */}
-        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 md:gap-6">
+      {/* Service Category Cards - Below Banner */}
+      <div className="container mx-auto px-2 sm:px-4 py-12">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 md:gap-8">
           {serviceCategories.map((category) => {
             const Icon = category.icon;
             return (
               <Link
                 key={category.id}
                 href={category.href}
-                className="flex items-center gap-3 px-4 sm:px-6 py-3 sm:py-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md hover:border-fami-blue transition-all group sm:min-w-[200px] md:min-w-[250px]"
+                className="flex flex-col items-center justify-center gap-3 px-8 py-6 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-lg hover:border-fami-blue/30 transition-all group sm:min-w-[220px]"
               >
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-fami-blue/10 flex items-center justify-center group-hover:bg-fami-blue/20 transition-colors">
-                  <Icon size={20} className={`sm:w-6 sm:h-6 ${category.color}`} />
+                <div className="w-14 h-14 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-fami-blue group-hover:text-white transition-all duration-300">
+                  <Icon size={28} className={`text-fami-blue group-hover:text-white transition-colors`} />
                 </div>
-                <span className="font-semibold text-sm sm:text-base text-gray-800 group-hover:text-fami-blue transition-colors">
+                <span className="font-bold text-base text-gray-800 group-hover:text-fami-blue transition-colors text-center">
                   {category.title}
                 </span>
               </Link>

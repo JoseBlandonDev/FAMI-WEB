@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, MapPin, Phone, User } from 'lucide-react';
+import { Menu, X, MapPin, Phone, Instagram, Facebook, Youtube, Linkedin, Twitter } from 'lucide-react';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -11,11 +11,8 @@ const Navbar = () => {
   const menuItems = [
     { name: 'Especialidades', href: '/especialidades' },
     { name: 'Servicios / Programas', href: '/servicios' },
-    { name: 'Paquetes / Visitantes', href: '/paquetes' },
     { name: 'Noticias', href: '/noticias' },
-    { name: 'Eventos', href: '/eventos' },
     { name: 'Nosotros', href: '/nosotros' },
-    { name: 'Aliados / Cooperantes', href: '/aliados' },
   ];
 
   const toggleMobileMenu = () => {
@@ -27,7 +24,8 @@ const Navbar = () => {
       {/* Top Bar */}
       <div className="bg-fami-blue text-white">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center py-2 text-sm">
+          <div className="flex flex-col sm:flex-row justify-between items-center py-2 text-sm gap-2 sm:gap-0">
+            {/* Left: Contact Links */}
             <div className="flex items-center gap-6">
               <Link href="/localizacion" className="flex items-center gap-2 hover:text-fami-orange transition-colors">
                 <MapPin size={16} />
@@ -38,6 +36,25 @@ const Navbar = () => {
                 <span>Contáctanos</span>
               </Link>
             </div>
+
+            {/* Right: Social Media Icons (Moved from Sidebar) */}
+            <div className="flex items-center gap-4">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-orange transition-colors">
+                <Instagram size={18} />
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-orange transition-colors">
+                <Facebook size={18} />
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-orange transition-colors">
+                <Youtube size={18} />
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-orange transition-colors">
+                <Linkedin size={18} />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-orange transition-colors">
+                <Twitter size={18} />
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -45,11 +62,12 @@ const Navbar = () => {
       {/* Main Navbar */}
       <nav className="bg-white shadow-md">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <div className="flex-shrink-0">
+          {/* Increased height to h-24 for thicker header */}
+          <div className="flex justify-between items-center h-24">
+            {/* Logo - Expanded size */}
+            <div className="flex-shrink-0 py-2">
               <Link href="/" className="flex items-center">
-                <div className="relative h-12 w-32">
+                <div className="relative h-20 w-48">
                   <Image
                     src="/logos/fami-logo.png"
                     alt="FAMI Logo"
@@ -62,40 +80,25 @@ const Navbar = () => {
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden lg:flex items-center space-x-1">
+            <div className="hidden xl:flex items-center space-x-2">
               {menuItems.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="px-3 py-2 text-sm text-gray-700 hover:text-fami-blue font-medium transition-colors whitespace-nowrap"
+                  className="px-3 py-2 text-base text-gray-700 hover:text-fami-blue font-medium transition-colors whitespace-nowrap"
                 >
                   {item.name}
                 </Link>
               ))}
-              {/* User Login Icon */}
-              <Link
-                href="/admin/login"
-                className="ml-4 p-2 text-gray-600 hover:text-fami-blue hover:bg-fami-blue/10 rounded-full transition-all"
-                title="Iniciar sesión"
-              >
-                <User size={22} />
-              </Link>
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="lg:hidden flex items-center gap-2">
-              <Link
-                href="/admin/login"
-                className="p-2 text-gray-600 hover:text-fami-blue hover:bg-fami-blue/10 rounded-full transition-all"
-                title="Iniciar sesión"
-              >
-                <User size={22} />
-              </Link>
+            <div className="xl:hidden flex items-center gap-2">
               <button
                 onClick={toggleMobileMenu}
                 className="text-gray-700 hover:text-fami-blue focus:outline-none p-2"
               >
-                {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+                {isMobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
               </button>
             </div>
           </div>
@@ -103,7 +106,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+          <div className="xl:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg z-50">
             <div className="px-4 py-4 space-y-2">
               {menuItems.map((item) => (
                 <Link
