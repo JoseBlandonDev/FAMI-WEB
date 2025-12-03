@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <div className="bg-white">
       {/* Hero Banner */}
-      <div className="relative h-64 md:h-80 bg-fami-blue flex items-center justify-center overflow-hidden">
+      <div className="relative h-32 md:h-48 bg-fami-blue flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 opacity-20">
              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/medical-icons.png')]"></div>
         </div>
