@@ -54,17 +54,16 @@ export default function AdminCertifications() {
     }
   };
 
-  const handleInputChange = (certId, field, value) => {
+  const handleInputChange = (certId, value) => {
     setCertifications(certifications.map(cert =>
-      cert.id === certId ? { ...cert, [field]: value } : cert
+      cert.id === certId ? { ...cert, name: value } : cert
     ));
   };
 
   const addNewCertification = () => {
     const newCert = {
       id: -Date.now(), // Negative ID for temporary local state
-      name: "Nuevo reconocimiento",
-      description: "",
+      name: "Nueva certificación",
       image: "",
       isNew: true
     };
@@ -100,7 +99,6 @@ export default function AdminCertifications() {
       if (newItems.length > 0) {
         const itemsToInsert = newItems.map(c => ({
           name: c.name,
-          description: c.description,
           image: c.image
         }));
         
@@ -116,7 +114,6 @@ export default function AdminCertifications() {
         const itemsToUpdate = existingItems.map(c => ({
           id: c.id,
           name: c.name,
-          description: c.description,
           image: c.image
         }));
         
@@ -137,7 +134,7 @@ export default function AdminCertifications() {
     }
   };
 
-  if (loading) return <div className="p-8 text-center">Cargando datos...</div>;
+  if (loading) return <div className="p-8 text-center">Cargando certificaciones...</div>;
 
   return (
     <div>
@@ -148,8 +145,8 @@ export default function AdminCertifications() {
             <ArrowLeft size={24} />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Alianzas y Reconocimientos</h1>
-            <p className="text-gray-600 text-sm">Gestiona los logos y descripciones de aliados y certificados</p>
+            <h1 className="text-2xl font-bold text-gray-900">Certificaciones</h1>
+            <p className="text-gray-600 text-sm">Administra las imágenes de certificados y reconocimientos</p>
           </div>
         </div>
         <div className="flex gap-3">
@@ -176,7 +173,7 @@ export default function AdminCertifications() {
         {certifications.map((cert) => (
           <div key={cert.id} className="bg-white rounded-xl shadow-sm overflow-hidden">
             <div className="p-4 bg-gray-50 border-b flex items-center justify-between">
-              <span className="font-medium text-gray-700">Item</span>
+              <span className="font-medium text-gray-700">Certificación</span>
               <button
                 onClick={() => deleteCertification(cert.id)}
                 className="text-red-500 hover:text-red-700 p-1"
@@ -209,33 +206,17 @@ export default function AdminCertifications() {
                 </label>
               </div>
 
-              {/* Form Fields */}
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Título / Nombre
-                  </label>
-                  <input
-                    type="text"
-                    value={cert.name}
-                    onChange={(e) => handleInputChange(cert.id, 'name', e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
-                    placeholder="Ej. Certificado ISO"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Descripción
-                  </label>
-                  <textarea
-                    value={cert.description || ''}
-                    onChange={(e) => handleInputChange(cert.id, 'description', e.target.value)}
-                    rows={3}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue resize-none"
-                    placeholder="Breve descripción..."
-                  />
-                </div>
+              {/* Name Input */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Nombre del reconocimiento
+                </label>
+                <input
+                  type="text"
+                  value={cert.name}
+                  onChange={(e) => handleInputChange(cert.id, e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
+                />
               </div>
             </div>
           </div>
@@ -244,13 +225,13 @@ export default function AdminCertifications() {
 
       {certifications.length === 0 && (
         <div className="bg-white rounded-xl p-12 text-center">
-          <p className="text-gray-500 mb-4">No hay elementos configurados</p>
+          <p className="text-gray-500 mb-4">No hay certificaciones configuradas</p>
           <button
             onClick={addNewCertification}
             className="inline-flex items-center gap-2 px-4 py-2 bg-fami-blue text-white rounded-lg hover:bg-fami-blue/90 transition-colors"
           >
             <Plus size={20} />
-            Agregar primero
+            Agregar primera certificación
           </button>
         </div>
       )}
