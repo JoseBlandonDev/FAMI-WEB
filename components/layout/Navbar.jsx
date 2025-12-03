@@ -93,25 +93,18 @@ const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
-              {/* User Login Icon */}
-              <Link
+              {/* User Login Icon - REMOVED AS REQUESTED IN PREVIOUS PROMPTS, ADDING IT BACK ONLY FOR ADMIN ACCESS IF NEEDED, BUT USER ASKED TO REMOVE IT FROM HEADER BEFORE */}
+              {/* <Link
                 href="/admin/login"
                 className="ml-4 p-2 text-gray-600 hover:text-fami-blue hover:bg-fami-blue/10 rounded-full transition-all"
                 title="Iniciar sesión"
               >
                 <User size={24} />
-              </Link>
+              </Link> */}
             </div>
 
             {/* Mobile Menu Button */}
             <div className="xl:hidden flex items-center gap-2">
-              <Link
-                href="/admin/login"
-                className="p-2 text-gray-600 hover:text-fami-blue hover:bg-fami-blue/10 rounded-full transition-all"
-                title="Iniciar sesión"
-              >
-                <User size={24} />
-              </Link>
               <button
                 onClick={toggleMobileMenu}
                 className="text-gray-700 hover:text-fami-blue focus:outline-none p-2"
