@@ -68,8 +68,9 @@ const HeroSection = ({ slides }) => {
           {displaySlides.map((slide, index) => (
             <div className="flex-[0_0_100%] min-w-0" key={slide.id || index}>
               {/* Hero with background image */}
-              <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 md:py-12">
-                <div className="relative min-h-[280px] sm:min-h-[350px] md:min-h-[450px] lg:min-h-[480px] rounded-xl sm:rounded-2xl overflow-hidden">
+              <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-6">
+                {/* Adjusted height to be smaller/compact as requested */}
+                <div className="relative h-[200px] sm:h-[280px] md:h-[350px] lg:h-[400px] rounded-xl sm:rounded-2xl overflow-hidden">
                   {/* Background Image */}
                   <div className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden">
                     <Image
