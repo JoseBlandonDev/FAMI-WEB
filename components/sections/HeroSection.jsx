@@ -75,7 +75,7 @@ const HeroSection = ({ slides }) => {
                    2. Using object-contain to ensure NOTHING is cut off.
                    3. Added max-w-5xl and mx-auto to limit width on large screens, making it effectively smaller/compact.
                 */}
-                <div className="relative w-full max-w-6xl mx-auto aspect-[2.55/1] rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="relative w-full max-w-5xl mx-auto aspect-[2.55/1] rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                   
                   {/* Conditional Link Wrapping */}
                   {slide.ctaLink ? (
