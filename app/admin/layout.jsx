@@ -11,7 +11,6 @@ import {
   Video,
   Award,
   FileText,
-  Settings,
   Menu,
   X,
   LogOut,
@@ -19,8 +18,6 @@ import {
   Bell,
   PanelLeftClose,
   PanelLeft,
-  Share2,
-  Stethoscope,
   MessageSquare
 } from 'lucide-react';
 
@@ -29,12 +26,9 @@ const sidebarItems = [
   { name: 'Encuestas', href: '/admin/encuestas', icon: MessageSquare },
   { name: 'Noticias', href: '/admin/noticias', icon: Newspaper },
   { name: 'Blog', href: '/admin/blog', icon: FileText },
-  { name: 'Especialidades', href: '/admin/especialidades', icon: Stethoscope },
   { name: 'Hero / Slider', href: '/admin/hero', icon: Image },
-  { name: 'Servicios', href: '/admin/servicios', icon: Settings },
   { name: 'Certificaciones', href: '/admin/certificaciones', icon: Award },
   { name: 'Videos', href: '/admin/videos', icon: Video },
-  { name: 'Redes Sociales', href: '/admin/redes-sociales', icon: Share2 },
 ];
 
 export default function AdminLayout({ children }) {
