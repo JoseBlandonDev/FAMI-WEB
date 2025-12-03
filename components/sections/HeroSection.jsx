@@ -69,8 +69,12 @@ const HeroSection = ({ slides }) => {
             <div className="flex-[0_0_100%] min-w-0" key={slide.id || index}>
               {/* Hero with background image */}
               <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-6">
-                {/* Adjusted height to be smaller/compact as requested */}
-                <div className="relative h-[200px] sm:h-[280px] md:h-[350px] lg:h-[400px] rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                {/* 
+                   Restored to show full image:
+                   1. Using aspect ratio close to 1200/470 (~2.55) so it fits perfectly without fixed height cropping.
+                   2. Using object-contain to ensure NOTHING is cut off.
+                */}
+                <div className="relative w-full aspect-[2.55/1] rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                   
                   {/* Conditional Link Wrapping */}
                   {slide.ctaLink ? (
@@ -79,7 +83,7 @@ const HeroSection = ({ slides }) => {
                         src={slide.image || defaultSlide.image}
                         alt="FAMI Banner"
                         fill
-                        className="object-cover" // Use cover to fill the container nicely
+                        className="object-contain" // Ensures full image visibility
                         priority
                         unoptimized
                       />
@@ -90,7 +94,7 @@ const HeroSection = ({ slides }) => {
                         src={slide.image || defaultSlide.image}
                         alt="FAMI Banner"
                         fill
-                        className="object-cover"
+                        className="object-contain" // Ensures full image visibility
                         priority
                         unoptimized
                       />
