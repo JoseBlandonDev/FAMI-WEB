@@ -1,7 +1,6 @@
 import { Montserrat } from 'next/font/google';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import FloatingSocial from '@/components/layout/FloatingSocial';
 import WhatsAppButton from '@/components/layout/WhatsAppButton';
 import AppShell from '@/components/layout/AppShell';
 import { AuthProvider } from '@/context/AuthContext';
@@ -24,7 +23,6 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <AppShell
             navbar={<Navbar />}
-            sidebar={<FloatingSocial />}
             whatsapp={<WhatsAppButton />}
             footer={<Footer />}
           >
