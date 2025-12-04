@@ -143,8 +143,33 @@ const HeroSection = ({ slides }) => {
         )}
       </div>
 
-      {/* Search Bar - Below Hero Banner */}
-      <div className="bg-gray-50 pt-4 pb-6">
+      {/* Service Category Cards - Overlapping header */}
+      <div className="relative z-20 -mt-14 md:-mt-16">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-row flex-wrap justify-center gap-6 md:gap-12">
+            {serviceCategories.map((category) => {
+              const Icon = category.icon;
+              return (
+                <Link
+                  key={category.id}
+                  href={category.href}
+                  className="flex flex-col items-center justify-center gap-3 group"
+                >
+                  <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-white shadow-lg flex items-center justify-center group-hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <Icon size={36} className="text-fami-lavender group-hover:text-fami-blue transition-colors" strokeWidth={1.5} />
+                  </div>
+                  <span className="font-bold text-sm md:text-base text-fami-blue group-hover:text-fami-secondary transition-colors text-center">
+                    {category.title}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Search Bar - Below Icons */}
+      <div className="bg-white pt-6 pb-8">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <form onSubmit={handleSearch} className="relative flex items-center">
@@ -166,29 +191,6 @@ const HeroSection = ({ slides }) => {
               </div>
             </form>
           </div>
-        </div>
-      </div>
-
-      {/* Service Category Cards - Below Banner */}
-      <div className="container mx-auto px-2 sm:px-4 py-12">
-        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-8 md:gap-16">
-          {serviceCategories.map((category) => {
-            const Icon = category.icon;
-            return (
-              <Link
-                key={category.id}
-                href={category.href}
-                className="flex flex-col items-center justify-center gap-4 group"
-              >
-                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-white shadow-lg flex items-center justify-center group-hover:shadow-xl transition-all duration-300 border border-gray-100">
-                  <Icon size={48} className="text-fami-lavender group-hover:text-fami-blue transition-colors" strokeWidth={1.5} />
-                </div>
-                <span className="font-bold text-lg text-fami-blue group-hover:text-fami-secondary transition-colors text-center">
-                  {category.title}
-                </span>
-              </Link>
-            );
-          })}
         </div>
       </div>
     </section>
