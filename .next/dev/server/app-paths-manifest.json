@@ -1,9 +1,3 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/apoyos-pedagogicos/page": "app/apoyos-pedagogicos/page.js",
-  "/contacto/page": "app/contacto/page.js",
-  "/nosotros/page": "app/nosotros/page.js",
-  "/page": "app/page.js",
-  "/salud-ocupacional/page": "app/salud-ocupacional/page.js",
-  "/servicios-ips/page": "app/servicios-ips/page.js"
+  "/api/seed-especialidades/route": "app/api/seed-especialidades/route.js"
 }
