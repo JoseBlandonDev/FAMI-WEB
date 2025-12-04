@@ -186,13 +186,15 @@ export default async function EspecialidadDetailPage({ params }) {
                     </svg>
                     WhatsApp
                   </a>
-                  <Link
-                    href="/contacto"
+                  <a
+                    href={`https://wa.me/573218227123?text=Hola, estoy interesado en la especialidad de ${encodeURIComponent(especialidad.nombre)}. Me gustaría obtener más información.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 bg-white text-fami-blue px-6 py-3 rounded-lg font-semibold hover:bg-fami-secondary hover:text-white transition-colors"
                   >
                     <Phone size={18} />
                     Contactar
-                  </Link>
+                  </a>
                   <Link
                     href="/localizacion"
                     className="inline-flex items-center gap-2 bg-white/20 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/30 transition-colors"
