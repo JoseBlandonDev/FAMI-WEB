@@ -180,20 +180,13 @@ export default function AdminEspecialidades() {
 
     setUploadingImage(true);
     try {
-      // Compress image to less than 70kb and convert to webp
-      const options = {
-        maxSizeMB: 0.07, // 70kb
-        maxWidthOrHeight: 800,
-        useWebWorker: true,
-        fileType: 'image/webp'
-      };
+      // Get file extension
+      const ext = file.name.split('.').pop().toLowerCase();
+      const filename = `especialidades/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, '')}`;
 
-      const compressedFile = await imageCompression(file, options);
-
-      const filename = `especialidades/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, '')}.webp`;
       const { error } = await supabase.storage
         .from('hero-images')
-        .upload(filename, compressedFile);
+        .upload(filename, file);
 
       if (error) throw error;
 
@@ -404,7 +397,7 @@ export default function AdminEspecialidades() {
                   <p className="text-xs font-medium text-fami-blue mb-1">Recomendaciones para la imagen:</p>
                   <ul className="text-xs text-gray-600 space-y-0.5">
                     <li>• Tamaño: <strong>1200 x 500 px</strong> o <strong>1400 x 600 px</strong></li>
-                    <li>• Formato: JPG o PNG (se convertirá a WebP)</li>
+                    <li>• Formato: JPG o PNG</li>
                     <li>• Peso máximo recomendado: 300KB</li>
                     <li>• Mínimo 1200px de ancho para buena calidad</li>
                   </ul>
