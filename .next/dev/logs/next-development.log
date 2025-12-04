@@ -44,3 +44,10 @@
 [19:03:22.346] Server  LOG      ✓ Compiled in 52ms
 [19:04:26.540] Browser WARN    Image with src "https://yvtlzrwzdxcoumfqgjdf.supabase.co/storage/v1/object/public/hero-images/especialidades/1764812517889-AP1.jpg.webp" is using quality "90" which is not configured in images.qualities [70, 70, 70, 70, 70, 75]. Please update your config to [70, 70, 70, 70, 70, 75, 90].
 Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[19:04:47.336] Server  WARN    Image with src "https://yvtlzrwzdxcoumfqgjdf.supabase.co/storage/v1/object/public/hero-images/especialidades/1764812517889-AP1.jpg.webp" is using quality "90" which is not configured in images.qualities [70, 70, 70, 70, 70, 75]. Please update your config to [70, 70, 70, 70, 70, 75, 90].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[19:04:47.425] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[19:04:47.580] Browser WARN    Image with src "https://yvtlzrwzdxcoumfqgjdf.supabase.co/storage/v1/object/public/hero-images/especialidades/1764812517889-AP1.jpg.webp" is using quality "90" which is not configured in images.qualities [70, 70, 70, 70, 70, 75]. Please update your config to [70, 70, 70, 70, 70, 75, 90].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[19:04:47.580] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[19:04:47.580] Browser WARN    Image with src "https://yvtlzrwzdxcoumfqgjdf.supabase.co/storage/v1/object/public/hero-images/especialidades/1764812517889-AP1.jpg.webp" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.

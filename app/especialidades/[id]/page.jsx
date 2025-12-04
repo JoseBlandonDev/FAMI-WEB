@@ -109,15 +109,15 @@ export default async function EspecialidadDetailPage({ params }) {
         </div>
       </div>
 
-      {/* Full Width Image */}
+      {/* Full Width Image with margins */}
       {especialidad.imagen && (
-        <div className="w-full">
+        <div className="container mx-auto px-4 md:px-8 lg:px-16">
           <Image
             src={especialidad.imagen}
             alt={especialidad.nombre}
             width={1920}
-            height={400}
-            className="w-full h-[300px] md:h-[400px] object-cover"
+            height={600}
+            className="w-full h-auto object-contain"
             quality={90}
             priority
             unoptimized
