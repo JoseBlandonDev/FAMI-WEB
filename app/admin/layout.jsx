@@ -18,17 +18,22 @@ import {
   Bell,
   PanelLeftClose,
   PanelLeft,
-  MessageSquare
+  MessageSquare,
+  Stethoscope,
+  Briefcase,
+  Share2
 } from 'lucide-react';
 
 const sidebarItems = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-  { name: 'Encuestas', href: '/admin/encuestas', icon: MessageSquare },
   { name: 'Noticias', href: '/admin/noticias', icon: Newspaper },
   { name: 'Blog', href: '/admin/blog', icon: FileText },
+  { name: 'Especialidades', href: '/admin/especialidades', icon: Stethoscope },
   { name: 'Hero / Slider', href: '/admin/hero', icon: Image },
+  { name: 'Servicios', href: '/admin/servicios', icon: Briefcase },
   { name: 'Certificaciones', href: '/admin/certificaciones', icon: Award },
   { name: 'Videos', href: '/admin/videos', icon: Video },
+  { name: 'Redes Sociales', href: '/admin/redes-sociales', icon: Share2 },
 ];
 
 export default function AdminLayout({ children }) {

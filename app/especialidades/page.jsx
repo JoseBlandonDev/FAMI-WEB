@@ -1,143 +1,149 @@
-import React from 'react';
-import { Heart, Activity, Microscope, Stethoscope, Smile, Brain } from 'lucide-react';
+"use client";
 
-const EspecialidadesPage = () => {
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Search, ChevronRight } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+
+export default function EspecialidadesPage() {
+  const [especialidades, setEspecialidades] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchEspecialidades();
+  }, []);
+
+  const fetchEspecialidades = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('especialidades')
+        .select('*')
+        .eq('activo', true)
+        .order('nombre', { ascending: true });
+
+      if (error) throw error;
+      setEspecialidades(data || []);
+    } catch (error) {
+      console.error('Error fetching especialidades:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filteredEspecialidades = especialidades.filter(item =>
+    item.nombre?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.descripcion_corta?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="bg-gray-50 pb-20">
-      {/* Hero Banner */}
-      <div className="relative h-24 md:h-32 bg-fami-blue flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/medical-icons.png')]"></div>
-        <div className="relative z-10 text-center px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Especialidades</h1>
-          <div className="w-24 h-1 bg-fami-orange mx-auto rounded-full"></div>
+    <div className="bg-gray-50 min-h-screen pb-20">
+      {/* Breadcrumb */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="container mx-auto px-4 py-3">
+          <nav className="flex items-center gap-2 text-sm text-gray-500">
+            <Link href="/" className="hover:text-fami-blue transition-colors">
+              FAMI
+            </Link>
+            <ChevronRight size={14} />
+            <span className="text-gray-700">Especialidades</span>
+          </nav>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 mt-8">
-        <div className="space-y-12">
-
-          {/* Servicios IPS */}
-          <section className="bg-white rounded-2xl shadow-lg overflow-hidden p-8 md:p-12">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 bg-fami-blue/10 rounded-full flex items-center justify-center text-fami-blue">
-                <Stethoscope size={28} />
-              </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-fami-blue">Servicios IPS: Atención Integral</h2>
-            </div>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              En Fami creemos que tu bienestar merece la mejor atención, con calidez humana y el respaldo de un equipo profesional comprometido contigo. Nuestro propósito es acompañarte en cada etapa de tu vida, brindándote soluciones de salud confiables y accesibles, siempre con un trato cercano y respetuoso.
-            </p>
-            <p className="text-gray-700 mb-6">
-              Nos especializamos en prevención, diagnóstico y tratamiento, apoyados en tecnología de calidad y profesionales altamente capacitados para ofrecerte una experiencia integral de cuidado.
-            </p>
-            <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
-              <h3 className="font-bold text-fami-blue mb-4">Nuestros servicios:</h3>
-              <ul className="grid md:grid-cols-2 gap-3 text-gray-600">
-                <li className="flex items-center gap-2"><span className="w-2 h-2 bg-fami-orange rounded-full"></span> Medicina general y especializada.</li>
-                <li className="flex items-center gap-2"><span className="w-2 h-2 bg-fami-orange rounded-full"></span> Consulta psicológica y apoyo emocional.</li>
-                <li className="flex items-center gap-2"><span className="w-2 h-2 bg-fami-orange rounded-full"></span> Valoración física y exámenes complementarios.</li>
-                <li className="flex items-center gap-2"><span className="w-2 h-2 bg-fami-orange rounded-full"></span> Exámenes clínicos y de laboratorio.</li>
-                <li className="flex items-center gap-2"><span className="w-2 h-2 bg-fami-orange rounded-full"></span> Asesoría en Seguridad y Salud en el Trabajo (SST).</li>
-              </ul>
-            </div>
-            <p className="mt-6 text-fami-blue font-medium text-center italic">
-              "En Fami estamos convencidos de que la salud comienza con una buena atención."
-            </p>
-          </section>
-
-          {/* Odontología */}
-          <section className="bg-white rounded-2xl shadow-lg overflow-hidden p-8 md:p-12">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 bg-fami-blue/10 rounded-full flex items-center justify-center text-fami-blue">
-                <Smile size={28} />
-              </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-fami-blue">Odontología</h2>
-            </div>
-            <h3 className="text-xl text-fami-orange font-semibold mb-4">Odontología General • Especializada • Higiene Oral</h3>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              En Fami Odontología sabemos que tu sonrisa es parte esencial de tu bienestar y confianza. Por eso te ofrecemos un cuidado integral que va desde la odontología general y especializada, hasta la higiene oral preventiva, siempre con un enfoque humano y profesional.
-            </p>
-            <div className="bg-blue-50 p-6 rounded-xl text-center">
-              <p className="text-fami-blue font-medium">
-                Recuerda: una sonrisa sana comienza con una cita cumplida. Ven a Fami Odontología y cuida tu salud oral con nosotros.
-              </p>
-            </div>
-          </section>
-
-          {/* Apoyo Diagnóstico */}
-          <section className="bg-white rounded-2xl shadow-lg overflow-hidden p-8 md:p-12">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 bg-fami-blue/10 rounded-full flex items-center justify-center text-fami-blue">
-                <Activity size={28} />
-              </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-fami-blue">Apoyo Diagnóstico</h2>
-            </div>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              En FAMI ponemos a tu disposición un completo portafolio de servicios de apoyo diagnóstico, diseñados para cuidar tu salud de manera preventiva y precisa. Contamos con equipos confiables y profesionales especializados.
-            </p>
-            <div className="grid md:grid-cols-3 gap-4 mb-6">
-              {['Audiometría clínica', 'Impedanciometría', 'Optometría', 'Ecografías', 'Espirometría', 'Protectores auditivos'].map((item) => (
-                <div key={item} className="bg-gray-50 px-4 py-3 rounded-lg text-center text-gray-700 font-medium border border-gray-100 hover:border-fami-blue transition-colors">
-                  {item}
-                </div>
-              ))}
-            </div>
-            <p className="text-fami-orange text-center font-medium">
-              Detectar a tiempo es ganar la batalla antes de que comience.
-            </p>
-          </section>
-
-          {/* Laboratorio Clínico */}
-          <section className="bg-white rounded-2xl shadow-lg overflow-hidden p-8 md:p-12">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 bg-fami-blue/10 rounded-full flex items-center justify-center text-fami-blue">
-                <Microscope size={28} />
-              </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-fami-blue">Laboratorio Clínico</h2>
-            </div>
-            <p className="text-gray-700 mb-6">
-              En FAMI cuidamos tu salud con el respaldo de un laboratorio clínico confiable, donde encontrarás pruebas oportunas y seguras que te ayudarán a prevenir, diagnosticar y dar seguimiento a tu bienestar.
-            </p>
-            <ul className="grid md:grid-cols-2 gap-3 text-gray-600 mb-6">
-              <li className="flex items-center gap-2"><span className="w-2 h-2 bg-fami-blue rounded-full"></span> Cuadro hemático</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 bg-fami-blue rounded-full"></span> Parcial de orina</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 bg-fami-blue rounded-full"></span> Test de embarazo</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 bg-fami-blue rounded-full"></span> Tipo de sangre</li>
-              <li className="flex items-center gap-2"><span className="w-2 h-2 bg-fami-blue rounded-full"></span> Exámenes especializados</li>
-            </ul>
-            <p className="text-center text-gray-500 text-sm">
-              Cuida tu salud hoy, para no lamentar mañana. Agenda tus exámenes en FAMI.
-            </p>
-          </section>
-
-          {/* Apoyo Terapéutico */}
-          <section className="bg-white rounded-2xl shadow-lg overflow-hidden p-8 md:p-12">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 bg-fami-blue/10 rounded-full flex items-center justify-center text-fami-blue">
-                <Brain size={28} />
-              </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-fami-blue">Apoyo Terapéutico</h2>
-            </div>
-            <p className="text-gray-700 mb-6">
-              En FAMI creemos que la recuperación y el bienestar integral van más allá del tratamiento médico. Ofrecemos un completo servicio diseñado para fortalecer tus capacidades físicas, emocionales y sociales.
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm text-gray-600">
-              <div className="flex items-center gap-2"><Heart size={14} className="text-fami-orange"/> Terapia ocupacional</div>
-              <div className="flex items-center gap-2"><Heart size={14} className="text-fami-orange"/> Fonoaudiología</div>
-              <div className="flex items-center gap-2"><Heart size={14} className="text-fami-orange"/> Fisioterapia</div>
-              <div className="flex items-center gap-2"><Heart size={14} className="text-fami-orange"/> Nutrición</div>
-              <div className="flex items-center gap-2"><Heart size={14} className="text-fami-orange"/> Psicología</div>
-              <div className="flex items-center gap-2"><Heart size={14} className="text-fami-orange"/> Trabajo social</div>
-              <div className="flex items-center gap-2"><Heart size={14} className="text-fami-orange"/> Acondicionamiento físico</div>
-              <div className="flex items-center gap-2"><Heart size={14} className="text-fami-orange"/> Terapia de rehabilitación</div>
-              <div className="flex items-center gap-2"><Heart size={14} className="text-fami-orange"/> Terapia cardiorrespiratoria</div>
-            </div>
-          </section>
-
+      {/* Header */}
+      <div className="bg-white border-b border-gray-100">
+        <div className="container mx-auto px-4 py-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Especialidades</h1>
+          <div className="w-16 h-1 bg-fami-orange mt-3 rounded-full"></div>
         </div>
+      </div>
+
+      {/* Search Section */}
+      <div className="bg-fami-blue py-10">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl font-bold text-white text-center mb-6">
+            Buscar una Especialidad
+          </h2>
+          <div className="max-w-2xl mx-auto">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Escriba aquí el nombre de la especialidad..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-6 py-4 pr-14 bg-white/10 border-b-2 border-white/30 text-white placeholder-white/60 focus:outline-none focus:border-white transition-colors text-lg"
+              />
+              <Search className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60" size={24} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Especialidades Grid */}
+      <div className="container mx-auto px-4 py-12">
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="bg-white rounded-xl shadow-sm overflow-hidden animate-pulse">
+                <div className="h-48 bg-gray-200"></div>
+                <div className="p-4">
+                  <div className="h-5 bg-gray-200 rounded w-3/4"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : filteredEspecialidades.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {filteredEspecialidades.map((especialidad) => (
+              <Link
+                key={especialidad.id}
+                href={`/especialidades/${especialidad.id}`}
+                className="group bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-lg hover:border-fami-blue/30 transition-all duration-300"
+              >
+                {/* Image */}
+                <div className="relative h-48 bg-gray-100 overflow-hidden">
+                  {especialidad.imagen ? (
+                    <Image
+                      src={especialidad.imagen}
+                      alt={especialidad.nombre}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      unoptimized
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center h-full text-gray-400 bg-gradient-to-br from-gray-100 to-gray-200">
+                      <span className="text-sm">Sin imagen</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Content */}
+                <div className="p-4">
+                  <h3 className="font-semibold text-gray-900 group-hover:text-fami-blue transition-colors text-center">
+                    {especialidad.nombre?.toLowerCase()}
+                  </h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-16">
+            <div className="text-gray-400 mb-4">
+              <Search size={48} className="mx-auto" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-700 mb-2">
+              No se encontraron especialidades
+            </h3>
+            <p className="text-gray-500">
+              {searchQuery
+                ? `No hay resultados para "${searchQuery}"`
+                : 'No hay especialidades disponibles en este momento'}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
-};
-
-export default EspecialidadesPage;
+}
