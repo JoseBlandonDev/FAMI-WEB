@@ -2254,6 +2254,10 @@
     }
   }
 
+  .text-fami-lavender {
+    color: var(--color-fami-lavender);
+  }
+
   .text-fami-primary {
     color: var(--color-fami-primary);
   }
@@ -3195,6 +3199,12 @@
   }
 
   @media (min-width: 48rem) {
+    .md\:h-40 {
+      height: calc(var(--spacing) * 40);
+    }
+  }
+
+  @media (min-width: 48rem) {
     .md\:h-44 {
       height: calc(var(--spacing) * 44);
     }
@@ -3239,6 +3249,12 @@
   @media (min-width: 48rem) {
     .md\:w-32 {
       width: calc(var(--spacing) * 32);
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .md\:w-40 {
+      width: calc(var(--spacing) * 40);
     }
   }
 
@@ -3305,6 +3321,12 @@
   @media (min-width: 48rem) {
     .md\:gap-12 {
       gap: calc(var(--spacing) * 12);
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .md\:gap-16 {
+      gap: calc(var(--spacing) * 16);
     }
   }
 

@@ -39,3 +39,6 @@
 [02:20:09.961] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [02:20:10.812] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
 [18:36:58.529] Server  LOG      ✓ Compiled in 58ms
+[18:57:20.728] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[18:57:23.304] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[19:03:22.346] Server  LOG      ✓ Compiled in 52ms

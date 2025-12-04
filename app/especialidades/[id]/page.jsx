@@ -109,24 +109,22 @@ export default async function EspecialidadDetailPage({ params }) {
         </div>
       </div>
 
+      {/* Full Width Image */}
+      {especialidad.imagen && (
+        <div className="w-full">
+          <Image
+            src={especialidad.imagen}
+            alt={especialidad.nombre}
+            width={1920}
+            height={600}
+            className="w-full h-auto object-cover"
+            unoptimized
+          />
+        </div>
+      )}
+
       {/* Main Content */}
       <div className="container mx-auto px-4 py-12">
-        {/* Image - Full Width Centered */}
-        {especialidad.imagen && (
-          <div className="max-w-4xl mx-auto mb-12">
-            <div className="bg-white rounded-xl overflow-hidden shadow-lg p-4">
-              <Image
-                src={especialidad.imagen}
-                alt={especialidad.nombre}
-                width={1200}
-                height={800}
-                className="w-full h-auto rounded-lg"
-                unoptimized
-              />
-            </div>
-          </div>
-        )}
-
         {/* Content Grid */}
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
