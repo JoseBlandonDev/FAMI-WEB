@@ -1,7 +1,28 @@
-import React from 'react';
+"use client";
+
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Instagram, Facebook, Linkedin, MessageCircle, LogIn } from 'lucide-react';
+import { Instagram, Facebook, Linkedin, MessageCircle, LogIn, Youtube, Twitter, Globe } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+
+// TikTok icon component
+const TikTokIcon = ({ size = 20 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+  </svg>
+);
+
+const socialIconMap = {
+  instagram: Instagram,
+  facebook: Facebook,
+  youtube: Youtube,
+  linkedin: Linkedin,
+  twitter: Twitter,
+  whatsapp: MessageCircle,
+  tiktok: TikTokIcon,
+  website: Globe,
+};
 
 const legalLinks = [
   { name: 'Términos y Condiciones', href: '/politicas/terminos-y-condiciones' },
@@ -9,14 +30,38 @@ const legalLinks = [
   { name: 'Tratamiento de Datos', href: '/politicas/tratamiento-de-datos' },
 ];
 
-const socialLinks = [
-  { icon: Instagram, href: 'https://instagram.com/fami', label: 'Instagram' },
-  { icon: Facebook, href: 'https://facebook.com/fami', label: 'Facebook' },
-  { icon: Linkedin, href: 'https://linkedin.com/company/fami', label: 'LinkedIn' },
-  { icon: MessageCircle, href: 'https://wa.me/573218227123', label: 'WhatsApp' },
-];
-
 const Footer = () => {
+  const [socialLinks, setSocialLinks] = useState({});
+
+  useEffect(() => {
+    const fetchSocialLinks = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('social_media')
+          .select('*')
+          .single();
+
+        if (data && !error) {
+          setSocialLinks(data);
+        }
+      } catch (error) {
+        console.error('Error fetching social links:', error);
+      }
+    };
+
+    fetchSocialLinks();
+  }, []);
+
+  // Filter social networks that have links
+  const activeSocialLinks = Object.entries(socialLinks)
+    .filter(([key, value]) => value && key !== 'id' && key !== 'created_at' && key !== 'updated_at')
+    .map(([key, value]) => ({
+      key,
+      href: value,
+      icon: socialIconMap[key],
+      label: key.charAt(0).toUpperCase() + key.slice(1),
+    }));
+
   return (
     <footer className="bg-fami-blue text-white">
       {/* Main Footer */}
@@ -60,20 +105,24 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Social Links */}
+          {/* Social Links from database */}
           <div className="flex justify-center md:justify-end items-center gap-4">
-            {socialLinks.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border-2 border-white/50 flex items-center justify-center text-white hover:bg-white hover:text-fami-blue transition-colors"
-                aria-label={social.label}
-              >
-                <social.icon size={20} />
-              </a>
-            ))}
+            {activeSocialLinks.map((social) => {
+              const Icon = social.icon;
+              if (!Icon) return null;
+              return (
+                <a
+                  key={social.key}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full border-2 border-white/50 flex items-center justify-center text-white hover:bg-white hover:text-fami-blue transition-colors"
+                  aria-label={social.label}
+                >
+                  <Icon size={20} />
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>
