@@ -587,6 +587,10 @@
     right: calc(var(--spacing) * 20);
   }
 
+  .right-32 {
+    right: calc(var(--spacing) * 32);
+  }
+
   .bottom-0 {
     bottom: calc(var(--spacing) * 0);
   }
@@ -880,6 +884,10 @@
 
   .h-2 {
     height: calc(var(--spacing) * 2);
+  }
+
+  .h-2\/3 {
+    height: 66.6667%;
   }
 
   .h-4 {

@@ -57,53 +57,38 @@ const Certifications = ({ certifications = [] }) => {
 
   return (
     <section className="py-20 bg-fami-blue relative overflow-hidden">
-      {/* Decorative flame/wave watermark - Left */}
+      {/* Decorative rounded wave watermark - Left */}
       <svg
         className="absolute left-0 top-0 h-full w-auto opacity-20"
-        viewBox="0 0 200 600"
+        viewBox="0 0 250 600"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMinYMin slice"
       >
-        <path
-          d="M-50 600 C30 500, 80 400, 60 300 C40 200, 100 100, 80 0 L-50 0 Z"
-          fill="#545ea8"
-        />
-        <path
-          d="M-80 600 C20 480, 60 350, 40 250 C20 150, 70 50, 50 -50 L-80 -50 Z"
-          fill="#6670b8"
-        />
+        <ellipse cx="-50" cy="150" rx="180" ry="200" fill="#545ea8" />
+        <ellipse cx="-80" cy="450" rx="150" ry="180" fill="#6670b8" />
       </svg>
 
-      {/* Decorative flame/wave watermark - Right Bottom */}
+      {/* Decorative rounded wave watermark - Right Bottom */}
       <svg
-        className="absolute right-0 bottom-0 h-1/2 w-auto opacity-15"
-        viewBox="0 0 200 300"
+        className="absolute right-0 bottom-0 h-2/3 w-auto opacity-15"
+        viewBox="0 0 300 400"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMaxYMax slice"
       >
-        <path
-          d="M250 300 C200 250, 180 200, 200 150 C220 100, 180 50, 200 0 L250 0 Z"
-          fill="#545ea8"
-        />
-        <path
-          d="M280 300 C220 240, 200 180, 220 120 C240 60, 200 0, 220 -50 L280 -50 Z"
-          fill="#6670b8"
-        />
+        <ellipse cx="280" cy="350" rx="120" ry="150" fill="#545ea8" />
+        <ellipse cx="320" cy="280" rx="100" ry="130" fill="#6670b8" />
       </svg>
 
-      {/* Additional curve accent - Bottom Right */}
+      {/* Additional rounded accent - Bottom Right */}
       <svg
-        className="absolute right-20 bottom-0 h-1/3 w-auto opacity-10"
-        viewBox="0 0 150 200"
+        className="absolute right-32 bottom-0 h-1/3 w-auto opacity-10"
+        viewBox="0 0 200 200"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M150 200 C120 150, 100 100, 120 50 C140 0, 100 -30, 130 -50 L180 -50 L180 200 Z"
-          fill="#7080c8"
-        />
+        <ellipse cx="150" cy="180" rx="80" ry="100" fill="#7080c8" />
       </svg>
 
       <div className="container mx-auto px-4 relative z-10">
