@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { Plus, Search, Edit, Trash2, Save, X, Loader2, ImagePlus } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
-import imageCompression from 'browser-image-compression';
 import 'react-quill-new/dist/quill.snow.css';
 
 // Dynamic import of React Quill (client-side only)
@@ -56,21 +55,11 @@ export default function AdminEspecialidades() {
             const file = input.files[0];
             if (file) {
               try {
-                // Compress image
-                const options = {
-                  maxSizeMB: 0.07,
-                  maxWidthOrHeight: 800,
-                  useWebWorker: true,
-                  fileType: 'image/webp'
-                };
-
-                const compressedFile = await imageCompression(file, options);
-
-                // Upload to Supabase
-                const filename = `especialidades/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, '')}.webp`;
+                // Upload to Supabase without compression
+                const filename = `especialidades/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, '')}`;
                 const { error: uploadError } = await supabase.storage
                   .from('hero-images')
-                  .upload(filename, compressedFile);
+                  .upload(filename, file);
 
                 if (uploadError) throw uploadError;
 
