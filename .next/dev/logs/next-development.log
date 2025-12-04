@@ -59,3 +59,19 @@ Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
 [19:24:56.839] Server  LOG      ✓ Compiled in 70ms
 [19:29:11.773] Server  LOG      ✓ Compiled in 57ms
 [20:03:37.401] Server  LOG      ✓ Compiled in 56ms
+[20:03:54.920] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[20:03:55.087] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[20:04:37.015] Server  LOG      ✓ Compiled in 56ms
+[20:06:09.653] Server  LOG      ✓ Compiled in 41ms
+[20:07:37.434] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[20:07:37.612] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[20:07:53.677] Server  LOG      ✓ Compiled in 44ms
+[20:08:11.588] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[20:08:11.760] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[20:08:34.744] Server  LOG      ✓ Compiled in 29ms
+[20:09:24.893] Server  LOG      ✓ Compiled in 22ms
+[20:11:57.677] Server  LOG      ✓ Compiled in 52ms
+[20:14:21.699] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[20:14:21.870] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[20:16:54.389] Server  LOG      ✓ Compiled in 38ms
+[20:16:58.247] Server  LOG      ✓ Compiled in 23ms

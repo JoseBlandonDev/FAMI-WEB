@@ -57,47 +57,55 @@ const Certifications = ({ certifications = [] }) => {
 
   return (
     <section className="py-20 bg-fami-blue relative overflow-hidden">
-      {/* Decorative flame watermark - Left side */}
+      {/* Left side watermark - Main large curve */}
       <svg
-        className="absolute left-0 top-0 h-full w-48 md:w-64"
-        viewBox="0 0 200 500"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+        className="absolute left-0 top-0 h-full w-auto opacity-20 pointer-events-none"
+        viewBox="0 0 200 400"
         preserveAspectRatio="xMinYMid slice"
+        fill="none"
       >
-        {/* Outer flame - lighter */}
         <path
-          d="M-100 500 Q-50 400, -20 300 Q10 200, -30 100 Q-70 0, -50 -50 L-150 -50 L-150 550 Z"
-          fill="#4a5499"
-          opacity="0.6"
-        />
-        {/* Inner flame - slightly lighter */}
-        <path
-          d="M-80 500 Q-30 380, 10 280 Q50 180, 20 80 Q-10 -20, 30 -80 L-120 -80 L-120 550 Z"
-          fill="#545ea8"
-          opacity="0.5"
+          d="M-50 0 Q80 80, 60 200 Q40 320, -50 400 L-50 0 Z"
+          fill="#6b7bc9"
         />
       </svg>
 
-      {/* Decorative flame watermark - Right bottom */}
+      {/* Left side watermark - Secondary curve */}
       <svg
-        className="absolute right-0 bottom-0 w-48 md:w-72 h-64 md:h-80"
-        viewBox="0 0 300 350"
+        className="absolute left-0 top-0 h-full w-auto opacity-15 pointer-events-none"
+        viewBox="0 0 150 400"
+        preserveAspectRatio="xMinYMid slice"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="xMaxYMax slice"
       >
-        {/* Right flame 1 */}
         <path
-          d="M350 400 Q300 320, 280 250 Q260 180, 290 120 Q320 60, 300 0 L400 0 L400 400 Z"
-          fill="#4a5499"
-          opacity="0.4"
+          d="M-30 20 Q50 100, 40 200 Q30 300, -30 380 L-30 20 Z"
+          fill="#8090d4"
         />
-        {/* Right flame 2 - smaller */}
+      </svg>
+
+      {/* Right bottom watermark - Main curve */}
+      <svg
+        className="absolute right-0 bottom-0 h-2/3 w-auto opacity-20 pointer-events-none"
+        viewBox="0 0 150 300"
+        preserveAspectRatio="xMaxYMax slice"
+        fill="none"
+      >
         <path
-          d="M380 400 Q340 340, 330 290 Q320 240, 340 190 Q360 140, 350 90 L420 90 L420 400 Z"
-          fill="#545ea8"
-          opacity="0.3"
+          d="M200 300 Q120 280, 100 200 Q80 120, 200 50 L200 300 Z"
+          fill="#6b7bc9"
+        />
+      </svg>
+
+      {/* Right bottom watermark - Secondary curve */}
+      <svg
+        className="absolute right-0 bottom-0 h-1/2 w-auto opacity-15 pointer-events-none"
+        viewBox="0 0 120 250"
+        preserveAspectRatio="xMaxYMax slice"
+        fill="none"
+      >
+        <path
+          d="M170 250 Q100 230, 80 170 Q60 110, 170 60 L170 250 Z"
+          fill="#8090d4"
         />
       </svg>
 

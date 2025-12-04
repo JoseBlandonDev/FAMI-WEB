@@ -2,26 +2,38 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const ContactCTA = () => {
   return (
-    <section className="relative py-24 overflow-hidden bg-white">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight font-display text-fami-blue">
-            ESCUCHARTE NOS<br />AYUDA A CRECER
-          </h2>
-          <p className="text-gray-600 text-lg md:text-xl mb-10 font-medium">
-            Haz clic en el link y completa el formulario
-          </p>
-          <Link
-            href="/encuesta"
-            className="inline-block px-10 py-4 bg-fami-primary text-white text-lg font-bold rounded-full hover:bg-fami-secondary transition-colors shadow-lg hover:shadow-xl transform hover:scale-105 transition-transform uppercase tracking-wide"
-          >
-            Llenar encuesta
-          </Link>
+    <section className="relative overflow-hidden bg-white">
+      <Link href="/encuesta" className="block">
+        {/* Imagen para Desktop */}
+        <div className="hidden md:block relative w-full">
+          <Image
+            src="/images/encuesta-desktop.jpg"
+            alt="Escucharte nos ayuda a crecer - Contáctanos"
+            width={1920}
+            height={600}
+            className="w-full h-auto object-contain"
+            priority
+            unoptimized
+          />
         </div>
-      </div>
+
+        {/* Imagen para Móvil */}
+        <div className="block md:hidden relative w-full">
+          <Image
+            src="/images/encuesta-mobile.jpg"
+            alt="Escucharte nos ayuda a crecer - Contáctanos"
+            width={800}
+            height={800}
+            className="w-full h-auto object-contain"
+            priority
+            unoptimized
+          />
+        </div>
+      </Link>
     </section>
   );
 };
