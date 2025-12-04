@@ -54,3 +54,5 @@ Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
 [19:07:12.397] Server  LOG      ✓ Compiled in 58ms
 [19:20:48.747] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [19:20:48.915] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[19:23:47.479] Server  LOG      ✓ Compiled in 47ms
+[19:23:57.402] Server  LOG      ✓ Compiled in 36ms

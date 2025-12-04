@@ -56,18 +56,63 @@ const Certifications = ({ certifications = [] }) => {
   );
 
   return (
-    <section className="py-20 bg-white relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-fami-blue/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-fami-secondary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+    <section className="py-20 bg-fami-blue relative overflow-hidden">
+      {/* Decorative flame/wave watermark - Left */}
+      <svg
+        className="absolute left-0 top-0 h-full w-auto opacity-20"
+        viewBox="0 0 200 600"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMinYMin slice"
+      >
+        <path
+          d="M-50 600 C30 500, 80 400, 60 300 C40 200, 100 100, 80 0 L-50 0 Z"
+          fill="#545ea8"
+        />
+        <path
+          d="M-80 600 C20 480, 60 350, 40 250 C20 150, 70 50, 50 -50 L-80 -50 Z"
+          fill="#6670b8"
+        />
+      </svg>
+
+      {/* Decorative flame/wave watermark - Right Bottom */}
+      <svg
+        className="absolute right-0 bottom-0 h-1/2 w-auto opacity-15"
+        viewBox="0 0 200 300"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMaxYMax slice"
+      >
+        <path
+          d="M250 300 C200 250, 180 200, 200 150 C220 100, 180 50, 200 0 L250 0 Z"
+          fill="#545ea8"
+        />
+        <path
+          d="M280 300 C220 240, 200 180, 220 120 C240 60, 200 0, 220 -50 L280 -50 Z"
+          fill="#6670b8"
+        />
+      </svg>
+
+      {/* Additional curve accent - Bottom Right */}
+      <svg
+        className="absolute right-20 bottom-0 h-1/3 w-auto opacity-10"
+        viewBox="0 0 150 200"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M150 200 C120 150, 100 100, 120 50 C140 0, 100 -30, 130 -50 L180 -50 L180 200 Z"
+          fill="#7080c8"
+        />
+      </svg>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-fami-blue mb-4 font-display">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-display">
             ALIANZAS Y RECONOCIMIENTOS
           </h2>
-          <div className="w-24 h-1 bg-fami-secondary mx-auto rounded-full mb-6"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+          <div className="w-24 h-1 bg-white/50 mx-auto rounded-full mb-6"></div>
+          <p className="text-white/80 max-w-2xl mx-auto text-lg">
             Trabajamos de la mano con organizaciones líderes para brindar el mejor servicio y fortalecer nuestra comunidad.
           </p>
         </div>
