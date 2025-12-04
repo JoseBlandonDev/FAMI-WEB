@@ -5,11 +5,10 @@ const ServiciosPage = () => {
   return (
     <div className="bg-gray-50 pb-20">
       {/* Hero Banner */}
-      <div className="relative h-24 md:h-32 bg-fami-blue-light flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/medical-icons.png')]"></div>
+      <div className="relative h-24 md:h-32 bg-white flex items-center justify-center overflow-hidden">
         <div className="relative z-10 text-center px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Servicios y Programas</h1>
-          <div className="w-24 h-1 bg-fami-secondary mx-auto rounded-full"></div>
+          <h1 className="text-4xl md:text-5xl font-bold text-fami-blue mb-4">Servicios y Programas</h1>
+          <div className="w-24 h-1 bg-fami-blue mx-auto rounded-full"></div>
         </div>
       </div>
 
