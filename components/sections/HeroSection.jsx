@@ -62,38 +62,9 @@ const HeroSection = ({ slides }) => {
 
   return (
     <section className="relative bg-white">
-      
-      {/* Search Bar - Above Hero */}
-      {/* Removed bottom border and reduced bottom padding to merge with hero */}
-      <div className="bg-gray-50 pt-6 pb-4">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <form onSubmit={handleSearch} className="relative flex items-center">
-              <div className="relative w-full group">
-                {/* Orange border added */}
-                <input
-                  type="text"
-                  placeholder="¿Qué estás buscando hoy? (Especialidades, noticias...)"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-6 pr-14 py-3.5 bg-white border-2 border-fami-orange/80 focus:border-fami-orange rounded-full shadow-sm text-gray-700 placeholder-gray-400 outline-none transition-all duration-300 hover:shadow-md"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-fami-blue text-white rounded-full hover:bg-fami-orange transition-colors shadow-sm group-hover:scale-105 duration-200"
-                  aria-label="Buscar"
-                >
-                  <Search size={20} />
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
 
       {/* Hero Carousel */}
-      {/* Removed top padding to stick to search bar area */}
-      <div className="overflow-hidden relative bg-gray-50 pb-8" ref={emblaRef}>
+      <div className="overflow-hidden relative bg-gray-50 pt-6 pb-4" ref={emblaRef}>
         <div className="flex">
           {displaySlides.map((slide, index) => (
             <div className="flex-[0_0_100%] min-w-0" key={slide.id || index}>
@@ -149,6 +120,32 @@ const HeroSection = ({ slides }) => {
             </button>
           </>
         )}
+      </div>
+
+      {/* Search Bar - Below Hero Banner */}
+      <div className="bg-gray-50 pt-4 pb-6">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <form onSubmit={handleSearch} className="relative flex items-center">
+              <div className="relative w-full group">
+                <input
+                  type="text"
+                  placeholder="¿Qué estás buscando hoy? (Especialidades, noticias...)"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-6 pr-14 py-3.5 bg-white border-2 border-fami-blue/80 focus:border-fami-blue rounded-full shadow-sm text-gray-700 placeholder-gray-400 outline-none transition-all duration-300 hover:shadow-md"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-fami-blue text-white rounded-full hover:bg-fami-orange transition-colors shadow-sm group-hover:scale-105 duration-200"
+                  aria-label="Buscar"
+                >
+                  <Search size={20} />
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       {/* Service Category Cards - Below Banner */}
