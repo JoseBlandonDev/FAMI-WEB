@@ -29,7 +29,6 @@ export default function AdminEspecialidades() {
     descripcion: '',
     descripcion_corta: '',
     imagen: '',
-    servicios: '',
     activo: true
   });
 
@@ -127,6 +126,27 @@ export default function AdminEspecialidades() {
     item.nombre?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Función para extraer texto plano del HTML y crear un resumen
+  const getResumen = (item) => {
+    if (item.descripcion_corta) return item.descripcion_corta;
+    if (!item.descripcion) return 'Sin descripción';
+
+    // Remover tags HTML y obtener texto plano
+    const textoPlano = item.descripcion
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    // Limitar a 150 caracteres
+    return textoPlano.length > 150
+      ? textoPlano.substring(0, 150) + '...'
+      : textoPlano;
+  };
+
   const handleEdit = (item) => {
     setEditingItem(item);
     setFormData({
@@ -134,7 +154,6 @@ export default function AdminEspecialidades() {
       descripcion: item.descripcion || '',
       descripcion_corta: item.descripcion_corta || '',
       imagen: item.imagen || '',
-      servicios: item.servicios || '',
       activo: item.activo !== false
     });
     setShowModal(true);
@@ -147,7 +166,6 @@ export default function AdminEspecialidades() {
       descripcion: '',
       descripcion_corta: '',
       imagen: '',
-      servicios: '',
       activo: true
     });
     setShowModal(true);
@@ -298,7 +316,7 @@ export default function AdminEspecialidades() {
 
             {/* Content */}
             <p className="text-sm text-gray-500 line-clamp-3 mb-4">
-              {item.descripcion_corta || 'Sin descripción corta'}
+              {getResumen(item)}
             </p>
 
             <div className="flex items-center justify-end pt-4 border-t border-gray-100 gap-2">
@@ -431,20 +449,6 @@ export default function AdminEspecialidades() {
                     style={{ minHeight: '250px' }}
                   />
                 </div>
-              </div>
-
-              {/* Services */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Servicios (separados por coma)
-                </label>
-                <textarea
-                  value={formData.servicios}
-                  onChange={(e) => setFormData({ ...formData, servicios: e.target.value })}
-                  rows={3}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue resize-none"
-                  placeholder="Consulta médica, Control de enfermedades, Certificados médicos..."
-                />
               </div>
 
               {/* Active Status */}

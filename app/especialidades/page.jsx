@@ -36,6 +36,27 @@ export default function EspecialidadesPage() {
     item.descripcion_corta?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Función para extraer texto plano del HTML y crear un resumen
+  const getResumen = (item) => {
+    if (item.descripcion_corta) return item.descripcion_corta;
+    if (!item.descripcion) return 'Conoce más sobre esta especialidad y los servicios que ofrecemos.';
+
+    // Remover tags HTML y obtener texto plano
+    const textoPlano = item.descripcion
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    // Limitar a 150 caracteres
+    return textoPlano.length > 150
+      ? textoPlano.substring(0, 150) + '...'
+      : textoPlano;
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen pb-20">
       {/* Breadcrumb */}
@@ -106,7 +127,7 @@ export default function EspecialidadesPage() {
                   {especialidad.nombre}
                 </h3>
                 <p className="text-gray-600 text-sm line-clamp-3 mb-4">
-                  {especialidad.descripcion_corta || 'Conoce más sobre esta especialidad y los servicios que ofrecemos.'}
+                  {getResumen(especialidad)}
                 </p>
                 <span className="text-fami-blue text-sm font-medium group-hover:underline inline-flex items-center gap-1">
                   Ver más <ChevronRight size={16} />

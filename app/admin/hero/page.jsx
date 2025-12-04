@@ -8,8 +8,23 @@ import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 
+// Páginas base disponibles para redirección
+const paginasBase = [
+  { value: '', label: 'Sin redirección' },
+  { value: '/', label: 'Inicio' },
+  { value: '/especialidades', label: 'Todas las Especialidades' },
+  { value: '/servicios', label: 'Servicios' },
+  { value: '/nosotros', label: 'Nosotros' },
+  { value: '/contacto', label: 'Contacto' },
+  { value: '/localizacion', label: 'Localización' },
+  { value: '/noticias', label: 'Noticias' },
+  { value: '/encuestas', label: 'Encuestas' },
+  { value: '/certificaciones', label: 'Certificaciones' },
+];
+
 export default function AdminHero() {
   const [slides, setSlides] = useState([]);
+  const [especialidades, setEspecialidades] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const { user } = useAuth();
@@ -17,7 +32,23 @@ export default function AdminHero() {
 
   useEffect(() => {
     fetchSlides();
+    fetchEspecialidades();
   }, []);
+
+  const fetchEspecialidades = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('especialidades')
+        .select('id, nombre')
+        .eq('activo', true)
+        .order('nombre', { ascending: true });
+
+      if (error) throw error;
+      setEspecialidades(data || []);
+    } catch (error) {
+      console.error('Error fetching especialidades:', error);
+    }
+  };
 
   const fetchSlides = async () => {
     try {
@@ -229,23 +260,43 @@ export default function AdminHero() {
                   </div>
                 </div>
 
-                {/* Link Input */}
+                {/* Link Select */}
                 <div className="w-full md:w-1/3">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Enlace de redirección (Opcional)
+                    Página de redirección (Opcional)
                   </label>
                   <div className="relative">
-                    <LinkIcon size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                    <input
-                      type="text"
+                    <LinkIcon size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                    <select
                       value={slide.ctaLink || ''}
                       onChange={(e) => handleInputChange(slide.id, 'ctaLink', e.target.value)}
-                      placeholder="https://..."
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
-                    />
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue appearance-none bg-white cursor-pointer"
+                    >
+                      <optgroup label="Páginas principales">
+                        {paginasBase.map((pagina) => (
+                          <option key={pagina.value} value={pagina.value}>
+                            {pagina.label}
+                          </option>
+                        ))}
+                      </optgroup>
+                      {especialidades.length > 0 && (
+                        <optgroup label="Especialidades">
+                          {especialidades.map((esp) => (
+                            <option key={esp.id} value={`/especialidades/${esp.id}`}>
+                              {esp.nombre}
+                            </option>
+                          ))}
+                        </optgroup>
+                      )}
+                    </select>
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
                   </div>
                   <p className="text-xs text-gray-500 mt-2">
-                    Si se deja vacío, el banner no será clickeable.
+                    Selecciona la página a donde redirigirá el banner al hacer clic.
                   </p>
                 </div>
               </div>
