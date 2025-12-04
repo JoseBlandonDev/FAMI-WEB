@@ -389,7 +389,6 @@ export default function AdminEspecialidades() {
                         <span className={`text-sm mt-2 ${formData.imagen ? 'text-white' : 'text-gray-500'}`}>
                           {formData.imagen ? 'Cambiar imagen' : 'Subir imagen'}
                         </span>
-                        <span className="text-xs text-gray-400 mt-1">Se optimizará a WebP (&lt;70kb)</span>
                       </>
                     )}
                     <input
@@ -400,6 +399,15 @@ export default function AdminEspecialidades() {
                       disabled={uploadingImage}
                     />
                   </label>
+                </div>
+                <div className="mt-2 p-3 bg-blue-50 rounded-lg border border-blue-100">
+                  <p className="text-xs font-medium text-fami-blue mb-1">Recomendaciones para la imagen:</p>
+                  <ul className="text-xs text-gray-600 space-y-0.5">
+                    <li>• Tamaño: <strong>1200 x 500 px</strong> o <strong>1400 x 600 px</strong></li>
+                    <li>• Formato: JPG o PNG (se convertirá a WebP)</li>
+                    <li>• Peso máximo recomendado: 300KB</li>
+                    <li>• Mínimo 1200px de ancho para buena calidad</li>
+                  </ul>
                 </div>
               </div>
 
