@@ -1002,6 +1002,10 @@
     height: 50vh;
   }
 
+  .h-\[300px\] {
+    height: 300px;
+  }
+
   .h-\[400px\] {
     height: 400px;
   }
@@ -3207,6 +3211,12 @@
   @media (min-width: 48rem) {
     .md\:h-44 {
       height: calc(var(--spacing) * 44);
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .md\:h-\[400px\] {
+      height: 400px;
     }
   }
 

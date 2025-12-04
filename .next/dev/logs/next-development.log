@@ -42,3 +42,5 @@
 [18:57:20.728] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [18:57:23.304] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
 [19:03:22.346] Server  LOG      ✓ Compiled in 52ms
+[19:04:26.540] Browser WARN    Image with src "https://yvtlzrwzdxcoumfqgjdf.supabase.co/storage/v1/object/public/hero-images/especialidades/1764812517889-AP1.jpg.webp" is using quality "90" which is not configured in images.qualities [70, 70, 70, 70, 70, 75]. Please update your config to [70, 70, 70, 70, 70, 75, 90].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
