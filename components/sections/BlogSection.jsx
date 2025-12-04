@@ -27,7 +27,7 @@ const BlogSection = ({ blogs = [] }) => {
           </div>
           <Link
             href="/blog"
-            className="hidden md:flex items-center gap-2 text-fami-blue hover:text-fami-orange font-medium"
+            className="hidden md:flex items-center gap-2 text-fami-blue hover:text-fami-secondary font-medium"
           >
             Ver todos
             <ArrowRight size={18} />
@@ -70,7 +70,7 @@ const BlogSection = ({ blogs = [] }) => {
                 <p className="text-gray-500 text-sm line-clamp-3 mb-4">
                   {blog.excerpt}
                 </p>
-                <span className="inline-flex items-center gap-1 text-fami-orange text-sm font-medium group-hover:gap-2 transition-all">
+                <span className="inline-flex items-center gap-1 text-fami-secondary text-sm font-medium group-hover:gap-2 transition-all">
                   Leer artículo <ArrowRight size={16} />
                 </span>
               </div>

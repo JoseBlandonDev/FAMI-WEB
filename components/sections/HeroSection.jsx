@@ -108,13 +108,13 @@ const HeroSection = ({ slides }) => {
           <>
             <button
               onClick={scrollPrev}
-              className="absolute left-2 sm:left-[5%] md:left-[10%] top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-lg border border-gray-100 text-fami-blue hover:bg-fami-orange hover:text-white hover:border-fami-orange transition-all duration-300 group"
+              className="absolute left-2 sm:left-[5%] md:left-[10%] top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-lg border border-gray-100 text-fami-blue hover:bg-fami-secondary hover:text-white hover:border-fami-secondary transition-all duration-300 group"
             >
               <ChevronLeft size={32} className="group-hover:scale-110 transition-transform" />
             </button>
             <button
               onClick={scrollNext}
-              className="absolute right-2 sm:right-[5%] md:right-[10%] top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-lg border border-gray-100 text-fami-blue hover:bg-fami-orange hover:text-white hover:border-fami-orange transition-all duration-300 group"
+              className="absolute right-2 sm:right-[5%] md:right-[10%] top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white shadow-lg border border-gray-100 text-fami-blue hover:bg-fami-secondary hover:text-white hover:border-fami-secondary transition-all duration-300 group"
             >
               <ChevronRight size={32} className="group-hover:scale-110 transition-transform" />
             </button>
@@ -137,7 +137,7 @@ const HeroSection = ({ slides }) => {
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-fami-blue text-white rounded-full hover:bg-fami-orange transition-colors shadow-sm group-hover:scale-105 duration-200"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-fami-blue text-white rounded-full hover:bg-fami-secondary transition-colors shadow-sm group-hover:scale-105 duration-200"
                   aria-label="Buscar"
                 >
                   <Search size={20} />

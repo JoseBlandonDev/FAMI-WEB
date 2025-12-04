@@ -108,11 +108,11 @@ function SearchContent() {
                 placeholder="Buscar especialidades, noticias, blogs..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-5 py-4 pr-14 rounded-xl bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fami-orange shadow-lg"
+                className="w-full px-5 py-4 pr-14 rounded-xl bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fami-secondary shadow-lg"
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-fami-orange text-white rounded-lg hover:bg-fami-orange/90 transition-colors"
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-fami-secondary text-white rounded-lg hover:bg-fami-secondary/90 transition-colors"
               >
                 <Search size={24} />
               </button>

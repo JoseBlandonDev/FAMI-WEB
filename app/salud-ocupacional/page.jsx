@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <div className="bg-white">
        {/* Hero Banner */}
-       <div className="relative h-24 md:h-32 bg-fami-orange flex items-center justify-center overflow-hidden">
+       <div className="relative h-24 md:h-32 bg-fami-secondary flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 opacity-20">
              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/medical-icons.png')]"></div>
         </div>
@@ -29,7 +29,7 @@ export default function Page() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
           <div>
             <div className="flex items-center gap-3 mb-6">
-               <ShieldCheck className="w-8 h-8 text-fami-orange" />
+               <ShieldCheck className="w-8 h-8 text-fami-secondary" />
                <h2 className="text-2xl font-bold text-fami-blue">Nuestros Servicios</h2>
             </div>
             <ul className="space-y-6">
@@ -72,7 +72,7 @@ export default function Page() {
         <div className="bg-fami-blue rounded-3xl p-8 md:p-12 text-white relative overflow-hidden">
           <div className="relative z-10">
             <div className="flex items-center gap-3 mb-6">
-               <HeartHandshake className="w-10 h-10 text-fami-orange" />
+               <HeartHandshake className="w-10 h-10 text-fami-secondary" />
                <h2 className="text-3xl font-bold">Plan de Bienestar Empresarial</h2>
             </div>
             <p className="text-lg text-white/90 mb-8 max-w-3xl">

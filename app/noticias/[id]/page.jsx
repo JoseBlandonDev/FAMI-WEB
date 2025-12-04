@@ -96,7 +96,7 @@ export default async function NewsDetailPage({ params }) {
                   {newsItem.date}
                 </time>
                 <div className="flex items-center gap-4">
-                  <span className="text-fami-orange font-semibold text-sm uppercase tracking-wide">
+                  <span className="text-fami-secondary font-semibold text-sm uppercase tracking-wide">
                     Noticias FAMI
                   </span>
                   {/* Social Share Buttons */}
@@ -143,7 +143,7 @@ export default async function NewsDetailPage({ params }) {
               </h1>
 
               {/* Divider */}
-              <div className="w-16 h-1 bg-fami-orange mb-6"></div>
+              <div className="w-16 h-1 bg-fami-secondary mb-6"></div>
             </header>
 
             {/* Featured Image */}
@@ -208,7 +208,7 @@ export default async function NewsDetailPage({ params }) {
                 </div>
                 <Link
                   href="/contacto"
-                  className="mt-4 block w-full bg-white text-fami-blue text-center py-2 rounded-lg font-semibold hover:bg-fami-orange hover:text-white transition-colors text-sm"
+                  className="mt-4 block w-full bg-white text-fami-blue text-center py-2 rounded-lg font-semibold hover:bg-fami-secondary hover:text-white transition-colors text-sm"
                 >
                   Ir a Contacto
                 </Link>
@@ -253,7 +253,7 @@ export default async function NewsDetailPage({ params }) {
                   </div>
                   <Link
                     href="/noticias"
-                    className="mt-4 block text-fami-blue hover:text-fami-orange font-medium text-sm transition-colors text-center"
+                    className="mt-4 block text-fami-blue hover:text-fami-secondary font-medium text-sm transition-colors text-center"
                   >
                     Ver todas →
                   </Link>

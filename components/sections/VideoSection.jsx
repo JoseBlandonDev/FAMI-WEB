@@ -83,7 +83,7 @@ const VideoSection = ({ videos = [] }) => {
                 onClick={(e) => openVideoModal(featuredVideo, e)}
                 className="absolute inset-0 flex items-center justify-center cursor-pointer z-10"
               >
-                <div className="w-20 h-20 rounded-full bg-fami-orange text-white flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg hover:shadow-fami-orange/50">
+                <div className="w-20 h-20 rounded-full bg-fami-secondary text-white flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg hover:shadow-fami-secondary/50">
                   <Play size={32} className="ml-1" fill="currentColor" />
                 </div>
               </a>
@@ -128,7 +128,7 @@ const VideoSection = ({ videos = [] }) => {
 
                         {/* Info */}
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-white font-medium text-sm line-clamp-2 group-hover:text-fami-orange transition-colors">
+                          <h4 className="text-white font-medium text-sm line-clamp-2 group-hover:text-fami-secondary transition-colors">
                             {video.title}
                           </h4>
                           <p className="text-gray-400 text-xs mt-1 line-clamp-1">
@@ -155,7 +155,7 @@ const VideoSection = ({ videos = [] }) => {
           <div className="relative w-full max-w-5xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl border border-white/10">
             <button
               onClick={closeVideoModal}
-              className="absolute top-4 right-4 z-50 text-white hover:text-fami-orange transition-colors bg-black/50 p-2 rounded-full"
+              className="absolute top-4 right-4 z-50 text-white hover:text-fami-secondary transition-colors bg-black/50 p-2 rounded-full"
             >
               <X size={32} />
             </button>

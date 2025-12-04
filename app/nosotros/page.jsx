@@ -28,8 +28,8 @@ export default function Page() {
 
         {/* Mision / Vision Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
-          <div className="bg-fami-gray p-10 rounded-2xl relative overflow-hidden">
-            <Target className="w-16 h-16 text-fami-orange mb-6" />
+          <div className="bg-fami-light p-10 rounded-2xl relative overflow-hidden">
+            <Target className="w-16 h-16 text-fami-secondary mb-6" />
             <h2 className="text-2xl font-bold text-fami-blue mb-4">Nuestra Misión</h2>
             <p className="text-gray-700 leading-relaxed">
               Nuestra misión es clara: cuidar la vida en todas sus etapas, desde los más pequeños hasta los adultos mayores, 
@@ -37,8 +37,8 @@ export default function Page() {
             </p>
           </div>
 
-          <div className="bg-fami-gray p-10 rounded-2xl relative overflow-hidden">
-            <Heart className="w-16 h-16 text-fami-cyan mb-6" />
+          <div className="bg-fami-light p-10 rounded-2xl relative overflow-hidden">
+            <Heart className="w-16 h-16 text-fami-accent mb-6" />
             <h2 className="text-2xl font-bold text-fami-blue mb-4">Nuestra Visión</h2>
             <p className="text-gray-700 leading-relaxed">
               Nuestra visión nos impulsa a construir un futuro donde la salud sea un derecho vivido con calidad, cercanía y respeto.

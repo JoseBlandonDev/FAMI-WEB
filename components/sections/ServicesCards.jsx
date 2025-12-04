@@ -39,7 +39,7 @@ const ServicesCards = ({ services = [] }) => {
                   </div>
                 </div>
                 {/* Title */}
-                <h3 className="mt-4 text-center text-fami-blue font-semibold text-sm md:text-base group-hover:text-fami-orange transition-colors max-w-[180px]">
+                <h3 className="mt-4 text-center text-fami-blue font-semibold text-sm md:text-base group-hover:text-fami-secondary transition-colors max-w-[180px]">
                   {service.title}
                 </h3>
               </div>

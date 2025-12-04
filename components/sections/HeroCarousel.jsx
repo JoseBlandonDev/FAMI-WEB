@@ -92,7 +92,7 @@ const HeroCarousel = () => {
               <div className="absolute inset-0 flex items-center">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="max-w-3xl opacity-0 animate-fadeIn" style={{ animationFillMode: 'forwards', animationDelay: '300ms' }}>
-                    <span className="inline-block py-1 px-3 rounded-full bg-fami-orange text-white text-xs md:text-sm font-bold mb-4 uppercase tracking-wider">
+                    <span className="inline-block py-1 px-3 rounded-full bg-fami-secondary text-white text-xs md:text-sm font-bold mb-4 uppercase tracking-wider">
                       {slide.category}
                     </span>
                     <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">

@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <div className="bg-white">
        {/* Hero Banner */}
-       <div className="relative h-24 md:h-32 bg-fami-cyan flex items-center justify-center overflow-hidden">
+       <div className="relative h-24 md:h-32 bg-fami-accent flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 opacity-20">
              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
         </div>
@@ -34,13 +34,13 @@ export default function Page() {
             </p>
             <div className="flex gap-4">
                <div className="flex items-center gap-2 text-fami-blue font-medium">
-                 <Star className="w-5 h-5 text-fami-orange" fill="currentColor" /> Estimulación
+                 <Star className="w-5 h-5 text-fami-secondary" fill="currentColor" /> Estimulación
                </div>
                <div className="flex items-center gap-2 text-fami-blue font-medium">
-                 <Star className="w-5 h-5 text-fami-orange" fill="currentColor" /> Desarrollo
+                 <Star className="w-5 h-5 text-fami-secondary" fill="currentColor" /> Desarrollo
                </div>
                <div className="flex items-center gap-2 text-fami-blue font-medium">
-                 <Star className="w-5 h-5 text-fami-orange" fill="currentColor" /> Crianza
+                 <Star className="w-5 h-5 text-fami-secondary" fill="currentColor" /> Crianza
                </div>
             </div>
           </div>
@@ -62,21 +62,21 @@ export default function Page() {
             <p className="text-gray-600 text-sm">Asesoría personalizada adaptada a las necesidades únicas de cada niño.</p>
           </div>
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:-translate-y-1 transition-transform">
-            <BookOpen className="w-12 h-12 text-fami-orange mb-4" />
+            <BookOpen className="w-12 h-12 text-fami-secondary mb-4" />
             <h3 className="text-xl font-bold text-fami-blue mb-3">Estimulación y Desarrollo</h3>
             <p className="text-gray-600 text-sm">Actividades diseñadas según la etapa evolutiva para potenciar habilidades.</p>
           </div>
           <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:-translate-y-1 transition-transform">
-            <School className="w-12 h-12 text-fami-cyan mb-4" />
+            <School className="w-12 h-12 text-fami-accent mb-4" />
             <h3 className="text-xl font-bold text-fami-blue mb-3">Escuela de Padres</h3>
             <p className="text-gray-600 text-sm">Espacios de formación que fortalecen el vínculo familiar y la crianza consciente.</p>
           </div>
         </div>
 
         {/* Paquete Escolar */}
-        <div className="bg-fami-gray rounded-3xl p-8 md:p-12 border-2 border-dashed border-fami-blue/20">
+        <div className="bg-fami-light rounded-3xl p-8 md:p-12 border-2 border-dashed border-fami-blue/20">
           <div className="text-center mb-10">
-            <span className="bg-fami-orange text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide mb-4 inline-block">
+            <span className="bg-fami-secondary text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide mb-4 inline-block">
               Temporada Escolar
             </span>
             <h2 className="text-3xl font-bold text-fami-blue">Paquete Escolar Integral</h2>
@@ -88,7 +88,7 @@ export default function Page() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto mb-10">
             {['Certificado médico', 'Certificado odontológico', 'Coprológico', 'Audiometría', 'Visiometría'].map((item) => (
                <div key={item} className="bg-white p-4 rounded-xl text-center shadow-sm">
-                  <div className="w-2 h-2 bg-fami-cyan rounded-full mx-auto mb-2"></div>
+                  <div className="w-2 h-2 bg-fami-accent rounded-full mx-auto mb-2"></div>
                   <p className="font-medium text-fami-blue text-sm">{item}</p>
                </div>
             ))}

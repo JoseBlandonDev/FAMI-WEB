@@ -16,7 +16,7 @@ const ContactCTA = () => {
           </p>
           <Link
             href="/encuesta"
-            className="inline-block px-10 py-4 bg-fami-orange text-white text-lg font-bold rounded-full hover:bg-orange-600 transition-colors shadow-lg hover:shadow-xl transform hover:scale-105 transition-transform uppercase tracking-wide"
+            className="inline-block px-10 py-4 bg-fami-primary text-white text-lg font-bold rounded-full hover:bg-fami-secondary transition-colors shadow-lg hover:shadow-xl transform hover:scale-105 transition-transform uppercase tracking-wide"
           >
             Llenar encuesta
           </Link>

@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  /* Official Brand Colors */
-  --color-fami-blue: #354093; /* primary-blue: Principal - Brand Base */
-  --color-fami-blue-light: #545ea8; /* secondary-blue: Secundario */
-  --color-fami-cyan: #829eb3; /* accent-blue: Acento cian agrisado */
-  --color-fami-purple: #9fa4d3; /* soft-purple: Lavanda suave */
-  --color-fami-orange: #FF7F32; /* Mantener naranja CTA si no está prohibido, o ajustar */
-  --color-fami-bg: #ccd1eb; /* light-bg: Fondo muy claro */
-  --color-fami-text: #2e2d2c; /* text-dark: Texto principal / Negro suave */
-  --color-fami-gray: #F8F9FA; /* Mantener como un gris muy claro neutro si se necesita */
+  /* Official Brand Colors - Paleta Oficial */
+  --color-fami-primary: #354093;    /* Primary blue - Brand Base */
+  --color-fami-secondary: #545ea8;  /* Secondary blue */
+  --color-fami-accent: #829eb3;     /* Accent cyan grayish */
+  --color-fami-lavender: #9fa4d3;   /* Soft purple/lavender */
+  --color-fami-light: #ccd1eb;      /* Light background */
+  --color-fami-text: #2e2d2c;       /* Dark text (never pure black) */
+  --color-fami-white: #FFFFFF;      /* Pure white */
+
+  /* Alias for backwards compatibility */
+  --color-fami-blue: #354093;
 
   /* Font Stack */
   --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
@@ -109,5 +111,5 @@
 }
 
 .prose-content a:hover {
-  color: #FF7F32;
+  color: #545ea8;
 }

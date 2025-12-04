@@ -25,10 +25,10 @@ export default function Page() {
             Nuestro propósito es acompañarte en cada etapa de tu vida, brindándote soluciones de salud confiables y accesibles.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <span className="bg-fami-gray text-fami-blue px-4 py-2 rounded-full font-medium text-sm">Medicina General</span>
-            <span className="bg-fami-gray text-fami-blue px-4 py-2 rounded-full font-medium text-sm">Especializada</span>
-            <span className="bg-fami-gray text-fami-blue px-4 py-2 rounded-full font-medium text-sm">Psicología</span>
-            <span className="bg-fami-gray text-fami-blue px-4 py-2 rounded-full font-medium text-sm">Laboratorio</span>
+            <span className="bg-fami-light text-fami-blue px-4 py-2 rounded-full font-medium text-sm">Medicina General</span>
+            <span className="bg-fami-light text-fami-blue px-4 py-2 rounded-full font-medium text-sm">Especializada</span>
+            <span className="bg-fami-light text-fami-blue px-4 py-2 rounded-full font-medium text-sm">Psicología</span>
+            <span className="bg-fami-light text-fami-blue px-4 py-2 rounded-full font-medium text-sm">Laboratorio</span>
           </div>
         </div>
 
@@ -39,7 +39,7 @@ export default function Page() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <div className="flex items-center gap-4 mb-4">
-                <Smile className="w-10 h-10 text-fami-orange" />
+                <Smile className="w-10 h-10 text-fami-secondary" />
                 <h3 className="text-2xl font-bold text-fami-blue">Odontología</h3>
               </div>
               <h4 className="text-lg font-semibold text-gray-800 mb-4">General • Especializada • Higiene Oral</h4>
@@ -61,7 +61,7 @@ export default function Page() {
             </div>
             <div>
               <div className="flex items-center gap-4 mb-4">
-                <Eye className="w-10 h-10 text-fami-cyan" />
+                <Eye className="w-10 h-10 text-fami-accent" />
                 <h3 className="text-2xl font-bold text-fami-blue">Apoyo Diagnóstico</h3>
               </div>
               <p className="text-gray-600 mb-6 leading-relaxed">
@@ -71,7 +71,7 @@ export default function Page() {
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                 {['Audiometría clínica', 'Impedanciometría', 'Optometría', 'Ecografías', 'Espirometría', 'Protectores auditivos'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-gray-700">
-                    <CheckCircle2 className="w-4 h-4 text-fami-orange" /> {item}
+                    <CheckCircle2 className="w-4 h-4 text-fami-secondary" /> {item}
                   </li>
                 ))}
               </ul>
@@ -92,7 +92,7 @@ export default function Page() {
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                 {['Cuadro hemático', 'Parcial de orina', 'Test de embarazo', 'Tipo de sangre', 'Exámenes especializados'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-gray-700">
-                    <CheckCircle2 className="w-4 h-4 text-fami-orange" /> {item}
+                    <CheckCircle2 className="w-4 h-4 text-fami-secondary" /> {item}
                   </li>
                 ))}
               </ul>
@@ -103,7 +103,7 @@ export default function Page() {
           </div>
 
            {/* 4. Apoyo Terapéutico */}
-           <div className="bg-fami-gray rounded-2xl p-8 md:p-12">
+           <div className="bg-fami-light rounded-2xl p-8 md:p-12">
               <div className="text-center max-w-3xl mx-auto">
                 <Activity className="w-12 h-12 text-fami-blue mx-auto mb-4" />
                 <h3 className="text-2xl font-bold text-fami-blue mb-6">Apoyo Terapéutico</h3>

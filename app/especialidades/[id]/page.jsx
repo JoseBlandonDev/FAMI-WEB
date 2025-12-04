@@ -134,7 +134,7 @@ export default async function EspecialidadDetailPage({ params }) {
             <div className="lg:col-span-2 space-y-8">
               {/* Description */}
               <div className="bg-white rounded-xl p-8 shadow-sm">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-fami-orange">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-fami-secondary">
                   Acerca de esta especialidad
                 </h2>
                 {especialidad.descripcion ? (
@@ -152,13 +152,13 @@ export default async function EspecialidadDetailPage({ params }) {
               {/* Services */}
               {servicios.length > 0 && (
                 <div className="bg-white rounded-xl p-8 shadow-sm">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-fami-orange">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-fami-secondary">
                     Servicios que ofrecemos
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {servicios.map((servicio, index) => (
                       <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                        <CheckCircle className="text-fami-orange flex-shrink-0 mt-0.5" size={20} />
+                        <CheckCircle className="text-fami-secondary flex-shrink-0 mt-0.5" size={20} />
                         <span className="text-gray-700">{servicio}</span>
                       </div>
                     ))}
@@ -188,7 +188,7 @@ export default async function EspecialidadDetailPage({ params }) {
                   </a>
                   <Link
                     href="/contacto"
-                    className="inline-flex items-center gap-2 bg-white text-fami-blue px-6 py-3 rounded-lg font-semibold hover:bg-fami-orange hover:text-white transition-colors"
+                    className="inline-flex items-center gap-2 bg-white text-fami-blue px-6 py-3 rounded-lg font-semibold hover:bg-fami-secondary hover:text-white transition-colors"
                   >
                     <Phone size={18} />
                     Contactar
@@ -209,7 +209,7 @@ export default async function EspecialidadDetailPage({ params }) {
               {/* Schedule Info */}
               <div className="bg-white rounded-xl p-6 shadow-sm">
                 <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <Clock className="text-fami-orange" size={20} />
+                  <Clock className="text-fami-secondary" size={20} />
                   Horario de atención
                 </h3>
                 <ul className="space-y-3 text-gray-600 mb-5">
@@ -238,7 +238,7 @@ export default async function EspecialidadDetailPage({ params }) {
               {/* Other Specialties */}
               {otrasEspecialidades.length > 0 && (
                 <div className="bg-white rounded-xl p-6 shadow-sm">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4 pb-3 border-b-2 border-fami-orange">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4 pb-3 border-b-2 border-fami-secondary">
                     Otras especialidades
                   </h3>
                   <div className="space-y-2">
@@ -257,7 +257,7 @@ export default async function EspecialidadDetailPage({ params }) {
                   <div className="mt-4 pt-4 border-t border-gray-200">
                     <Link
                       href="/especialidades"
-                      className="text-fami-blue hover:text-fami-orange font-medium text-sm transition-colors inline-flex items-center gap-1"
+                      className="text-fami-blue hover:text-fami-secondary font-medium text-sm transition-colors inline-flex items-center gap-1"
                     >
                       Ver todas las especialidades
                       <ChevronRight size={16} />

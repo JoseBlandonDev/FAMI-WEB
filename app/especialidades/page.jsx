@@ -76,7 +76,7 @@ export default function EspecialidadesPage() {
       <div className="bg-white border-b border-gray-100">
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Especialidades</h1>
-          <div className="w-16 h-1 bg-fami-orange mt-3 rounded-full"></div>
+          <div className="w-16 h-1 bg-fami-secondary mt-3 rounded-full"></div>
         </div>
       </div>
 

@@ -44,7 +44,7 @@ export default async function NoticiasPage() {
             Volver al inicio
           </Link>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Noticias <span className="text-fami-orange">FAMI</span>
+            Noticias <span className="text-fami-secondary">FAMI</span>
           </h1>
           <p className="text-white/80 text-lg max-w-2xl">
             Mantente informado sobre nuestros eventos, jornadas de salud y todas las novedades de nuestra fundación.
@@ -58,7 +58,7 @@ export default async function NoticiasPage() {
             <p className="text-gray-500 text-lg">No hay noticias disponibles por el momento.</p>
             <Link
               href="/"
-              className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-fami-blue text-white rounded-lg hover:bg-fami-orange transition-colors"
+              className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-fami-blue text-white rounded-lg hover:bg-fami-secondary transition-colors"
             >
               Volver al inicio
             </Link>
@@ -69,7 +69,7 @@ export default async function NoticiasPage() {
             {featuredNews.length > 0 && (
               <div className="mb-16">
                 <h2 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-2">
-                  <Star className="text-fami-orange" size={24} />
+                  <Star className="text-fami-secondary" size={24} />
                   Noticias Destacadas
                 </h2>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -94,7 +94,7 @@ export default async function NoticiasPage() {
                           </div>
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                        <div className="absolute top-4 left-4 bg-fami-orange text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                        <div className="absolute top-4 left-4 bg-fami-secondary text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
                           <Star size={12} />
                           Destacada
                         </div>
@@ -104,7 +104,7 @@ export default async function NoticiasPage() {
                           <Calendar size={14} />
                           {item.date}
                         </div>
-                        <h3 className="text-2xl font-bold mb-2 group-hover:text-fami-orange transition-colors">
+                        <h3 className="text-2xl font-bold mb-2 group-hover:text-fami-secondary transition-colors">
                           {item.title}
                         </h3>
                         <p className="text-white/80 line-clamp-2">
@@ -157,7 +157,7 @@ export default async function NoticiasPage() {
                       </div>
                       <div className="p-6">
                         <div className="flex items-center gap-2 text-xs text-gray-500 mb-3">
-                          <Calendar size={14} className="text-fami-orange" />
+                          <Calendar size={14} className="text-fami-secondary" />
                           {item.date}
                         </div>
                         <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-fami-blue transition-colors">
@@ -166,7 +166,7 @@ export default async function NoticiasPage() {
                         <p className="text-gray-500 text-sm line-clamp-3 mb-4">
                           {item.excerpt || item.content}
                         </p>
-                        <span className="inline-flex items-center gap-1 text-fami-blue text-sm font-medium group-hover:text-fami-orange group-hover:gap-2 transition-all">
+                        <span className="inline-flex items-center gap-1 text-fami-blue text-sm font-medium group-hover:text-fami-secondary group-hover:gap-2 transition-all">
                           Leer más <ArrowRight size={16} />
                         </span>
                       </div>

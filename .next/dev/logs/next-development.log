@@ -13,3 +13,13 @@
 [01:09:54.844] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
 [01:10:17.605] Server  LOG      ✓ Compiled in 51ms
 [01:18:16.681] Server  LOG      ✓ Compiled in 97ms
+[01:24:20.420] Server  LOG      ✓ Compiled in 413ms
+[01:43:43.969] Server  LOG      ✓ Compiled in 36ms
+[01:43:44.249] Server  LOG      ✓ Compiled in 0ms
+[01:43:51.485] Server  LOG      ✓ Compiled in 91ms
+[01:43:57.719] Server  LOG      ✓ Compiled in 92ms
+[01:44:57.720] Server  LOG      ✓ Compiled in 51ms
+[01:45:05.343] Server  LOG      ✓ Compiled in 50ms
+[01:45:59.856] Server  LOG      ✓ Compiled in 39ms
+[01:46:21.201] Server  LOG      ✓ Compiled in 21ms
+[01:46:47.378] Server  LOG      ✓ Compiled in 32ms

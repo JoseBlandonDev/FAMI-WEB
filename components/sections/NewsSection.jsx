@@ -58,7 +58,7 @@ const NewsSection = ({ news = [] }) => {
       <div className="p-6 flex flex-col flex-1">
         {/* Date */}
         <div className="flex items-center gap-2 text-xs text-gray-500 mb-3 font-medium">
-          <Calendar size={14} className="text-fami-orange" />
+          <Calendar size={14} className="text-fami-secondary" />
           {item.date}
         </div>
 
@@ -75,7 +75,7 @@ const NewsSection = ({ news = [] }) => {
         {/* Button */}
         <Link
           href={`/noticias/${item.id}`}
-          className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-fami-blue text-white rounded-lg hover:bg-fami-orange transition-all font-medium text-sm group-hover:shadow-md"
+          className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-fami-blue text-white rounded-lg hover:bg-fami-secondary transition-all font-medium text-sm group-hover:shadow-md"
         >
           Ver más
           <ArrowRight size={16} />
@@ -92,7 +92,7 @@ const NewsSection = ({ news = [] }) => {
           {/* Left Column: Title & Description */}
           <div className="lg:w-1/3 text-center lg:text-left space-y-6">
             <h2 className="text-4xl md:text-5xl font-bold text-fami-blue leading-tight">
-              Noticias <span className="text-fami-orange">FAMI</span>
+              Noticias <span className="text-fami-secondary">FAMI</span>
             </h2>
             
             <p className="text-gray-600 text-lg leading-relaxed">

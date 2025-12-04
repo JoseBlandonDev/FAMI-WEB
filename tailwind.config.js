@@ -9,15 +9,21 @@ module.exports = {
     extend: {
       colors: {
         fami: {
-          blue: '#2E3A8C',
-          cyan: '#6C8CD5',
-          orange: '#FF7F32',
-          gray: '#F8F9FA',
-          text: '#1F2937',
+          primary: '#354093',      // Primary blue - Brand Base
+          secondary: '#545ea8',    // Secondary blue
+          accent: '#829eb3',       // Accent cyan grayish
+          lavender: '#9fa4d3',     // Soft purple/lavender
+          light: '#ccd1eb',        // Light background
+          text: '#2e2d2c',         // Dark text (never pure black)
+          white: '#FFFFFF',        // Pure white
+          // Aliases for backwards compatibility
+          blue: '#354093',
         },
       },
       fontFamily: {
         sans: ['var(--font-montserrat)'],
+        gobold: ['var(--font-gobold)'],
+        bebas: ['var(--font-bebas)'],
       },
     },
   },

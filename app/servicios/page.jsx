@@ -9,7 +9,7 @@ const ServiciosPage = () => {
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/medical-icons.png')]"></div>
         <div className="relative z-10 text-center px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Servicios y Programas</h1>
-          <div className="w-24 h-1 bg-fami-orange mx-auto rounded-full"></div>
+          <div className="w-24 h-1 bg-fami-secondary mx-auto rounded-full"></div>
         </div>
       </div>
 
@@ -33,10 +33,10 @@ const ServiciosPage = () => {
                 <div className="bg-gray-50 p-6 rounded-xl">
                   <h3 className="font-bold text-fami-blue mb-4 text-lg">Nuestros servicios incluyen:</h3>
                   <ul className="space-y-3 text-gray-600">
-                    <li className="flex items-start gap-2"><CheckCircle size={18} className="text-fami-orange mt-1 flex-shrink-0"/> Evaluaciones ocupacionales (ingreso, periódicas, egreso).</li>
-                    <li className="flex items-start gap-2"><CheckCircle size={18} className="text-fami-orange mt-1 flex-shrink-0"/> Examen médico laboral especializado.</li>
-                    <li className="flex items-start gap-2"><CheckCircle size={18} className="text-fami-orange mt-1 flex-shrink-0"/> Pruebas diagnósticas: audiometría, espirometría, visiometría, optometría.</li>
-                    <li className="flex items-start gap-2"><CheckCircle size={18} className="text-fami-orange mt-1 flex-shrink-0"/> Asesoría en Seguridad y Salud en el Trabajo (SST).</li>
+                    <li className="flex items-start gap-2"><CheckCircle size={18} className="text-fami-secondary mt-1 flex-shrink-0"/> Evaluaciones ocupacionales (ingreso, periódicas, egreso).</li>
+                    <li className="flex items-start gap-2"><CheckCircle size={18} className="text-fami-secondary mt-1 flex-shrink-0"/> Examen médico laboral especializado.</li>
+                    <li className="flex items-start gap-2"><CheckCircle size={18} className="text-fami-secondary mt-1 flex-shrink-0"/> Pruebas diagnósticas: audiometría, espirometría, visiometría, optometría.</li>
+                    <li className="flex items-start gap-2"><CheckCircle size={18} className="text-fami-secondary mt-1 flex-shrink-0"/> Asesoría en Seguridad y Salud en el Trabajo (SST).</li>
                   </ul>
                 </div>
                 
@@ -51,9 +51,9 @@ const ServiciosPage = () => {
           </section>
 
           {/* Plan de Bienestar Empresarial */}
-          <section className="bg-white rounded-2xl shadow-lg overflow-hidden p-8 md:p-12 border-l-8 border-fami-orange">
+          <section className="bg-white rounded-2xl shadow-lg overflow-hidden p-8 md:p-12 border-l-8 border-fami-secondary">
             <div className="flex items-center gap-4 mb-6">
-              <Heart size={32} className="text-fami-orange" />
+              <Heart size={32} className="text-fami-secondary" />
               <h2 className="text-2xl md:text-3xl font-bold text-fami-blue">Plan de Bienestar Empresarial</h2>
             </div>
             <p className="text-gray-700 mb-6 italic">
@@ -72,7 +72,7 @@ const ServiciosPage = () => {
                   <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-fami-blue rounded-full"></span> Beneficios extendidos para la familia.</li>
                 </ul>
               </div>
-              <div className="bg-fami-gray p-6 rounded-xl text-center">
+              <div className="bg-fami-light p-6 rounded-xl text-center">
                 <p className="text-fami-blue font-bold text-lg mb-2">Invierte en tu recurso más valioso: tu gente.</p>
                 <p className="text-gray-600 text-sm">Con FAMI, el bienestar laboral se transforma en crecimiento organizacional.</p>
               </div>
@@ -110,7 +110,7 @@ const ServiciosPage = () => {
             {/* Paquete Escolar */}
             <section className="bg-white rounded-2xl shadow-lg overflow-hidden p-8">
               <div className="flex items-center gap-3 mb-4">
-                <Package size={24} className="text-fami-orange" />
+                <Package size={24} className="text-fami-secondary" />
                 <h2 className="text-xl font-bold text-fami-blue">Paquete Escolar Integral</h2>
               </div>
               <p className="text-gray-600 text-sm mb-4">
@@ -127,7 +127,7 @@ const ServiciosPage = () => {
             {/* Servicios Adicionales */}
             <section className="bg-white rounded-2xl shadow-lg overflow-hidden p-8">
               <div className="flex items-center gap-3 mb-4">
-                <PlusCircle size={24} className="text-fami-cyan" />
+                <PlusCircle size={24} className="text-fami-accent" />
                 <h2 className="text-xl font-bold text-fami-blue">Servicios Adicionales</h2>
               </div>
               <div className="grid grid-cols-2 gap-4 text-sm">

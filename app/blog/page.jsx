@@ -58,7 +58,7 @@ export default async function BlogPage() {
             <p className="text-gray-500 text-lg">No hay artículos disponibles por el momento.</p>
             <Link
               href="/"
-              className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-fami-blue text-white rounded-lg hover:bg-fami-orange transition-colors"
+              className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-fami-blue text-white rounded-lg hover:bg-fami-secondary transition-colors"
             >
               Volver al inicio
             </Link>
@@ -109,7 +109,7 @@ export default async function BlogPage() {
                       Por: <span className="font-medium text-gray-600">{blog.author}</span>
                     </p>
                   )}
-                  <span className="inline-flex items-center gap-1 text-fami-orange text-sm font-medium group-hover:gap-2 transition-all">
+                  <span className="inline-flex items-center gap-1 text-fami-secondary text-sm font-medium group-hover:gap-2 transition-all">
                     Leer artículo <ArrowRight size={16} />
                   </span>
                 </div>

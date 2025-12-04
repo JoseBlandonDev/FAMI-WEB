@@ -27,11 +27,11 @@ const Navbar = () => {
           <div className="flex flex-col sm:flex-row justify-between items-center py-2 text-sm gap-2 sm:gap-0">
             {/* Left: Contact Links */}
             <div className="flex items-center gap-6">
-              <Link href="/localizacion" className="flex items-center gap-2 hover:text-fami-orange transition-colors">
+              <Link href="/localizacion" className="flex items-center gap-2 hover:text-fami-secondary transition-colors">
                 <MapPin size={16} />
                 <span>Localización</span>
               </Link>
-              <Link href="/contacto" className="flex items-center gap-2 hover:text-fami-orange transition-colors">
+              <Link href="/contacto" className="flex items-center gap-2 hover:text-fami-secondary transition-colors">
                 <Phone size={16} />
                 <span>Contáctanos</span>
               </Link>
@@ -39,19 +39,19 @@ const Navbar = () => {
 
             {/* Right: Social Media Icons (Moved from Sidebar) */}
             <div className="flex items-center gap-4">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-orange transition-colors">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-secondary transition-colors">
                 <Instagram size={18} />
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-orange transition-colors">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-secondary transition-colors">
                 <Facebook size={18} />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-orange transition-colors">
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-secondary transition-colors">
                 <Youtube size={18} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-orange transition-colors">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-secondary transition-colors">
                 <Linkedin size={18} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-orange transition-colors">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-fami-secondary transition-colors">
                 <Twitter size={18} />
               </a>
             </div>

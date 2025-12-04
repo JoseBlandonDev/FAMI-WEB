@@ -43,7 +43,7 @@ const Certifications = ({ certifications = [] }) => {
       
       {/* Content */}
       <div className="mt-6 text-center w-full">
-        <h3 className="text-lg font-bold text-fami-blue mb-2 group-hover:text-fami-orange transition-colors">
+        <h3 className="text-lg font-bold text-fami-blue mb-2 group-hover:text-fami-secondary transition-colors">
           {cert.name}
         </h3>
         {cert.description && (
@@ -59,14 +59,14 @@ const Certifications = ({ certifications = [] }) => {
     <section className="py-20 bg-white relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-fami-blue/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-fami-orange/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-fami-secondary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-fami-blue mb-4 font-display">
             ALIANZAS Y RECONOCIMIENTOS
           </h2>
-          <div className="w-24 h-1 bg-fami-orange mx-auto rounded-full mb-6"></div>
+          <div className="w-24 h-1 bg-fami-secondary mx-auto rounded-full mb-6"></div>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             Trabajamos de la mano con organizaciones líderes para brindar el mejor servicio y fortalecer nuestra comunidad.
           </p>
