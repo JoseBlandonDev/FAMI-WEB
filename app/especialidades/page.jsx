@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Search, ChevronRight } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
@@ -95,36 +94,23 @@ export default function EspecialidadesPage() {
             ))}
           </div>
         ) : filteredEspecialidades.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredEspecialidades.map((especialidad) => (
               <Link
                 key={especialidad.id}
                 href={`/especialidades/${especialidad.id}`}
-                className="group bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-lg hover:border-fami-blue/30 transition-all duration-300"
+                className="group bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-lg hover:border-fami-blue/30 transition-all duration-300 p-6"
               >
-                {/* Image */}
-                <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden">
-                  {especialidad.imagen ? (
-                    <Image
-                      src={especialidad.imagen}
-                      alt={especialidad.nombre}
-                      fill
-                      className="object-contain group-hover:scale-105 transition-transform duration-300"
-                      unoptimized
-                    />
-                  ) : (
-                    <div className="flex items-center justify-center h-full text-gray-400 bg-gradient-to-br from-gray-100 to-gray-200">
-                      <span className="text-sm">Sin imagen</span>
-                    </div>
-                  )}
-                </div>
-
                 {/* Content */}
-                <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 group-hover:text-fami-blue transition-colors text-center">
-                    {especialidad.nombre?.toLowerCase()}
-                  </h3>
-                </div>
+                <h3 className="font-bold text-lg text-gray-900 group-hover:text-fami-blue transition-colors mb-3">
+                  {especialidad.nombre}
+                </h3>
+                <p className="text-gray-600 text-sm line-clamp-3 mb-4">
+                  {especialidad.descripcion_corta || 'Conoce más sobre esta especialidad y los servicios que ofrecemos.'}
+                </p>
+                <span className="text-fami-blue text-sm font-medium group-hover:underline inline-flex items-center gap-1">
+                  Ver más <ChevronRight size={16} />
+                </span>
               </Link>
             ))}
           </div>

@@ -1,3 +1,5 @@
 {
-  "/api/seed-especialidades/route": "app/api/seed-especialidades/route.js"
+  "/especialidades/[id]/page": "app/especialidades/[id]/page.js",
+  "/especialidades/page": "app/especialidades/page.js",
+  "/page": "app/page.js"
 }

@@ -283,52 +283,39 @@ export default function AdminEspecialidades() {
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredItems.map((item) => (
-          <div key={item.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-            {/* Image */}
-            <div className="relative h-40 bg-gray-100">
-              {item.imagen ? (
-                <Image
-                  src={item.imagen}
-                  alt={item.nombre}
-                  fill
-                  className="object-cover"
-                  unoptimized
-                />
-              ) : (
-                <div className="flex items-center justify-center h-full text-gray-400">
-                  Sin imagen
-                </div>
-              )}
-              <div className="absolute top-3 right-3">
-                <span className={`px-2 py-1 text-xs rounded-full ${
-                  item.activo !== false
-                    ? 'bg-green-100 text-green-600'
-                    : 'bg-gray-100 text-gray-600'
-                }`}>
-                  {item.activo !== false ? 'Activa' : 'Inactiva'}
-                </span>
-              </div>
+          <div key={item.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-5">
+            {/* Header */}
+            <div className="flex items-start justify-between mb-3">
+              <h3 className="font-semibold text-gray-900 text-lg">{item.nombre}</h3>
+              <span className={`px-2 py-1 text-xs rounded-full ${
+                item.activo !== false
+                  ? 'bg-green-100 text-green-600'
+                  : 'bg-gray-100 text-gray-600'
+              }`}>
+                {item.activo !== false ? 'Activa' : 'Inactiva'}
+              </span>
             </div>
 
             {/* Content */}
-            <div className="p-5">
-              <h3 className="font-semibold text-gray-900 text-lg">{item.nombre}</h3>
-              <p className="text-sm text-gray-500 mt-2 line-clamp-2">{item.descripcion_corta}</p>
+            <p className="text-sm text-gray-500 line-clamp-3 mb-4">
+              {item.descripcion_corta || 'Sin descripción corta'}
+            </p>
 
-              <div className="flex items-center justify-end mt-4 pt-4 border-t border-gray-100 gap-2">
-                <button
-                  onClick={() => handleEdit(item)}
-                  className="p-2 text-gray-400 hover:text-fami-blue hover:bg-fami-blue/10 rounded-lg transition-colors"
-                >
-                  <Edit size={18} />
-                </button>
-                <button
-                  onClick={() => handleDelete(item.id)}
-                  className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                >
-                  <Trash2 size={18} />
-                </button>
-              </div>
+            <div className="flex items-center justify-end pt-4 border-t border-gray-100 gap-2">
+              <button
+                onClick={() => handleEdit(item)}
+                className="flex items-center gap-1 px-3 py-1.5 text-sm text-fami-blue hover:bg-fami-blue/10 rounded-lg transition-colors"
+              >
+                <Edit size={16} />
+                Editar
+              </button>
+              <button
+                onClick={() => handleDelete(item.id)}
+                className="flex items-center gap-1 px-3 py-1.5 text-sm text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+              >
+                <Trash2 size={16} />
+                Eliminar
+              </button>
             </div>
           </div>
         ))}

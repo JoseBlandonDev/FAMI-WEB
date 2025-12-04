@@ -2,3 +2,6 @@
 [00:56:47.388] Server  ERROR    ⨯ Error: Missing Supabase environment variables
 [00:56:53.165] Server  ERROR    ⨯ Error: Missing Supabase environment variables
 [00:10:57.390] Server  LOG        Reload env: .env
+[00:25:09.054] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:25:09.225] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:25:11.193] Server  LOG      ✓ Compiled in 43ms
