@@ -56,58 +56,18 @@ const Certifications = ({ certifications = [] }) => {
   );
 
   return (
-    <section className="py-20 bg-fami-blue relative overflow-hidden">
-      {/* Left side watermark - Main large curve */}
-      <svg
-        className="absolute left-0 top-0 h-full w-auto opacity-20 pointer-events-none"
-        viewBox="0 0 200 400"
-        preserveAspectRatio="xMinYMid slice"
-        fill="none"
-      >
-        <path
-          d="M-50 0 Q80 80, 60 200 Q40 320, -50 400 L-50 0 Z"
-          fill="#6b7bc9"
-        />
-      </svg>
+    <section className="py-20 relative overflow-hidden">
+      {/* Background image - Desktop */}
+      <div
+        className="absolute inset-0 hidden md:block bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/images/alianzas-bg-desktop.jpg')" }}
+      />
 
-      {/* Left side watermark - Secondary curve */}
-      <svg
-        className="absolute left-0 top-0 h-full w-auto opacity-15 pointer-events-none"
-        viewBox="0 0 150 400"
-        preserveAspectRatio="xMinYMid slice"
-        fill="none"
-      >
-        <path
-          d="M-30 20 Q50 100, 40 200 Q30 300, -30 380 L-30 20 Z"
-          fill="#8090d4"
-        />
-      </svg>
-
-      {/* Right bottom watermark - Main curve */}
-      <svg
-        className="absolute right-0 bottom-0 h-2/3 w-auto opacity-20 pointer-events-none"
-        viewBox="0 0 150 300"
-        preserveAspectRatio="xMaxYMax slice"
-        fill="none"
-      >
-        <path
-          d="M200 300 Q120 280, 100 200 Q80 120, 200 50 L200 300 Z"
-          fill="#6b7bc9"
-        />
-      </svg>
-
-      {/* Right bottom watermark - Secondary curve */}
-      <svg
-        className="absolute right-0 bottom-0 h-1/2 w-auto opacity-15 pointer-events-none"
-        viewBox="0 0 120 250"
-        preserveAspectRatio="xMaxYMax slice"
-        fill="none"
-      >
-        <path
-          d="M170 250 Q100 230, 80 170 Q60 110, 170 60 L170 250 Z"
-          fill="#8090d4"
-        />
-      </svg>
+      {/* Background image - Mobile */}
+      <div
+        className="absolute inset-0 block md:hidden bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/images/alianzas-bg-mobile.jpg')" }}
+      />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
