@@ -3289,6 +3289,12 @@
   }
 
   @media (min-width: 48rem) {
+    .md\:h-80 {
+      height: calc(var(--spacing) * 80);
+    }
+  }
+
+  @media (min-width: 48rem) {
     .md\:h-\[400px\] {
       height: 400px;
     }
@@ -3357,6 +3363,12 @@
   @media (min-width: 48rem) {
     .md\:w-64 {
       width: calc(var(--spacing) * 64);
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .md\:w-72 {
+      width: calc(var(--spacing) * 72);
     }
   }
 

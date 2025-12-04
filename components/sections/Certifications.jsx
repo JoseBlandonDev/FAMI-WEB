@@ -57,38 +57,48 @@ const Certifications = ({ certifications = [] }) => {
 
   return (
     <section className="py-20 bg-fami-blue relative overflow-hidden">
-      {/* Decorative rounded wave watermark - Left */}
+      {/* Decorative flame watermark - Left side */}
       <svg
-        className="absolute left-0 top-0 h-full w-auto opacity-20"
-        viewBox="0 0 250 600"
+        className="absolute left-0 top-0 h-full w-48 md:w-64"
+        viewBox="0 0 200 500"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="xMinYMin slice"
+        preserveAspectRatio="xMinYMid slice"
       >
-        <ellipse cx="-50" cy="150" rx="180" ry="200" fill="#545ea8" />
-        <ellipse cx="-80" cy="450" rx="150" ry="180" fill="#6670b8" />
+        {/* Outer flame - lighter */}
+        <path
+          d="M-100 500 Q-50 400, -20 300 Q10 200, -30 100 Q-70 0, -50 -50 L-150 -50 L-150 550 Z"
+          fill="#4a5499"
+          opacity="0.6"
+        />
+        {/* Inner flame - slightly lighter */}
+        <path
+          d="M-80 500 Q-30 380, 10 280 Q50 180, 20 80 Q-10 -20, 30 -80 L-120 -80 L-120 550 Z"
+          fill="#545ea8"
+          opacity="0.5"
+        />
       </svg>
 
-      {/* Decorative rounded wave watermark - Right Bottom */}
+      {/* Decorative flame watermark - Right bottom */}
       <svg
-        className="absolute right-0 bottom-0 h-2/3 w-auto opacity-15"
-        viewBox="0 0 300 400"
+        className="absolute right-0 bottom-0 w-48 md:w-72 h-64 md:h-80"
+        viewBox="0 0 300 350"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMaxYMax slice"
       >
-        <ellipse cx="280" cy="350" rx="120" ry="150" fill="#545ea8" />
-        <ellipse cx="320" cy="280" rx="100" ry="130" fill="#6670b8" />
-      </svg>
-
-      {/* Additional rounded accent - Bottom Right */}
-      <svg
-        className="absolute right-32 bottom-0 h-1/3 w-auto opacity-10"
-        viewBox="0 0 200 200"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <ellipse cx="150" cy="180" rx="80" ry="100" fill="#7080c8" />
+        {/* Right flame 1 */}
+        <path
+          d="M350 400 Q300 320, 280 250 Q260 180, 290 120 Q320 60, 300 0 L400 0 L400 400 Z"
+          fill="#4a5499"
+          opacity="0.4"
+        />
+        {/* Right flame 2 - smaller */}
+        <path
+          d="M380 400 Q340 340, 330 290 Q320 240, 340 190 Q360 140, 350 90 L420 90 L420 400 Z"
+          fill="#545ea8"
+          opacity="0.3"
+        />
       </svg>
 
       <div className="container mx-auto px-4 relative z-10">
