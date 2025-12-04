@@ -171,19 +171,19 @@ const HeroSection = ({ slides }) => {
 
       {/* Service Category Cards - Below Banner */}
       <div className="container mx-auto px-2 sm:px-4 py-12">
-        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 md:gap-8">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-8 md:gap-16">
           {serviceCategories.map((category) => {
             const Icon = category.icon;
             return (
               <Link
                 key={category.id}
                 href={category.href}
-                className="flex flex-col items-center justify-center gap-3 px-8 py-6 bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-lg hover:border-fami-blue/30 transition-all group sm:min-w-[220px]"
+                className="flex flex-col items-center justify-center gap-4 group"
               >
-                <div className="w-14 h-14 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-fami-blue group-hover:text-white transition-all duration-300">
-                  <Icon size={28} className={`text-fami-blue group-hover:text-white transition-colors`} />
+                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-white shadow-lg flex items-center justify-center group-hover:shadow-xl transition-all duration-300 border border-gray-100">
+                  <Icon size={48} className="text-fami-lavender group-hover:text-fami-blue transition-colors" strokeWidth={1.5} />
                 </div>
-                <span className="font-bold text-base text-gray-800 group-hover:text-fami-blue transition-colors text-center">
+                <span className="font-bold text-lg text-fami-blue group-hover:text-fami-secondary transition-colors text-center">
                   {category.title}
                 </span>
               </Link>
