@@ -1,22 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Instagram, Facebook, Linkedin, MessageCircle } from 'lucide-react';
+import { Instagram, Facebook, Linkedin, MessageCircle, LogIn } from 'lucide-react';
 
 const legalLinks = [
   { name: 'Términos legales y derechos de uso', href: '#' },
   { name: 'Aviso de Privacidad', href: '#' },
   { name: 'Política de Cookies', href: '#' },
   { name: 'Mapa Web', href: '#' },
-];
-
-const institutionalLinks = [
-  { name: 'Transparencia', href: '#' },
-  { name: 'Reporte a Joint Commission International', href: '#' },
-  { name: 'Correo electrónico corporativo', href: '#' },
-  { name: 'Campus Virtual', href: '#' },
-  { name: 'Atención al usuario', href: '#' },
-  { name: 'Canal de denuncias', href: '#' },
 ];
 
 const socialLinks = [
@@ -31,7 +22,7 @@ const Footer = () => {
     <footer className="bg-fami-blue text-white">
       {/* Main Footer */}
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           {/* Logo */}
           <div className="flex justify-center md:justify-start">
             <div className="relative w-32 h-20">
@@ -57,22 +48,16 @@ const Footer = () => {
                   </Link>
                 </li>
               ))}
-            </ul>
-          </div>
-
-          {/* Institutional Links */}
-          <div className="text-center md:text-left">
-            <ul className="space-y-2">
-              {institutionalLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-white/80 hover:text-fami-secondary transition-colors text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+              {/* Iniciar Sesión */}
+              <li>
+                <Link
+                  href="/admin/login"
+                  className="inline-flex items-center gap-2 text-white/80 hover:text-fami-secondary transition-colors text-sm"
+                >
+                  <LogIn size={16} />
+                  Iniciar Sesión
+                </Link>
+              </li>
             </ul>
           </div>
 
