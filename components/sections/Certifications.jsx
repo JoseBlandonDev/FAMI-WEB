@@ -43,11 +43,11 @@ const Certifications = ({ certifications = [] }) => {
       
       {/* Content */}
       <div className="mt-6 text-center w-full">
-        <h3 className="text-lg font-bold text-fami-blue mb-2 group-hover:text-fami-secondary transition-colors">
+        <h3 className="text-lg font-bold text-white mb-2 group-hover:text-fami-light transition-colors">
           {cert.name}
         </h3>
         {cert.description && (
-          <p className="text-sm text-gray-500 leading-relaxed px-2">
+          <p className="text-sm text-white/70 leading-relaxed px-2">
             {cert.description}
           </p>
         )}

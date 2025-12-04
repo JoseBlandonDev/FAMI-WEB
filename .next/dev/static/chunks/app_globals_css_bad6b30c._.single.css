@@ -2623,6 +2623,12 @@
   }
 
   @media (hover: hover) {
+    .group-hover\:text-fami-light:is(:where(.group):hover *) {
+      color: var(--color-fami-light);
+    }
+  }
+
+  @media (hover: hover) {
     .group-hover\:text-fami-secondary:is(:where(.group):hover *) {
       color: var(--color-fami-secondary);
     }
