@@ -103,13 +103,13 @@ export default function EspecialidadesPage() {
                 className="group bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-lg hover:border-fami-blue/30 transition-all duration-300"
               >
                 {/* Image */}
-                <div className="relative h-48 bg-gray-100 overflow-hidden">
+                <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden">
                   {especialidad.imagen ? (
                     <Image
                       src={especialidad.imagen}
                       alt={especialidad.nombre}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-contain group-hover:scale-105 transition-transform duration-300"
                       unoptimized
                     />
                   ) : (

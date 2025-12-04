@@ -1,3 +1,4 @@
 [00:00:00.564] Server  LOG      ✓ Ready in 361ms
 [00:56:47.388] Server  ERROR    ⨯ Error: Missing Supabase environment variables
 [00:56:53.165] Server  ERROR    ⨯ Error: Missing Supabase environment variables
+[00:10:57.390] Server  LOG        Reload env: .env
