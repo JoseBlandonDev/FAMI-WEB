@@ -12,3 +12,4 @@
 [01:09:54.636] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [01:09:54.844] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
 [01:10:17.605] Server  LOG      ✓ Compiled in 51ms
+[01:18:16.681] Server  LOG      ✓ Compiled in 97ms
