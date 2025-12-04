@@ -26,6 +26,7 @@ export default function AdminEspecialidades() {
 
   const [formData, setFormData] = useState({
     nombre: '',
+    subtitulo: '',
     descripcion: '',
     descripcion_corta: '',
     imagen: '',
@@ -151,6 +152,7 @@ export default function AdminEspecialidades() {
     setEditingItem(item);
     setFormData({
       nombre: item.nombre || '',
+      subtitulo: item.subtitulo || '',
       descripcion: item.descripcion || '',
       descripcion_corta: item.descripcion_corta || '',
       imagen: item.imagen || '',
@@ -163,6 +165,7 @@ export default function AdminEspecialidades() {
     setEditingItem(null);
     setFormData({
       nombre: '',
+      subtitulo: '',
       descripcion: '',
       descripcion_corta: '',
       imagen: '',
@@ -412,6 +415,21 @@ export default function AdminEspecialidades() {
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
                   placeholder="Ej: Medicina General"
                 />
+              </div>
+
+              {/* Subtítulo */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Subtítulo
+                </label>
+                <input
+                  type="text"
+                  value={formData.subtitulo}
+                  onChange={(e) => setFormData({ ...formData, subtitulo: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-fami-blue"
+                  placeholder="Ej: Acerca de Medicina General"
+                />
+                <p className="text-xs text-gray-500 mt-1">Se mostrará como título de la sección de descripción</p>
               </div>
 
               {/* Short Description */}
