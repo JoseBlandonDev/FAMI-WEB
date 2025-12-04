@@ -1,41 +1,62 @@
 "use client";
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, Search, Heart, GraduationCap, Stethoscope } from 'lucide-react';
-
-const serviceCategories = [
-  {
-    id: 1,
-    title: 'Salud ocupacional',
-    icon: Heart,
-    href: '/salud-ocupacional',
-    color: 'text-fami-blue'
-  },
-  {
-    id: 2,
-    title: 'Apoyos pedagógicos',
-    icon: GraduationCap,
-    href: '/apoyos-pedagogicos',
-    color: 'text-fami-blue'
-  },
-  {
-    id: 3,
-    title: 'Servicios de la IPS',
-    icon: Stethoscope,
-    href: '/servicios-ips',
-    color: 'text-fami-blue'
-  }
-];
+import { supabase } from '@/lib/supabase';
 
 const HeroSection = ({ slides }) => {
   const router = useRouter();
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 8000 })]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [serviceCategories, setServiceCategories] = useState([
+    { id: 1, title: 'Salud ocupacional', icon: Heart, href: '/especialidades', color: 'text-fami-blue' },
+    { id: 2, title: 'Apoyos pedagógicos', icon: GraduationCap, href: '/especialidades', color: 'text-fami-blue' },
+    { id: 3, title: 'Servicios de la IPS', icon: Stethoscope, href: '/servicios', color: 'text-fami-blue' }
+  ]);
+
+  useEffect(() => {
+    async function fetchEspecialidadesIds() {
+      const { data } = await supabase
+        .from('especialidades')
+        .select('id, nombre')
+        .in('nombre', ['Salud Ocupacional', 'Apoyos Pedagógicos']);
+
+      if (data) {
+        const saludOcupacional = data.find(e => e.nombre === 'Salud Ocupacional');
+        const apoyosPedagogicos = data.find(e => e.nombre === 'Apoyos Pedagógicos');
+
+        setServiceCategories([
+          {
+            id: 1,
+            title: 'Salud ocupacional',
+            icon: Heart,
+            href: saludOcupacional ? `/especialidades/${saludOcupacional.id}` : '/especialidades',
+            color: 'text-fami-blue'
+          },
+          {
+            id: 2,
+            title: 'Apoyos pedagógicos',
+            icon: GraduationCap,
+            href: apoyosPedagogicos ? `/especialidades/${apoyosPedagogicos.id}` : '/especialidades',
+            color: 'text-fami-blue'
+          },
+          {
+            id: 3,
+            title: 'Servicios de la IPS',
+            icon: Stethoscope,
+            href: '/servicios',
+            color: 'text-fami-blue'
+          }
+        ]);
+      }
+    }
+    fetchEspecialidadesIds();
+  }, []);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
