@@ -4,10 +4,9 @@ import Image from 'next/image';
 import { Instagram, Facebook, Linkedin, MessageCircle, LogIn } from 'lucide-react';
 
 const legalLinks = [
-  { name: 'Términos legales y derechos de uso', href: '#' },
-  { name: 'Aviso de Privacidad', href: '#' },
-  { name: 'Política de Cookies', href: '#' },
-  { name: 'Mapa Web', href: '#' },
+  { name: 'Términos y Condiciones', href: '/politicas/terminos-y-condiciones' },
+  { name: 'Política de Privacidad', href: '/politicas/politica-de-privacidad' },
+  { name: 'Tratamiento de Datos', href: '/politicas/tratamiento-de-datos' },
 ];
 
 const socialLinks = [

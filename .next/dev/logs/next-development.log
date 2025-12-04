@@ -23,3 +23,18 @@
 [01:45:59.856] Server  LOG      ✓ Compiled in 39ms
 [01:46:21.201] Server  LOG      ✓ Compiled in 21ms
 [01:46:47.378] Server  LOG      ✓ Compiled in 32ms
+[01:50:49.749] Server  ERROR    ⨯ ReferenceError: institutionalLinks is not defined
+[01:50:49.792] Server  ERROR    ⨯ ReferenceError: institutionalLinks is not defined
+[01:50:49.811] Server  ERROR    ⨯ ReferenceError: institutionalLinks is not defined
+[01:50:49.830] Server  ERROR    ⨯ ReferenceError: institutionalLinks is not defined
+[01:50:49.848] Server  ERROR    ⨯ ReferenceError: institutionalLinks is not defined
+[01:50:50.361] Browser ERROR   uncaughtError: ReferenceError: institutionalLinks is not defined
+[01:51:17.444] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:51:18.352] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[02:18:48.647] Server  LOG      ✓ Compiled in 57ms
+[02:18:48.651] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./node_modules/next/dist/client/image-component.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[02:18:49.638] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:18:50.809] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[02:20:09.143] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./node_modules/next/dist/client/image-component.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[02:20:09.961] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:20:10.812] Browser WARN    Image with src "/logos/fami-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes

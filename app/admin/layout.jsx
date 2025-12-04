@@ -21,7 +21,8 @@ import {
   MessageSquare,
   Stethoscope,
   Briefcase,
-  Share2
+  Share2,
+  ScrollText
 } from 'lucide-react';
 
 const sidebarItems = [
@@ -33,6 +34,7 @@ const sidebarItems = [
   { name: 'Certificaciones', href: '/admin/certificaciones', icon: Award },
   { name: 'Videos', href: '/admin/videos', icon: Video },
   { name: 'Redes Sociales', href: '/admin/redes-sociales', icon: Share2 },
+  { name: 'Políticas', href: '/admin/politicas', icon: ScrollText },
 ];
 
 export default function AdminLayout({ children }) {
