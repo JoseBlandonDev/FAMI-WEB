@@ -33,8 +33,7 @@ const sidebarItems = [
   { name: 'Hero / Slider', href: '/admin/hero', icon: Image },
   { name: 'Certificaciones', href: '/admin/certificaciones', icon: Award },
   { name: 'Videos', href: '/admin/videos', icon: Video },
-  { name: 'Encuestas', href: '/admin/encuestas', icon: MessageSquare },
-  { name: 'Redes Sociales', href: '/admin/redes-sociales', icon: Share2 },
+  // Removed: { name: 'Encuestas', href: '/admin/encuestas', icon: MessageSquare },
   { name: 'Políticas', href: '/admin/politicas', icon: ScrollText },
 ];
 
