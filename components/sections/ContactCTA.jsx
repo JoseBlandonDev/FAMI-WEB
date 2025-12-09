@@ -7,7 +7,12 @@ import Image from 'next/image';
 const ContactCTA = () => {
   return (
     <section className="relative overflow-hidden bg-white">
-      <Link href="/encuesta" className="block">
+      <Link 
+        href="https://docs.google.com/forms/d/e/1FAIpQLSecpQgRMv58ad7i5TdZBfPHCZ_unmjBbPZCJsvAMQkrPTWR4w/viewform" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="block"
+      >
         {/* Imagen para Desktop */}
         <div className="hidden md:block relative w-full">
           <Image

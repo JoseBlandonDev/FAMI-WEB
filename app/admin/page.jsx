@@ -15,7 +15,6 @@ import {
 const quickLinks = [
   { name: 'Gestionar Noticias', href: '/admin/noticias', icon: Newspaper, color: 'bg-fami-primary' },
   { name: 'Gestionar Blog', href: '/admin/blog', icon: FileText, color: 'bg-fami-secondary' },
-  { name: 'Encuestas', href: '/admin/encuestas', icon: MessageSquare, color: 'bg-fami-lavender' },
   { name: 'Editar Hero', href: '/admin/hero', icon: Image, color: 'bg-fami-accent' },
   { name: 'Videos', href: '/admin/videos', icon: Video, color: 'bg-fami-primary' },
   { name: 'Certificaciones', href: '/admin/certificaciones', icon: Award, color: 'bg-fami-secondary' },
