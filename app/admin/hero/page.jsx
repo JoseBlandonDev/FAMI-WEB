@@ -12,14 +12,16 @@ import { useRouter } from 'next/navigation';
 const paginasBase = [
   { value: '', label: 'Sin redirección' },
   { value: '/', label: 'Inicio' },
-  { value: '/especialidades', label: 'Todas las Especialidades' },
-  { value: '/servicios', label: 'Servicios' },
   { value: '/nosotros', label: 'Nosotros' },
+  { value: '/servicios', label: 'Servicios y Programas' },
+  { value: '/servicios-ips', label: 'Servicios IPS (Clínicos)' },
+  { value: '/salud-ocupacional', label: 'Salud Ocupacional' },
+  { value: '/apoyos-pedagogicos', label: 'Apoyos Pedagógicos' },
+  { value: '/especialidades', label: 'Directorio de Especialidades' },
+  { value: '/noticias', label: 'Noticias' },
+  { value: '/blog', label: 'Blog' },
   { value: '/contacto', label: 'Contacto' },
   { value: '/localizacion', label: 'Localización' },
-  { value: '/noticias', label: 'Noticias' },
-  { value: '/encuestas', label: 'Encuestas' },
-  { value: '/certificaciones', label: 'Certificaciones' },
 ];
 
 export default function AdminHero() {
