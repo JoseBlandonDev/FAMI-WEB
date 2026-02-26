@@ -14,6 +14,11 @@ const montserrat = Montserrat({
 export const metadata = {
   title: 'FAMI - Fundación y Servicios de Salud',
   description: 'Servicios de salud de alta calidad en Colombia. Salud ocupacional, apoyos pedagógicos y servicios IPS.',
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
 };
 
 export default function RootLayout({ children }) {
