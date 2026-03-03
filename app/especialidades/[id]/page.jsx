@@ -217,7 +217,7 @@ export default async function EspecialidadDetailPage({ params }) {
                 <ul className="space-y-3 text-gray-600 mb-5">
                   <li className="flex justify-between py-2 border-b border-gray-100">
                     <span>Lunes - Viernes</span>
-                    <span className="font-semibold text-gray-900">7:00 AM - 6:00 PM</span>
+                    <span className="font-semibold text-gray-900">7:00 AM - 5:00 PM</span>
                   </li>
                   <li className="flex justify-between py-2">
                     <span>Sábados</span>
