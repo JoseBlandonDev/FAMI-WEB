@@ -32,13 +32,13 @@ export default function LocalizacionPage() {
                   {/* Dirección */}
                   <div className="text-center">
                     <p className="text-xl md:text-2xl font-medium mb-2">
-                      Cra. 9 No. 2-31
+                      Calle 2C #6-36
                     </p>
                     <p className="text-xl md:text-2xl font-medium mb-2">
                       321 7397280 - 312 2917838
                     </p>
                     <p className="text-lg text-white/90 mb-4">
-                      Barrio Centro
+                      Barrio Belén
                     </p>
 
                     {/* Badge de ciudad */}
@@ -81,7 +81,7 @@ export default function LocalizacionPage() {
                   WhatsApp
                 </a>
                 <a
-                  href="https://www.google.com/maps/place/Cra.+9+%232-31,+Santander+de+Quilichao,+Cauca,+Colombia"
+                  href="https://www.google.com/maps/place/Calle+2C+%236-36,+Santander+de+Quilichao,+Cauca,+Colombia"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 flex items-center justify-center gap-2 bg-fami-blue text-white py-4 px-6 rounded-xl font-semibold hover:bg-fami-blue/90 transition-colors"
@@ -95,7 +95,7 @@ export default function LocalizacionPage() {
             {/* Mapa de Google Maps */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden h-[500px] lg:h-auto">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.6395!2d-76.4833!3d3.0097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3a0d3f5f0f5f5f%3A0x5f5f5f5f5f5f5f5f!2sCra.%209%20%232-31%2C%20Santander%20de%20Quilichao%2C%20Cauca%2C%20Colombia!5e0!3m2!1ses!2sco!4v1701700000000!5m2!1ses!2sco"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3985.123!2d-76.5015!3d3.0201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3a1234567890ab%3A0x9876543210abcdef!2sCalle%202C%20%236-36%2C%20Santander%20de%20Quilichao%2C%20Cauca%2C%20Colombia!5e0!3m2!1ses!2sco!4v1706000000000!5m2!1ses!2sco"
                 width="100%"
                 height="100%"
                 style={{ border: 0, minHeight: '500px' }}
@@ -118,7 +118,7 @@ export default function LocalizacionPage() {
                   <MapPin className="text-fami-blue" size={32} />
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">Dirección</h3>
-                <p className="text-gray-600">Carrera 9 No. 2-31, Barrio Centro</p>
+                <p className="text-gray-600">Calle 2C #6-36, Barrio Belén</p>
               </div>
               <div className="text-center p-4">
                 <div className="w-16 h-16 bg-fami-blue/10 rounded-full flex items-center justify-center mx-auto mb-4">
