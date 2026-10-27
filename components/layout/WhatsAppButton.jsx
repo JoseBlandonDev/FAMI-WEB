@@ -4,7 +4,7 @@ import React from 'react';
 import { FaWhatsapp } from 'react-icons/fa'; // Using FontAwesome icon from react-icons
 
 const WhatsAppButton = () => {
-  const whatsappNumber = "573218227123";
+  const whatsappNumber = "573217397280";
   const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
   return (

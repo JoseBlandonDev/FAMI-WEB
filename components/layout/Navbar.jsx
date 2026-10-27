@@ -80,7 +80,7 @@ const Navbar = () => {
                 <MapPin size={16} />
                 <span>Localización</span>
               </Link>
-              <a href="https://wa.me/573218227123?text=Hola, me gustaría obtener más información sobre los servicios de FAMI." target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-fami-secondary transition-colors">
+              <a href="https://wa.me/573217397280?text=Hola, me gustaría obtener más información sobre los servicios de FAMI." target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-fami-secondary transition-colors">
                 <Phone size={16} />
                 <span>Contáctanos</span>
               </a>

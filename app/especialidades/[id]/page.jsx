@@ -176,7 +176,7 @@ export default async function EspecialidadDetailPage({ params }) {
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <a
-                    href={`https://wa.me/573218227123?text=Hola, estoy interesado en la especialidad de ${encodeURIComponent(especialidad.nombre)}. Me gustaría obtener más información.`}
+                    href={`https://wa.me/573217397280?text=Hola, estoy interesado en la especialidad de ${encodeURIComponent(especialidad.nombre)}. Me gustaría obtener más información.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#128C7E] transition-colors"
@@ -187,7 +187,7 @@ export default async function EspecialidadDetailPage({ params }) {
                     WhatsApp
                   </a>
                   <a
-                    href={`https://wa.me/573218227123?text=Hola, estoy interesado en la especialidad de ${encodeURIComponent(especialidad.nombre)}. Me gustaría obtener más información.`}
+                    href={`https://wa.me/573217397280?text=Hola, estoy interesado en la especialidad de ${encodeURIComponent(especialidad.nombre)}. Me gustaría obtener más información.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 bg-white text-fami-blue px-6 py-3 rounded-lg font-semibold hover:bg-fami-secondary hover:text-white transition-colors"
@@ -225,7 +225,7 @@ export default async function EspecialidadDetailPage({ params }) {
                   </li>
                 </ul>
                 <a
-                  href={`https://wa.me/573218227123?text=Hola, estoy interesado en la especialidad de ${encodeURIComponent(especialidad.nombre)}. Me gustaría obtener más información.`}
+                  href={`https://wa.me/573217397280?text=Hola, estoy interesado en la especialidad de ${encodeURIComponent(especialidad.nombre)}. Me gustaría obtener más información.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white py-3 px-4 rounded-lg font-semibold hover:bg-[#128C7E] transition-colors"
